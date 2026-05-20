@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FourPillars } from "@/components/layout/four-pillars";
+import { BrandPromiseStrip } from "@/components/marketing/brand-promise-strip";
 import { ListingCard } from "@/components/listings/listing-card";
 import { JsonLd } from "@/components/layout/jsonld";
 import { SmartImage } from "@/components/ui/smart-image";
@@ -10,8 +11,8 @@ import { realEstateAgentLD } from "@/lib/structured-data";
 import { formatDate, pollinationsImage } from "@/lib/utils";
 
 const heroImage = pollinationsImage(
-  "View over downtown Kitchener Ontario at golden hour with rooftops, brick buildings, and the green ridges of Doon Hills in the distance, warm autumn light, photograph",
-  { seed: 1, width: 1400, height: 1600 },
+  "Wide cinematic photograph of Uptown Waterloo Ontario streetscape at golden hour, low afternoon sun warming red brick facades, the King Street strip with leafy maples turning amber, a young couple walking with coffee, depth of field, 35mm film look, photoreal",
+  { seed: 11, width: 1600, height: 1800 },
 );
 
 export default function HomePage() {
@@ -21,69 +22,61 @@ export default function HomePage() {
   return (
     <>
       <JsonLd data={realEstateAgentLD()} />
-      {/* Hero */}
+      {/* Hero — visitor-focused, tool-forward copy. Map+search drops in at Wave 2.5. */}
       <section className="border-b border-border-subtle">
         <div className="mx-auto grid max-w-6xl gap-12 px-5 py-20 sm:px-8 md:grid-cols-[1.4fr_1fr] md:py-28">
           <div>
-            <p className="text-caption text-accent-deep">
+            <p className="text-caption text-lake-deep">
               Kitchener · Waterloo · Cambridge
             </p>
             <h1 className="mt-4 font-display text-display-xl text-ink md:text-display-2xl">
-              Slow real estate, careful answers, no pressure.
+              Find a place to live in Kitchener-Waterloo.
             </h1>
             <p className="mt-6 max-w-prose text-body-lg text-ink-soft">
-              {siteConfig.realtor.bioShort}
+              Every rental, every home for sale, and the math to know what you can actually
+              afford — in the region I&apos;ve lived my whole life.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm text-canvas transition hover:bg-accent-deep"
+                href="/rent"
+                className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm text-canvas transition hover:bg-lake-deep"
               >
-                Start a conversation
+                Browse rentals
               </Link>
               <Link
-                href={siteConfig.calendly.url}
-                className="inline-flex items-center gap-2 rounded-full border border-ink px-5 py-3 text-sm text-ink transition hover:border-accent-deep hover:text-accent-deep"
+                href="/buy"
+                className="inline-flex items-center gap-2 rounded-full border border-ink px-5 py-3 text-sm text-ink transition hover:border-accent hover:text-accent-deep"
               >
-                {siteConfig.calendly.cta}
+                What can I afford?
               </Link>
             </div>
-
-            <p className="mt-8 max-w-prose text-caption text-muted">
-              New to real estate. Not new to KW. I&apos;d rather earn your trust through the
-              work than the website — but this is what the website would say.
-            </p>
           </div>
 
-          <aside className="relative hidden overflow-hidden rounded-lg border border-border-subtle md:block">
+          <aside className="relative hidden overflow-hidden rounded-xl shadow-lg ring-1 ring-border-subtle md:block">
             <SmartImage
               src={heroImage}
-              alt="Kitchener-Waterloo at golden hour"
+              alt="Uptown Waterloo at golden hour"
               loading="eager"
               decoding="async"
               className="absolute inset-0 h-full w-full object-cover"
             />
-            <div className="relative h-full min-h-[420px] bg-gradient-to-t from-canvas/90 via-canvas/40 to-transparent p-8 pt-48">
-              <p className="text-caption text-canvas drop-shadow">What I offer</p>
-              <ul className="mt-4 space-y-3 text-body text-ink-soft">
-                <li className="rounded-md bg-canvas/90 px-3 py-2 backdrop-blur-sm">
-                  <span className="font-display text-ink">Time.</span> A first conversation is 30
-                  minutes, no pitch, no commitment.
-                </li>
-                <li className="rounded-md bg-canvas/90 px-3 py-2 backdrop-blur-sm">
-                  <span className="font-display text-ink">Patience.</span> The right offer can
-                  wait a few weeks. The wrong one stays with you for years.
-                </li>
-                <li className="rounded-md bg-canvas/90 px-3 py-2 backdrop-blur-sm">
-                  <span className="font-display text-ink">Honesty.</span> Including when the
-                  answer is &quot;it&apos;s not the right time&quot; or &quot;keep renting.&quot;
-                </li>
-              </ul>
+            <div className="relative h-full min-h-[460px] bg-gradient-to-t from-ink/70 via-ink/10 to-transparent p-8">
+              <div className="absolute bottom-6 left-6 right-6 rounded-lg bg-canvas/95 p-4 backdrop-blur-md">
+                <p className="text-caption text-lake-deep">Currently in KW</p>
+                <p className="mt-1 font-display text-display-sm text-ink">
+                  {activeRentListings.length + activeSaleListings.length} active listings
+                </p>
+                <p className="mt-1 text-body-sm text-ink-soft">
+                  Rentals, resales, and pre-list valuations across the region.
+                </p>
+              </div>
             </div>
           </aside>
         </div>
       </section>
+
+      <BrandPromiseStrip />
 
       <FourPillars />
 
@@ -94,10 +87,10 @@ export default function HomePage() {
       >
         <div className="flex flex-wrap items-baseline justify-between gap-4">
           <h2 id="featured-heading" className="text-display-lg text-ink">
-            {featured.length > 0 ? "Currently on the market" : "No active listings yet"}
+            {featured.length > 0 ? "Open this week in KW" : "Featured listings"}
           </h2>
           {featured.length > 0 ? (
-            <Link href="/listings" className="text-body-sm text-ink hover:text-accent-deep">
+            <Link href="/listings" className="text-body-sm text-ink hover:text-lake-deep">
               See all listings →
             </Link>
           ) : null}
@@ -111,10 +104,10 @@ export default function HomePage() {
           </div>
         ) : (
           <p className="mt-6 max-w-prose text-body text-ink-soft">
-            I&apos;m new to the business and don&apos;t have active listings yet. That doesn&apos;t
-            mean I can&apos;t help — most of my work happens before a listing exists, on the
-            buyer side. <Link href="/contact" className="underline">Send me a note</Link> and we can
-            talk about whether I&apos;m the right person for what you need.
+            No live listings on the wall right now. Most of the work happens before a listing
+            exists — browsing rentals, prepping a sale, getting pre-approved.{" "}
+            <Link href="/contact" className="underline">Get in touch</Link> and we&apos;ll start
+            with what you actually need.
           </p>
         )}
       </section>
@@ -123,11 +116,11 @@ export default function HomePage() {
       <section className="bg-canvas-elevated" aria-labelledby="neighborhoods-heading">
         <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
           <h2 id="neighborhoods-heading" className="text-display-lg text-ink">
-            The neighborhoods I know
+            Where to live in Kitchener-Waterloo
           </h2>
           <p className="mt-3 max-w-prose text-body-lg text-ink-soft">
-            Each of these has its own pace, its own price band, and its own quirks. I&apos;ve
-            written about what I notice on the ground.
+            Nine neighborhoods, each with its own pace, price band, and quirks. Pick one you&apos;re
+            curious about — the page tells you what it&apos;s actually like.
           </p>
 
           <ul className="mt-8 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
@@ -160,7 +153,7 @@ export default function HomePage() {
         >
           <div className="flex flex-wrap items-baseline justify-between gap-4">
             <h2 id="insights-heading" className="text-display-lg text-ink">
-              Recent thinking
+              Notes from the field
             </h2>
             <Link href="/insights" className="text-body-sm text-ink hover:text-accent-deep">
               All insights →
