@@ -9,8 +9,8 @@ import { siteConfig } from "@/lib/site-config";
 import { pollinationsImage } from "@/lib/utils";
 
 const heroImage = pollinationsImage(
-  "Young couple touring a Kitchener Ontario brick home with a real estate agent, daylight, looking at the front porch, candid moment, real estate photograph",
-  { seed: 201, width: 1800, height: 600 },
+  "Cinematic editorial real estate photograph, 35mm film look, warm Kodak Portra color grading, young diverse couple walking up the front steps of a red brick century home in Kitchener Ontario at golden hour, candid moment looking at each other smiling, mature maple trees in the background, shallow depth of field, soft natural lighting, photoreal, no text, no watermark, no logo",
+  { seed: 2011, width: 1800, height: 720, model: "flux" },
 );
 
 export const metadata: Metadata = {

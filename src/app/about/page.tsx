@@ -5,8 +5,8 @@ import { SmartImage } from "@/components/ui/smart-image";
 import { pollinationsImage } from "@/lib/utils";
 
 const fieldPhoto = pollinationsImage(
-  "Real estate agent in a Kitchener coffee shop sitting across from clients reviewing paper documents on a wooden table, daylight from window, warm authentic photograph",
-  { seed: 102 },
+  "Candid editorial photograph, 50mm lens, warm afternoon window light, a friendly Canadian woman real estate agent in her early thirties sitting across a wooden table in a Kitchener Ontario indie coffee shop reviewing paper documents with clients, genuine laughter, hands gesturing over a floorplan, shallow depth of field, photoreal, no text, no watermark, no logo",
+  { seed: 1022, width: 1400, height: 900, model: "flux" },
 );
 
 export const metadata: Metadata = {

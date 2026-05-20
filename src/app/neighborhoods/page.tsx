@@ -5,11 +5,11 @@ import { SmartImage } from "@/components/ui/smart-image";
 import { pollinationsImage } from "@/lib/utils";
 
 function thumbForNeighborhood(slug: string, name: string): string {
-  let seed = 300;
+  let seed = 3300;
   for (let i = 0; i < slug.length; i++) seed = (seed * 31 + slug.charCodeAt(i)) & 0xffff;
   return pollinationsImage(
-    `${name} neighborhood in Kitchener Waterloo Ontario, residential street scene, daylight, photograph`,
-    { seed, width: 800, height: 600 },
+    `Cinematic editorial neighborhood photograph, 35mm look, warm afternoon golden-hour light, characteristic residential street scene in ${name} Kitchener Waterloo Ontario, mature trees, soft long shadows, no people in frame, hyperreal architectural detail, photoreal, no text, no watermark, no logo`,
+    { seed, width: 1000, height: 750, model: "flux" },
   );
 }
 

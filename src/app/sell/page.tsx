@@ -5,8 +5,8 @@ import { siteConfig } from "@/lib/site-config";
 import { pollinationsImage } from "@/lib/utils";
 
 const heroImage = pollinationsImage(
-  "Beautiful Kitchener Ontario red brick detached family home exterior with For Sale sign on the front lawn, mature trees, sunny afternoon, real estate photograph",
-  { seed: 203, width: 1800, height: 600 },
+  "Cinematic real estate listing photograph, late golden hour, a beautifully maintained two-storey red brick detached family home in Westmount Kitchener Ontario, neat green lawn with a freshly placed agent For Sale sign, warm front porch light just turning on, mature trees framing the house, soft long shadows, hyperreal architectural detail, 35mm look, photoreal, no text on signs, no watermark, no logo",
+  { seed: 2033, width: 1800, height: 720, model: "flux" },
 );
 
 export const metadata: Metadata = {
