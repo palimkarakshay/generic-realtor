@@ -3,6 +3,7 @@ import { FourPillars } from "@/components/layout/four-pillars";
 import { ListingCard } from "@/components/listings/listing-card";
 import { JsonLd } from "@/components/layout/jsonld";
 import { SmartImage } from "@/components/ui/smart-image";
+import { SearchableListingMap } from "@/components/listings/searchable-listing-map";
 import { OpenHouseStrip } from "@/components/open-houses/open-house-strip";
 import { TestimonialCard } from "@/components/testimonials/testimonial-card";
 import {
@@ -14,41 +15,37 @@ import { getAllInsights } from "@/lib/insights";
 import { allTestimonials } from "@/lib/testimonials";
 import { siteConfig } from "@/lib/site-config";
 import { realEstateAgentLD } from "@/lib/structured-data";
-import { formatCAD, formatDate, formatNumber, pollinationsImage } from "@/lib/utils";
-
-const heroImage = pollinationsImage(
-  "View over downtown Kitchener Ontario at golden hour with rooftops, brick buildings, and the green ridges of Doon Hills in the distance, warm autumn light, photograph",
-  { seed: 1, width: 1400, height: 1600 },
-);
+import { formatCAD, formatDate, formatNumber } from "@/lib/utils";
 
 export default function HomePage() {
   const featured = [...activeSaleListings, ...activeRentListings].slice(0, 3);
   const [primary, ...rest] = featured;
+  const allActive = [...activeSaleListings, ...activeRentListings];
   const recentInsights = getAllInsights().slice(0, 3);
   const closed = recentlyClosedListings.slice(0, 3);
 
   return (
     <>
       <JsonLd data={realEstateAgentLD()} />
-      {/* Hero — dark, dramatic, agent-led */}
+      {/* Hero — dark, dramatic, agent-led, with searchable listings map */}
       <section className="relative overflow-hidden bg-ink text-canvas">
-        <div className="mx-auto grid max-w-6xl gap-12 px-5 py-20 sm:px-8 md:grid-cols-[1.4fr_1fr] md:py-28">
-          <div>
+        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1fr_1.15fr] md:py-20">
+          <div className="flex flex-col justify-center">
             <p className="text-caption uppercase text-accent">
               Kitchener · Waterloo · Cambridge
             </p>
             <h1 className="mt-4 font-display text-display-xl text-canvas md:text-display-2xl">
               Slow real estate, careful answers, no pressure.
             </h1>
-            <p className="mt-6 font-display text-display-lg text-accent-soft">
+            <p className="mt-5 font-display text-display-lg text-accent-soft">
               {siteConfig.realtor.name},{" "}
               <span className="text-canvas/80">{siteConfig.realtor.title}</span>
             </p>
-            <p className="mt-6 max-w-prose text-body-lg text-canvas/85">
+            <p className="mt-5 max-w-prose text-body-lg text-canvas/85">
               {siteConfig.realtor.bioShort}
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-7 flex flex-wrap gap-3">
               <Link
                 href="/contact"
                 className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-medium text-ink transition hover:bg-accent-soft"
@@ -63,32 +60,20 @@ export default function HomePage() {
               </Link>
             </div>
 
-            <p className="mt-8 max-w-prose text-caption uppercase text-canvas/55">
+            <p className="mt-6 text-caption uppercase text-canvas/55">
               New to real estate. Not new to KW.
             </p>
           </div>
 
-          <aside className="relative hidden overflow-hidden rounded-lg border border-canvas/10 md:block">
-            <SmartImage
-              src={heroImage}
-              alt="Kitchener-Waterloo at golden hour"
-              loading="eager"
-              decoding="async"
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-            <div className="relative h-full min-h-[460px] bg-gradient-to-t from-ink/95 via-ink/50 to-transparent p-8 pt-56">
-              <p className="text-caption uppercase text-accent">What I offer</p>
-              <ul className="mt-4 space-y-3 text-body text-canvas/90">
-                <li className="rounded-md bg-ink/70 px-3 py-2 backdrop-blur-sm">
-                  <span className="font-display text-accent-soft">Time.</span> A first conversation is 30 minutes, no pitch, no commitment.
-                </li>
-                <li className="rounded-md bg-ink/70 px-3 py-2 backdrop-blur-sm">
-                  <span className="font-display text-accent-soft">Patience.</span> The right offer can wait a few weeks. The wrong one stays with you for years.
-                </li>
-                <li className="rounded-md bg-ink/70 px-3 py-2 backdrop-blur-sm">
-                  <span className="font-display text-accent-soft">Honesty.</span> Including when the answer is &quot;it&apos;s not the right time.&quot;
-                </li>
-              </ul>
+          <aside aria-label="Search active listings" className="flex flex-col">
+            <p className="text-caption uppercase text-accent">
+              Explore the market
+            </p>
+            <p className="mt-1 text-body-sm text-canvas/75">
+              Every active listing on the map. Filter by type or beds, search by address.
+            </p>
+            <div className="mt-4 flex-1">
+              <SearchableListingMap listings={allActive} height={520} />
             </div>
           </aside>
         </div>
