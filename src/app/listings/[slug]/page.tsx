@@ -8,8 +8,9 @@ import { ListingMap } from "@/components/maps/listing-map";
 import { JsonLd } from "@/components/layout/jsonld";
 import { breadcrumbLD, listingLD } from "@/lib/structured-data";
 import { siteConfig } from "@/lib/site-config";
-import { formatCAD, formatNumber, daysSince } from "@/lib/utils";
+import { formatCAD, formatNumber, formatDate, daysSince } from "@/lib/utils";
 import { SmartImage } from "@/components/ui/smart-image";
+import { buildOpenHouseICS, icsDataUri } from "@/lib/open-house-ics";
 
 export async function generateStaticParams() {
   return allListings.map((l) => ({ slug: l.slug }));
@@ -52,6 +53,12 @@ export default async function ListingDetailPage({
   const related = getRelatedListings(slug);
   const dom = listing.listedAt ? daysSince(listing.listedAt) : null;
   const isSale = listing.listingType === "sale";
+  const todayISO = new Date().toISOString().slice(0, 10);
+  const upcomingOpenHouses = (listing.openHouses ?? [])
+    .filter((oh) => oh.date >= todayISO)
+    .sort(
+      (a, b) => a.date.localeCompare(b.date) || a.startTime.localeCompare(b.startTime),
+    );
 
   return (
     <article className="mx-auto max-w-5xl px-5 py-12 sm:px-8 md:py-16">
@@ -154,6 +161,46 @@ export default async function ListingDetailPage({
           </>
         )}
       </section>
+
+      {/* Upcoming open houses */}
+      {upcomingOpenHouses.length > 0 ? (
+        <section className="mt-10 rounded-lg border border-moss/40 bg-moss/5 p-6">
+          <p className="text-caption uppercase text-moss">Upcoming open houses</p>
+          <ul className="mt-4 space-y-3">
+            {upcomingOpenHouses.map((oh, i) => {
+              const ics = buildOpenHouseICS({
+                open: oh,
+                uid: `${listing.listingId}-${oh.date}-${oh.startTime}@rileyavery`,
+                title: listing.title,
+                address: `${listing.address}, ${listing.city}`,
+              });
+              return (
+                <li
+                  key={`${oh.date}-${oh.startTime}-${i}`}
+                  className="flex flex-wrap items-center justify-between gap-3 rounded-md bg-canvas p-4"
+                >
+                  <div>
+                    <p className="font-display text-body-lg text-ink">
+                      {formatDate(oh.date, { weekday: "long", month: "long", day: "numeric" })}
+                    </p>
+                    <p className="text-body-sm text-ink-soft">
+                      {oh.startTime}–{oh.endTime}
+                      {oh.notes ? ` · ${oh.notes}` : ""}
+                    </p>
+                  </div>
+                  <a
+                    href={icsDataUri(ics)}
+                    download={`${listing.slug}-${oh.date}.ics`}
+                    className="inline-flex items-center gap-2 rounded-full border border-moss px-4 py-2 text-sm text-moss transition hover:bg-moss hover:text-canvas"
+                  >
+                    Add to calendar
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ) : null}
 
       {/* Description */}
       <section className="mt-12 max-w-prose">

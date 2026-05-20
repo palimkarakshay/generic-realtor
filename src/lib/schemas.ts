@@ -36,6 +36,16 @@ const baseListing = z.object({
       }),
     )
     .default([]),
+  openHouses: z
+    .array(
+      z.object({
+        date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "YYYY-MM-DD"),
+        startTime: z.string().regex(/^\d{2}:\d{2}$/, "HH:MM 24h"),
+        endTime: z.string().regex(/^\d{2}:\d{2}$/, "HH:MM 24h"),
+        notes: z.string().optional(),
+      }),
+    )
+    .default([]),
   /** WGS84 coords for the Leaflet map */
   lat: z.number().min(-90).max(90).optional(),
   lng: z.number().min(-180).max(180).optional(),
@@ -104,6 +114,19 @@ export const neighborhoodFrontmatterSchema = z.object({
   vibe: z.string(),
 });
 export type NeighborhoodFrontmatter = z.infer<typeof neighborhoodFrontmatterSchema>;
+
+/** Client testimonials — homepage social proof. */
+export const testimonialSchema = z.object({
+  id: z.string().min(1),
+  author: z.string().min(1),
+  /** e.g., "Mentor", "Pre-licensing reference", "Mock-listing client" */
+  relation: z.string().min(1),
+  quote: z.string().min(1),
+  /** Marks the entry as a placeholder until real client quotes replace it */
+  draft: z.boolean().default(false),
+  location: z.string().optional(),
+});
+export type Testimonial = z.infer<typeof testimonialSchema>;
 
 /** Lead intake schema — used by the contact form. */
 export const leadSchema = z.object({

@@ -9,8 +9,8 @@ import "leaflet/dist/leaflet.css";
 const inlineIcon = L.divIcon({
   className: "leaflet-inline-icon",
   html: `<svg width="28" height="40" viewBox="0 0 28 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M14 0C6.27 0 0 6.05 0 13.52 0 23.69 14 40 14 40s14-16.31 14-26.48C28 6.05 21.73 0 14 0z" fill="#b86d3a"/>
-    <circle cx="14" cy="13.5" r="5" fill="#faf6ef"/>
+    <path d="M14 0C6.27 0 0 6.05 0 13.52 0 23.69 14 40 14 40s14-16.31 14-26.48C28 6.05 21.73 0 14 0z" fill="#0fb39a"/>
+    <circle cx="14" cy="13.5" r="5" fill="#ffffff"/>
   </svg>`,
   iconSize: [28, 40],
   iconAnchor: [14, 40],

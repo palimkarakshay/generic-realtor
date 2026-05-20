@@ -1,0 +1,33 @@
+[
+  {
+    "id": "t-marisol",
+    "author": "Marisol Chen",
+    "relation": "Pre-licensing mentor · 22-year KW broker",
+    "quote": "Riley asks the questions most agents stop asking after their first year. The slow approach is rare and clients notice.",
+    "location": "Waterloo",
+    "draft": false
+  },
+  {
+    "id": "t-aj",
+    "author": "A. and J.",
+    "relation": "Mock-listing exercise · March 2026",
+    "quote": "We walked through pricing strategy together and came out understanding why the comps said what they said. Worth the two hours.",
+    "draft": true
+  },
+  {
+    "id": "t-devon",
+    "author": "Devon P.",
+    "relation": "Friend who pestered Riley into getting licensed",
+    "quote": "Spent four years asking Riley about every house I looked at. Glad I finally have to pay for it.",
+    "location": "Kitchener",
+    "draft": true
+  },
+  {
+    "id": "t-hannah",
+    "author": "Hannah W.",
+    "relation": "Mortgage broker · referral network",
+    "quote": "Sends clients to me already prepared. Pre-approval conversations are 30 minutes instead of 90 because Riley walks them through the basics first.",
+    "location": "Cambridge",
+    "draft": false
+  }
+]

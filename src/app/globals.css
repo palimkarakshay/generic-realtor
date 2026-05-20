@@ -4,29 +4,29 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ─────────────────────────────────────────────────────────────
- * Design tokens — warm KW palette for a brand-new realtor's
- * personal site. Inspired by the Lumivara editorial system but
- * dialed warmer for residential real estate.
+ * Design tokens — modern teal + coral palette. Crisp whites,
+ * emerald-teal primary, coral secondary. Dark hero uses the ink
+ * tokens against electric-teal accents.
  * ────────────────────────────────────────────────────────────*/
 
 :root {
   /* Brand palette — light mode (default) */
-  --canvas: #faf6ef;
-  --canvas-elevated: #fdfaf3;
-  --ink: #1a1410;
-  --ink-soft: #3a2f26;
-  --muted: #786a5d;
-  --parchment: #efe7d6;
-  --accent: #b86d3a;            /* warm terracotta — KW autumn brick */
-  --accent-soft: #d18c5a;
-  --accent-deep: #93521f;
-  --moss: #6b7d4f;               /* secondary — KW greenbelt */
-  --moss-soft: #8b9b6e;
-  --border: #e2d8c4;
-  --border-subtle: #ede4d1;
-  --success: #4a7c59;
-  --error: #a13d3d;
-  --warning: #c08400;
+  --canvas: #ffffff;
+  --canvas-elevated: #f7fbfa;
+  --ink: #0b1f1c;
+  --ink-soft: #1f3d39;
+  --muted: #5e7a76;
+  --parchment: #dff3ed;
+  --accent: #0fb39a;            /* emerald-teal primary */
+  --accent-soft: #3fd0b8;
+  --accent-deep: #057668;
+  --moss: #ff6b4a;              /* rebranded coral; was greenbelt green */
+  --moss-soft: #ff8e72;
+  --border: #d6e4e1;
+  --border-subtle: #e8f0ee;
+  --success: #0c8a6d;
+  --error: #c43d3d;
+  --warning: #e0a000;
 
   /* Motion */
   --ease-out-quart: cubic-bezier(0.22, 1, 0.36, 1);
@@ -53,19 +53,19 @@
 }
 
 .dark {
-  --canvas: #14110d;
-  --canvas-elevated: #1c1814;
-  --ink: #faf6ef;
-  --ink-soft: #d8cdb9;
-  --muted: #8e8170;
-  --parchment: #2a241c;
-  --accent: #d18c5a;
-  --accent-soft: #e0a576;
-  --accent-deep: #b86d3a;
-  --moss: #8b9b6e;
-  --moss-soft: #a4b288;
-  --border: #2c261d;
-  --border-subtle: #221d16;
+  --canvas: #0b1614;
+  --canvas-elevated: #142220;
+  --ink: #f6fffd;
+  --ink-soft: #cfe1dc;
+  --muted: #7d9692;
+  --parchment: #1a2e2a;
+  --accent: #3fd0b8;
+  --accent-soft: #7fe3d0;
+  --accent-deep: #0fb39a;
+  --moss: #ff8e72;
+  --moss-soft: #ffae97;
+  --border: #1f3531;
+  --border-subtle: #162724;
 
   --background: var(--canvas);
   --foreground: var(--ink-soft);

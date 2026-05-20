@@ -3,11 +3,18 @@ import { FourPillars } from "@/components/layout/four-pillars";
 import { ListingCard } from "@/components/listings/listing-card";
 import { JsonLd } from "@/components/layout/jsonld";
 import { SmartImage } from "@/components/ui/smart-image";
-import { activeSaleListings, activeRentListings } from "@/lib/listings";
+import { OpenHouseStrip } from "@/components/open-houses/open-house-strip";
+import { TestimonialCard } from "@/components/testimonials/testimonial-card";
+import {
+  activeSaleListings,
+  activeRentListings,
+  recentlyClosedListings,
+} from "@/lib/listings";
 import { getAllInsights } from "@/lib/insights";
+import { allTestimonials } from "@/lib/testimonials";
 import { siteConfig } from "@/lib/site-config";
 import { realEstateAgentLD } from "@/lib/structured-data";
-import { formatDate, pollinationsImage } from "@/lib/utils";
+import { formatCAD, formatDate, formatNumber, pollinationsImage } from "@/lib/utils";
 
 const heroImage = pollinationsImage(
   "View over downtown Kitchener Ontario at golden hour with rooftops, brick buildings, and the green ridges of Doon Hills in the distance, warm autumn light, photograph",
@@ -16,47 +23,52 @@ const heroImage = pollinationsImage(
 
 export default function HomePage() {
   const featured = [...activeSaleListings, ...activeRentListings].slice(0, 3);
+  const [primary, ...rest] = featured;
   const recentInsights = getAllInsights().slice(0, 3);
+  const closed = recentlyClosedListings.slice(0, 3);
 
   return (
     <>
       <JsonLd data={realEstateAgentLD()} />
-      {/* Hero */}
-      <section className="border-b border-border-subtle">
+      {/* Hero — dark, dramatic, agent-led */}
+      <section className="relative overflow-hidden bg-ink text-canvas">
         <div className="mx-auto grid max-w-6xl gap-12 px-5 py-20 sm:px-8 md:grid-cols-[1.4fr_1fr] md:py-28">
           <div>
-            <p className="text-caption text-accent-deep">
+            <p className="text-caption uppercase text-accent">
               Kitchener · Waterloo · Cambridge
             </p>
-            <h1 className="mt-4 font-display text-display-xl text-ink md:text-display-2xl">
+            <h1 className="mt-4 font-display text-display-xl text-canvas md:text-display-2xl">
               Slow real estate, careful answers, no pressure.
             </h1>
-            <p className="mt-6 max-w-prose text-body-lg text-ink-soft">
+            <p className="mt-6 font-display text-display-lg text-accent-soft">
+              {siteConfig.realtor.name},{" "}
+              <span className="text-canvas/80">{siteConfig.realtor.title}</span>
+            </p>
+            <p className="mt-6 max-w-prose text-body-lg text-canvas/85">
               {siteConfig.realtor.bioShort}
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm text-canvas transition hover:bg-accent-deep"
+                className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-medium text-ink transition hover:bg-accent-soft"
               >
                 Start a conversation
               </Link>
               <Link
                 href={siteConfig.calendly.url}
-                className="inline-flex items-center gap-2 rounded-full border border-ink px-5 py-3 text-sm text-ink transition hover:border-accent-deep hover:text-accent-deep"
+                className="inline-flex items-center gap-2 rounded-full border border-canvas/40 px-5 py-3 text-sm text-canvas transition hover:border-accent hover:text-accent"
               >
                 {siteConfig.calendly.cta}
               </Link>
             </div>
 
-            <p className="mt-8 max-w-prose text-caption text-muted">
-              New to real estate. Not new to KW. I&apos;d rather earn your trust through the
-              work than the website — but this is what the website would say.
+            <p className="mt-8 max-w-prose text-caption uppercase text-canvas/55">
+              New to real estate. Not new to KW.
             </p>
           </div>
 
-          <aside className="relative hidden overflow-hidden rounded-lg border border-border-subtle md:block">
+          <aside className="relative hidden overflow-hidden rounded-lg border border-canvas/10 md:block">
             <SmartImage
               src={heroImage}
               alt="Kitchener-Waterloo at golden hour"
@@ -64,20 +76,17 @@ export default function HomePage() {
               decoding="async"
               className="absolute inset-0 h-full w-full object-cover"
             />
-            <div className="relative h-full min-h-[420px] bg-gradient-to-t from-canvas/90 via-canvas/40 to-transparent p-8 pt-48">
-              <p className="text-caption text-canvas drop-shadow">What I offer</p>
-              <ul className="mt-4 space-y-3 text-body text-ink-soft">
-                <li className="rounded-md bg-canvas/90 px-3 py-2 backdrop-blur-sm">
-                  <span className="font-display text-ink">Time.</span> A first conversation is 30
-                  minutes, no pitch, no commitment.
+            <div className="relative h-full min-h-[460px] bg-gradient-to-t from-ink/95 via-ink/50 to-transparent p-8 pt-56">
+              <p className="text-caption uppercase text-accent">What I offer</p>
+              <ul className="mt-4 space-y-3 text-body text-canvas/90">
+                <li className="rounded-md bg-ink/70 px-3 py-2 backdrop-blur-sm">
+                  <span className="font-display text-accent-soft">Time.</span> A first conversation is 30 minutes, no pitch, no commitment.
                 </li>
-                <li className="rounded-md bg-canvas/90 px-3 py-2 backdrop-blur-sm">
-                  <span className="font-display text-ink">Patience.</span> The right offer can
-                  wait a few weeks. The wrong one stays with you for years.
+                <li className="rounded-md bg-ink/70 px-3 py-2 backdrop-blur-sm">
+                  <span className="font-display text-accent-soft">Patience.</span> The right offer can wait a few weeks. The wrong one stays with you for years.
                 </li>
-                <li className="rounded-md bg-canvas/90 px-3 py-2 backdrop-blur-sm">
-                  <span className="font-display text-ink">Honesty.</span> Including when the
-                  answer is &quot;it&apos;s not the right time&quot; or &quot;keep renting.&quot;
+                <li className="rounded-md bg-ink/70 px-3 py-2 backdrop-blur-sm">
+                  <span className="font-display text-accent-soft">Honesty.</span> Including when the answer is &quot;it&apos;s not the right time.&quot;
                 </li>
               </ul>
             </div>
@@ -85,9 +94,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <FourPillars />
+      {/* Open houses strip */}
+      <OpenHouseStrip />
 
-      {/* Featured listings or honest empty state */}
+      {/* Featured listings — hero card + 2-up */}
       <section
         aria-labelledby="featured-heading"
         className="mx-auto max-w-6xl px-5 py-16 sm:px-8"
@@ -97,27 +107,77 @@ export default function HomePage() {
             {featured.length > 0 ? "Currently on the market" : "No active listings yet"}
           </h2>
           {featured.length > 0 ? (
-            <Link href="/listings" className="text-body-sm text-ink hover:text-accent-deep">
+            <Link
+              href="/listings"
+              className="text-body-sm text-ink underline-offset-4 hover:text-accent-deep hover:underline"
+            >
               See all listings →
             </Link>
           ) : null}
         </div>
 
-        {featured.length > 0 ? (
-          <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {featured.map((l) => (
+        {primary ? (
+          <Link
+            href={`/listings/${primary.slug}`}
+            className="group mt-8 grid gap-0 overflow-hidden rounded-xl border border-border-subtle bg-canvas-elevated shadow-sm transition hover:border-accent hover:shadow-md md:grid-cols-[1.3fr_1fr]"
+          >
+            <div className="relative aspect-[16/10] bg-parchment md:aspect-auto">
+              {primary.photos[0] ? (
+                <SmartImage
+                  src={primary.photos[0].src}
+                  alt={primary.photos[0].alt}
+                  loading="eager"
+                  className="absolute inset-0 h-full w-full object-cover transition group-hover:scale-[1.02]"
+                />
+              ) : null}
+              <span className="absolute left-4 top-4 rounded-full bg-accent px-3 py-1 text-caption font-medium uppercase text-ink">
+                Featured · {primary.city}
+              </span>
+            </div>
+            <div className="flex flex-col justify-center p-8">
+              <p className="text-caption uppercase text-accent-deep">
+                {primary.listingType === "sale" ? "For sale" : "For rent"}
+              </p>
+              <p className="mt-2 font-display text-display-xl text-ink">
+                {primary.listingType === "sale"
+                  ? formatCAD(primary.price)
+                  : `${formatCAD(primary.monthlyRent)}/mo`}
+              </p>
+              <p className="mt-2 text-body-lg text-ink-soft">{primary.title}</p>
+              <p className="mt-1 text-body-sm text-muted">
+                {primary.address}, {primary.city}
+              </p>
+              <div className="mt-5 flex flex-wrap gap-x-4 gap-y-1 text-caption uppercase text-muted">
+                <span>{primary.beds} bd</span>
+                <span>{primary.baths} ba</span>
+                {primary.sqft ? <span>{formatNumber(primary.sqft)} sqft</span> : null}
+              </div>
+              <span className="mt-6 inline-flex items-center gap-2 text-body-sm font-medium text-accent-deep group-hover:underline">
+                View this listing →
+              </span>
+            </div>
+          </Link>
+        ) : null}
+
+        {rest.length > 0 ? (
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
+            {rest.map((l) => (
               <ListingCard key={l.slug} listing={l} />
             ))}
           </div>
-        ) : (
+        ) : null}
+
+        {featured.length === 0 ? (
           <p className="mt-6 max-w-prose text-body text-ink-soft">
             I&apos;m new to the business and don&apos;t have active listings yet. That doesn&apos;t
             mean I can&apos;t help — most of my work happens before a listing exists, on the
             buyer side. <Link href="/contact" className="underline">Send me a note</Link> and we can
             talk about whether I&apos;m the right person for what you need.
           </p>
-        )}
+        ) : null}
       </section>
+
+      <FourPillars />
 
       {/* Neighborhoods preview */}
       <section className="bg-canvas-elevated" aria-labelledby="neighborhoods-heading">
@@ -151,6 +211,46 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
+
+      {/* Testimonials */}
+      {allTestimonials.length > 0 ? (
+        <section aria-labelledby="testimonials-heading" className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
+          <h2 id="testimonials-heading" className="text-display-lg text-ink">
+            Early voices
+          </h2>
+          <p className="mt-3 max-w-prose text-body text-ink-soft">
+            Riley is brand-new to the business. These are pre-licensing mentors, referral partners,
+            and mock-client conversations — labelled honestly. Real client quotes will replace the
+            drafts as the work happens.
+          </p>
+          <ul className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {allTestimonials.map((t) => (
+              <li key={t.id}>
+                <TestimonialCard testimonial={t} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {/* Recently closed */}
+      {closed.length > 0 ? (
+        <section aria-labelledby="closed-heading" className="bg-canvas-elevated">
+          <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
+            <h2 id="closed-heading" className="text-display-lg text-ink">
+              Recently closed
+            </h2>
+            <p className="mt-2 max-w-prose text-body text-ink-soft">
+              The work that&apos;s behind me, with the numbers attached.
+            </p>
+            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {closed.map((l) => (
+                <ListingCard key={l.slug} listing={l} />
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       {/* Recent insights */}
       {recentInsights.length > 0 ? (

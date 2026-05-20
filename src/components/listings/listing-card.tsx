@@ -9,6 +9,9 @@ export function ListingCard({ listing }: { listing: Listing }) {
   // Days on Market — only show if we have a listedAt date.
   const dom = listing.listedAt ? daysSince(listing.listedAt) : null;
 
+  const todayISO = new Date().toISOString().slice(0, 10);
+  const hasUpcomingOpenHouse = (listing.openHouses ?? []).some((oh) => oh.date >= todayISO);
+
   return (
     <Link
       href={`/listings/${listing.slug}`}
@@ -42,6 +45,11 @@ export function ListingCard({ listing }: { listing: Listing }) {
           {listing.status !== "active" ? (
             <span className="rounded-full bg-accent-deep px-2.5 py-1 text-caption font-medium uppercase text-canvas">
               {listing.status}
+            </span>
+          ) : null}
+          {hasUpcomingOpenHouse ? (
+            <span className="rounded-full bg-moss px-2.5 py-1 text-caption font-medium uppercase text-canvas">
+              Open house
             </span>
           ) : null}
         </div>
