@@ -26,9 +26,18 @@
       "Walk to Grand River trail"
     ],
     "photos": [
-      { "src": "/images/listings/galt-1.svg", "alt": "Brick exterior of 1908 Galt semi" },
-      { "src": "/images/listings/galt-2.svg", "alt": "Living room with original trim" },
-      { "src": "/images/listings/galt-3.svg", "alt": "Refinished oak floors in dining room" }
+      {
+        "src": "https://image.pollinations.ai/prompt/Exterior%20photograph%20of%20a%20historic%201908%20red%20brick%20semi%20detached%20house%20in%20Cambridge%20Ontario%2C%20autumn%20afternoon%20golden%20light%2C%20mature%20maple%20trees%2C%20restored%20Victorian%20trim%2C%20residential%20real%20estate%20listing%20photo%2C%20photorealistic?width=1200&height=900&seed=11&model=flux&nologo=true",
+        "alt": "Brick exterior of 1908 Galt semi"
+      },
+      {
+        "src": "https://image.pollinations.ai/prompt/Interior%20living%20room%20of%20a%20restored%20Ontario%20century%20home%2C%20original%20dark%20wood%20trim%2C%20refinished%20oak%20hardwood%20floors%2C%20neutral%20furniture%2C%20light%20from%20tall%20south%20facing%20windows%2C%20lived%20in%20but%20tidy%2C%20real%20estate%20listing%20photograph?width=1200&height=900&seed=12&model=flux&nologo=true",
+        "alt": "Living room with original trim"
+      },
+      {
+        "src": "https://image.pollinations.ai/prompt/Dining%20room%20of%20a%201908%20Ontario%20century%20home%20with%20refinished%20oak%20hardwood%20floors%2C%20modest%20wooden%20dining%20table%2C%20soft%20daylight%20from%20tall%20windows%2C%20calm%20uncluttered%2C%20real%20estate%20listing%20photograph?width=1200&height=900&seed=13&model=flux&nologo=true",
+        "alt": "Refinished oak floors in dining room"
+      }
     ],
     "lat": 43.3553,
     "lng": -80.3145,
@@ -51,7 +60,9 @@
     "furnished": "none",
     "petsAllowed": "cats-only",
     "parkingIncluded": true,
-    "utilitiesIncluded": ["water"],
+    "utilitiesIncluded": [
+      "water"
+    ],
     "availableFrom": "2026-07-01",
     "beds": 2,
     "baths": 1,
@@ -67,8 +78,14 @@
       "10 min to UW campus"
     ],
     "photos": [
-      { "src": "/images/listings/uptown-1.svg", "alt": "Loft living room with tall ceilings" },
-      { "src": "/images/listings/uptown-2.svg", "alt": "Kitchen with butcher block counters" }
+      {
+        "src": "https://image.pollinations.ai/prompt/Bright%20loft%20living%20room%20in%20a%20converted%201920s%20building%20above%20a%20bookshop%20in%20Waterloo%20Ontario%2C%20eleven%20foot%20ceilings%2C%20original%20tin%20tile%20ceiling%20detail%2C%20tall%20vintage%20windows%2C%20exposed%20brick%20accent%20wall%2C%20minimal%20modern%20furniture%2C%20midday%20natural%20light%2C%20real%20estate%20listing%20photograph?width=1200&height=900&seed=21&model=flux&nologo=true",
+        "alt": "Loft living room with tall ceilings"
+      },
+      {
+        "src": "https://image.pollinations.ai/prompt/Compact%20kitchen%20in%20a%20Waterloo%20loft%20apartment%20with%20butcher%20block%20counters%2C%20white%20shaker%20cabinets%2C%20a%20small%20window%20over%20the%20sink%2C%20late%20morning%20daylight%2C%20scandinavian%20style%2C%20real%20estate%20listing%20photograph?width=1200&height=900&seed=22&model=flux&nologo=true",
+        "alt": "Kitchen with butcher block counters"
+      }
     ],
     "lat": 43.4643,
     "lng": -80.5204,
@@ -101,7 +118,10 @@
       "8 min walk to Laurelwood PS"
     ],
     "photos": [
-      { "src": "/images/listings/laurelwood-1.svg", "alt": "Townhouse exterior with trail in background" }
+      {
+        "src": "https://image.pollinations.ai/prompt/Exterior%20of%20a%20modern%20end-unit%20townhouse%20in%20Waterloo%20Ontario%2C%20beige%20siding%2C%20two-car%20driveway%2C%20manicured%20front%20lawn%2C%20a%20forested%20trail%20visible%20behind%20the%20property%2C%20soft%20autumn%20light%2C%20real%20estate%20listing%20photograph?width=1200&height=900&seed=31&model=flux&nologo=true",
+        "alt": "Townhouse exterior with trail in background"
+      }
     ],
     "lat": 43.4847,
     "lng": -80.5701,
@@ -135,8 +155,14 @@
       "LRT 2 min walk"
     ],
     "photos": [
-      { "src": "/images/listings/downtown-1.svg", "alt": "Condo interior with downtown view" },
-      { "src": "/images/listings/downtown-2.svg", "alt": "Den setup as home office" }
+      {
+        "src": "https://image.pollinations.ai/prompt/Modern%20high%20floor%20condominium%20interior%20in%20downtown%20Kitchener%20Ontario%2C%20floor%20to%20ceiling%20south%20facing%20windows%2C%20view%20of%20small%20city%20skyline%20and%20distant%20hills%2C%20contemporary%20furniture%2C%20late%20afternoon%20golden%20light%2C%20real%20estate%20listing%20photograph?width=1200&height=900&seed=41&model=flux&nologo=true",
+        "alt": "Condo interior with downtown view"
+      },
+      {
+        "src": "https://image.pollinations.ai/prompt/Small%20home%20office%20den%20inside%20a%20modern%20Canadian%20condo%2C%20simple%20wood%20desk%20and%20ergonomic%20chair%2C%20neutral%20palette%2C%20natural%20light%20from%20a%20city%20facing%20window%2C%20organized%20and%20uncluttered%2C%20real%20estate%20listing%20photograph?width=1200&height=900&seed=42&model=flux&nologo=true",
+        "alt": "Den setup as home office"
+      }
     ],
     "lat": 43.4516,
     "lng": -80.4925,
@@ -170,7 +196,10 @@
       "Walk to Belmont Village"
     ],
     "photos": [
-      { "src": "/images/listings/westmount-1.svg", "alt": "Westmount bungalow front view" }
+      {
+        "src": "https://image.pollinations.ai/prompt/Exterior%20of%20a%201952%20raised%20bungalow%20on%20a%20corner%20lot%20in%20Westmount%20Kitchener%20Ontario%2C%20mixed%20brick%20and%20painted%20wood%20siding%2C%20mature%20silver%20maple%20trees%2C%20neat%20front%20lawn%2C%20late%20summer%20afternoon%20light%2C%20real%20estate%20listing%20photograph?width=1200&height=900&seed=51&model=flux&nologo=true",
+        "alt": "Westmount bungalow front view"
+      }
     ],
     "lat": 43.4378,
     "lng": -80.5072,
@@ -202,7 +231,10 @@
       "Quick 401 access"
     ],
     "photos": [
-      { "src": "/images/listings/doon-south-1.svg", "alt": "Townhome exterior" }
+      {
+        "src": "https://image.pollinations.ai/prompt/Exterior%20of%20a%202017%20build%20modern%20townhouse%20in%20suburban%20Doon%20South%20Kitchener%20Ontario%2C%20neutral%20grey%20siding%2C%20attached%20single%20garage%2C%20manicured%20low%20maintenance%20landscaping%2C%20bright%20midday%20light%2C%20real%20estate%20listing%20photograph?width=1200&height=900&seed=61&model=flux&nologo=true",
+        "alt": "Townhome exterior"
+      }
     ],
     "lat": 43.3854,
     "lng": -80.4376,
@@ -237,7 +269,10 @@
       "Detached garage"
     ],
     "photos": [
-      { "src": "/images/listings/preston-1.svg", "alt": "Preston brick bungalow" }
+      {
+        "src": "https://image.pollinations.ai/prompt/Exterior%20of%20a%201958%20red%20brick%20bungalow%20on%20a%20mature%20Preston%20Cambridge%20Ontario%20street%2C%20single%20storey%2C%20detached%20garage%20at%20the%20back%2C%20tall%20front%20yard%20trees%2C%20warm%20afternoon%20light%2C%20real%20estate%20listing%20photograph?width=1200&height=900&seed=71&model=flux&nologo=true",
+        "alt": "Preston brick bungalow"
+      }
     ],
     "lat": 43.3922,
     "lng": -80.3582,
@@ -261,7 +296,10 @@
     "furnished": "none",
     "petsAllowed": "case-by-case",
     "parkingIncluded": true,
-    "utilitiesIncluded": ["heat", "water"],
+    "utilitiesIncluded": [
+      "heat",
+      "water"
+    ],
     "availableFrom": "2026-06-15",
     "beds": 1,
     "baths": 1,
@@ -276,10 +314,13 @@
       "10 min walk to Stanley Park"
     ],
     "photos": [
-      { "src": "/images/listings/stanley-park-1.svg", "alt": "Stanley Park duplex exterior" }
+      {
+        "src": "https://image.pollinations.ai/prompt/Exterior%20of%20the%20lower%20garden%20suite%20of%20a%20quiet%20brick%20duplex%20in%20Stanley%20Park%20Kitchener%20Ontario%2C%20separate%20side%20entrance%2C%20small%20private%20patio%20with%20potted%20plants%2C%20mature%20trees%20overhead%2C%20daylight%2C%20real%20estate%20listing%20photograph?width=1200&height=900&seed=81&model=flux&nologo=true",
+        "alt": "Stanley Park duplex exterior"
+      }
     ],
     "lat": 43.4742,
-    "lng": -80.4520,
+    "lng": -80.452,
     "listedAt": "2026-05-12",
     "createdAt": "2026-05-12"
   },
@@ -298,7 +339,10 @@
     "furnished": "none",
     "petsAllowed": "no",
     "parkingIncluded": false,
-    "utilitiesIncluded": ["heat", "water"],
+    "utilitiesIncluded": [
+      "heat",
+      "water"
+    ],
     "beds": 0,
     "baths": 1,
     "sqft": 410,
@@ -311,7 +355,10 @@
       "Coin laundry in basement"
     ],
     "photos": [
-      { "src": "/images/listings/queen-studio-1.svg", "alt": "Studio apartment interior" }
+      {
+        "src": "https://image.pollinations.ai/prompt/Interior%20of%20a%20small%201920s%20walk-up%20studio%20apartment%20in%20downtown%20Kitchener%20Ontario%2C%20original%20hardwood%20floor%2C%20single%20tall%20sash%20window%20with%20daylight%2C%20a%20cast%20iron%20radiator%2C%20minimal%20mid%20century%20furniture%2C%20warm%20and%20quiet%2C%20real%20estate%20listing%20photograph?width=1200&height=900&seed=91&model=flux&nologo=true",
+        "alt": "Studio apartment interior"
+      }
     ],
     "lat": 43.4475,
     "lng": -80.4912,

@@ -70,6 +70,8 @@ export default async function ListingDetailPage({
             key={i}
             src={p.src}
             alt={p.alt}
+            loading={i === 0 ? "eager" : "lazy"}
+            decoding="async"
             className={
               i === 0
                 ? "aspect-[4/3] w-full object-cover md:col-span-2 md:aspect-auto"

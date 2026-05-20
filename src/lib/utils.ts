@@ -32,6 +32,25 @@ export function daysSince(iso: string): number {
   return Math.max(0, Math.floor(ms / 86_400_000));
 }
 
+/**
+ * Build a Pollinations AI image URL. Free, no API key, deterministic given the
+ * same prompt + seed. Used for demo listing photos and the realtor headshot
+ * until real photography is shot.
+ *
+ * Each unique URL triggers a one-time generation on the Pollinations server;
+ * Pollinations caches results so subsequent requests are fast.
+ */
+export function pollinationsImage(prompt: string, opts?: {
+  width?: number;
+  height?: number;
+  seed?: number;
+  model?: "flux" | "turbo";
+}): string {
+  const { width = 1200, height = 900, seed = 1, model = "flux" } = opts ?? {};
+  const encoded = encodeURIComponent(prompt.trim());
+  return `https://image.pollinations.ai/prompt/${encoded}?width=${width}&height=${height}&seed=${seed}&model=${model}&nologo=true`;
+}
+
 export function slugify(input: string): string {
   return input
     .toLowerCase()

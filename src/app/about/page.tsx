@@ -21,6 +21,8 @@ export default function AboutPage() {
         <img
           src={siteConfig.realtor.photo}
           alt={`${siteConfig.realtor.name}, ${siteConfig.realtor.title}`}
+          loading="lazy"
+          decoding="async"
           className="aspect-[3/4] w-full rounded-lg object-cover"
         />
 

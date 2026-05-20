@@ -21,7 +21,7 @@ export const siteConfig = {
       "Brand-new to real estate, lifelong KW resident, and committed to earning your trust through patient, careful work — not slick pitches.",
     bioLong:
       "I grew up between Kitchener and Waterloo, watched the region change through three real-estate cycles, and decided to get licensed because friends kept asking me the same questions and deserved better answers than what they were getting. I'm new to the business but not to the place. What I can promise: a slower, more careful pace; honest answers, including the ones you don't want to hear; and a refusal to push a deal that isn't right for you.",
-    photo: "/images/realtor-headshot-placeholder.svg",
+    photo: "https://image.pollinations.ai/prompt/Professional%20headshot%20photograph%20of%20a%20friendly%20Canadian%20woman%20real%20estate%20agent%20in%20her%20early%20thirties%2C%20warm%20natural%20smile%2C%20soft%20daylight%2C%20neutral%20cream%20studio%20background%2C%20smart-casual%20blazer%2C%20approachable%2C%20sharp%20focus%2C%20photorealistic?width=900&height=1200&seed=101&model=flux&nologo=true",
     email: "hello@yourdomain.ca",
     phone: "+1-519-555-0100",
     languages: ["English"] as string[],

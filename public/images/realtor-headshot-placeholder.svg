@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" role="img" aria-label="Realtor headshot placeholder">
-  <rect width="300" height="400" fill="#efe7d6"/>
-  <circle cx="150" cy="155" r="65" fill="#d18c5a"/>
-  <path d="M50 400 Q50 270 150 270 Q250 270 250 400 Z" fill="#b86d3a"/>
-  <text x="150" y="370" font-family="serif" font-size="14" fill="#faf6ef" text-anchor="middle">Photo coming soon</text>
-</svg>
