@@ -27,7 +27,7 @@ export function MortgageCalculator({ defaultPrice = 750_000 }: { defaultPrice?: 
   const shortDown = downPayment < minDown;
 
   return (
-    <div className="rounded-lg border border-border-subtle bg-canvas-elevated p-6 sm:p-8">
+    <div className="rounded-xl bg-canvas-elevated p-6 shadow-sm ring-1 ring-border-subtle sm:p-8">
       <h3 className="font-display text-display-sm text-ink">Mortgage estimator</h3>
       <p className="mt-2 text-body-sm text-muted">
         Educational. Real rates depend on the lender, term, your credit, and the date. Always
@@ -117,7 +117,7 @@ function Field({
   return (
     <label className="block">
       <span className="text-caption text-muted">{label}</span>
-      <div className="mt-1 flex items-center gap-2 rounded-md border border-border bg-canvas px-3 py-2 focus-within:border-accent">
+      <div className="mt-1 flex items-center gap-2 rounded-md border border-border bg-canvas px-3 py-2 focus-within:border-lake">
         <input
           type="number"
           value={Number.isFinite(value) ? value.toFixed(decimals) : ""}
@@ -125,7 +125,7 @@ function Field({
           min={min}
           max={max}
           step={step}
-          className="w-full bg-transparent text-body text-ink outline-none"
+          className="w-full bg-transparent text-body text-ink outline-none tabular-nums"
         />
         {suffix ? <span className="text-caption text-muted">{suffix}</span> : null}
       </div>
@@ -153,8 +153,8 @@ function Stat({
       <dd
         className={
           primary
-            ? "mt-1 font-display text-display-md text-accent-deep"
-            : "mt-1 font-display text-display-sm text-ink"
+            ? "mt-1 font-display text-display-md text-lake-deep tabular-nums"
+            : "mt-1 font-display text-display-sm text-ink tabular-nums"
         }
       >
         {value}

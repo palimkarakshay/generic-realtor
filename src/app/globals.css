@@ -4,27 +4,30 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ─────────────────────────────────────────────────────────────
- * Design tokens — warm KW palette for a brand-new realtor's
- * personal site. Inspired by the Lumivara editorial system but
- * dialed warmer for residential real estate.
+ * Design tokens — KW palette with deeper darks, vivid accents,
+ * and a cool "Grand River" teal as a second accent for data UI.
+ * Warm cream stays as canvas; cards lean true-white for crispness.
  * ────────────────────────────────────────────────────────────*/
 
 :root {
   /* Brand palette — light mode (default) */
-  --canvas: #faf6ef;
-  --canvas-elevated: #fdfaf3;
-  --ink: #1a1410;
-  --ink-soft: #3a2f26;
-  --muted: #786a5d;
+  --canvas: #f7f2e7;
+  --canvas-elevated: #ffffff;
+  --ink: #0f1419;
+  --ink-soft: #2a313a;
+  --muted: #6b7480;
   --parchment: #efe7d6;
-  --accent: #b86d3a;            /* warm terracotta — KW autumn brick */
-  --accent-soft: #d18c5a;
-  --accent-deep: #93521f;
-  --moss: #6b7d4f;               /* secondary — KW greenbelt */
-  --moss-soft: #8b9b6e;
-  --border: #e2d8c4;
-  --border-subtle: #ede4d1;
-  --success: #4a7c59;
+  --accent: #c2410c;             /* deeper, saturated terracotta */
+  --accent-soft: #fed7aa;
+  --accent-deep: #7c2d12;
+  --lake: #0e7490;               /* NEW — Grand River teal, for data/CTAs */
+  --lake-soft: #cffafe;
+  --lake-deep: #155e75;
+  --moss: #4d7c0f;               /* vivid KW greenbelt */
+  --moss-soft: #d9f99d;
+  --border: #e7e2d4;
+  --border-subtle: #f0ebde;
+  --success: #4d7c0f;
   --error: #a13d3d;
   --warning: #c08400;
 
@@ -53,19 +56,22 @@
 }
 
 .dark {
-  --canvas: #14110d;
-  --canvas-elevated: #1c1814;
-  --ink: #faf6ef;
-  --ink-soft: #d8cdb9;
-  --muted: #8e8170;
-  --parchment: #2a241c;
-  --accent: #d18c5a;
-  --accent-soft: #e0a576;
-  --accent-deep: #b86d3a;
-  --moss: #8b9b6e;
-  --moss-soft: #a4b288;
-  --border: #2c261d;
-  --border-subtle: #221d16;
+  --canvas: #0b0f14;
+  --canvas-elevated: #131820;
+  --ink: #f7f2e7;
+  --ink-soft: #d8d2c2;
+  --muted: #8a8e96;
+  --parchment: #1c2128;
+  --accent: #ea580c;
+  --accent-soft: #431407;
+  --accent-deep: #fb923c;
+  --lake: #22d3ee;
+  --lake-soft: #083344;
+  --lake-deep: #67e8f9;
+  --moss: #84cc16;
+  --moss-soft: #1a2e05;
+  --border: #1f242c;
+  --border-subtle: #161b22;
 
   --background: var(--canvas);
   --foreground: var(--ink-soft);
@@ -116,6 +122,9 @@
   --color-accent: var(--accent);
   --color-accent-soft: var(--accent-soft);
   --color-accent-deep: var(--accent-deep);
+  --color-lake: var(--lake);
+  --color-lake-soft: var(--lake-soft);
+  --color-lake-deep: var(--lake-deep);
   --color-moss: var(--moss);
   --color-moss-soft: var(--moss-soft);
   --color-border: var(--border);
@@ -128,11 +137,11 @@
   --font-body: "Public Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
 
   /* Typography scale */
-  --text-display-2xl: 4.5rem;
-  --text-display-xl: 3.5rem;
-  --text-display-lg: 2.75rem;
-  --text-display-md: 2.125rem;
-  --text-display-sm: 1.625rem;
+  --text-display-2xl: 5.5rem;
+  --text-display-xl: 4.25rem;
+  --text-display-lg: 3.25rem;
+  --text-display-md: 2.25rem;
+  --text-display-sm: 1.75rem;
   --text-body-lg: 1.125rem;
   --text-body: 1rem;
   --text-body-sm: 0.9rem;
@@ -160,8 +169,9 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     color: var(--ink);
-    font-weight: 500;
-    letter-spacing: -0.01em;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-variation-settings: "opsz" 144;
   }
 
   ::selection {
@@ -189,10 +199,16 @@
   border: 1px solid var(--border-subtle);
 }
 
-.text-display-2xl { font-size: var(--text-display-2xl); line-height: 1.05; }
-.text-display-xl  { font-size: var(--text-display-xl);  line-height: 1.1; }
-.text-display-lg  { font-size: var(--text-display-lg);  line-height: 1.15; }
+.text-display-2xl { font-size: var(--text-display-2xl); line-height: 1.02; letter-spacing: -0.03em; }
+.text-display-xl  { font-size: var(--text-display-xl);  line-height: 1.05; letter-spacing: -0.025em; }
+.text-display-lg  { font-size: var(--text-display-lg);  line-height: 1.1;  letter-spacing: -0.02em; }
 .text-display-md  { font-size: var(--text-display-md);  line-height: 1.2; }
 .text-display-sm  { font-size: var(--text-display-sm);  line-height: 1.3; }
 .text-body-lg     { font-size: var(--text-body-lg);     line-height: 1.65; }
-.text-caption     { font-size: var(--text-caption);     line-height: 1.4; letter-spacing: 0.04em; text-transform: uppercase; }
+.text-caption     { font-size: var(--text-caption);     line-height: 1.4; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500; }
+
+/* Tabular numerics — use on any price/calculation output */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}

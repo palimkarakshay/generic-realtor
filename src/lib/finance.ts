@@ -125,3 +125,44 @@ export function rentAffordability(args: { grossMonthlyIncome: number; targetMont
   else verdict = "unaffordable";
   return { maxRecommended: max, ratio, verdict };
 }
+
+/**
+ * Inverse of monthlyMortgagePayment: given an income, down payment, rate, and
+ * amortization, what's the most expensive home you can carry without exceeding
+ * the GDS-style 32%-of-gross-monthly-income payment ceiling?
+ *
+ * Returns the max purchase price. Uses Canadian semi-annual compounding to stay
+ * consistent with monthlyMortgagePayment. Clamps to zero on degenerate inputs.
+ */
+export function maxAffordablePurchasePrice(args: {
+  grossAnnualIncome: number;
+  downPayment: number;
+  annualRatePct: number;
+  amortizationYears: number;
+  /** Fraction of gross monthly income that goes to the mortgage payment. Default 0.32 (GDS). */
+  paymentRatio?: number;
+}): number {
+  const {
+    grossAnnualIncome,
+    downPayment,
+    annualRatePct,
+    amortizationYears,
+    paymentRatio = 0.32,
+  } = args;
+  if (grossAnnualIncome <= 0 || amortizationYears <= 0) return 0;
+
+  const maxMonthlyPayment = (grossAnnualIncome / 12) * paymentRatio;
+  const periods = amortizationYears * 12;
+
+  let maxPrincipal: number;
+  if (annualRatePct <= 0) {
+    maxPrincipal = maxMonthlyPayment * periods;
+  } else {
+    const semi = annualRatePct / 100 / 2;
+    const monthlyRate = Math.pow(1 + semi, 2 / 12) - 1;
+    maxPrincipal = (maxMonthlyPayment * (1 - Math.pow(1 + monthlyRate, -periods))) / monthlyRate;
+  }
+
+  const safeDown = Math.max(0, downPayment);
+  return Math.max(0, maxPrincipal + safeDown);
+}
