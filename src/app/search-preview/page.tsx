@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { ListingSearchPanel } from "@/components/search/listing-search-panel";
 import { ListingCard } from "@/components/listings/listing-card";
+import { ListingsMap } from "@/components/maps/listings-map";
 import {
   applyFilters,
   priceBounds,
@@ -54,13 +55,18 @@ export default function SearchPreviewPage() {
 
         <div>
           <p className="text-caption text-muted">{results.length} matching</p>
+
+          <div className="mt-3 overflow-hidden rounded-xl ring-1 ring-border-subtle">
+            <ListingsMap listings={results} height={480} />
+          </div>
+
           {results.length === 0 ? (
-            <p className="mt-3 text-body text-ink-soft">
+            <p className="mt-6 text-body text-ink-soft">
               Nothing matches the current filters. Try widening the price range
               or clearing the bedroom chips.
             </p>
           ) : (
-            <div className="mt-3 grid gap-5 sm:grid-cols-2">
+            <div className="mt-6 grid gap-5 sm:grid-cols-2">
               {results.map((l) => (
                 <ListingCard key={l.slug} listing={l} />
               ))}
