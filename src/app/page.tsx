@@ -130,13 +130,11 @@ export default function HomePage() {
 
         {featured.length === 0 ? (
           <p className="mt-6 max-w-prose text-body text-ink-soft">
-            Nothing of my own to show you yet — I&apos;m new. Most of my work happens before a
-            listing ever exists, on the buyer side.{" "}
+            No active listings to feature right now.{" "}
             <Link href="/contact" className="underline">
-              Send me a note
+              Send a note
             </Link>{" "}
-            and we&apos;ll figure out together whether I&apos;m the right person for what
-            you&apos;re after.
+            with what you&apos;re looking for and I&apos;ll watch the market for you.
           </p>
         ) : null}
       </section>
@@ -153,14 +151,12 @@ export default function HomePage() {
             />
           </div>
           <div>
-            <p className="text-caption uppercase text-accent">
-              Working with me
-            </p>
+            <p className="text-caption uppercase text-accent">Your realtor</p>
             <h2
               id="agent-intro"
               className="mt-3 font-display text-display-md text-canvas md:text-display-lg"
             >
-              Slow real estate, careful answers, no pressure.
+              {siteConfig.realtor.name}
             </h2>
             <p className="mt-4 max-w-prose text-body-lg text-canvas/85">
               {siteConfig.realtor.bioShort}
@@ -170,7 +166,7 @@ export default function HomePage() {
                 href="/contact"
                 className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-medium text-ink transition hover:bg-accent-soft"
               >
-                Start a conversation
+                Get in touch
               </Link>
               <Link
                 href={siteConfig.calendly.url}
@@ -180,7 +176,8 @@ export default function HomePage() {
               </Link>
             </div>
             <p className="mt-5 text-caption uppercase text-canvas/55">
-              {siteConfig.realtor.name} · {siteConfig.realtor.title} · New to the work, lifelong KW
+              {siteConfig.realtor.title} ·{" "}
+              {siteConfig.realtor.serviceAreas.slice(0, 3).join(" · ")}
             </p>
           </div>
         </div>
@@ -192,11 +189,11 @@ export default function HomePage() {
       <section className="bg-canvas-elevated" aria-labelledby="neighborhoods-heading">
         <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
           <h2 id="neighborhoods-heading" className="text-display-lg text-ink">
-            The neighborhoods I know
+            Neighborhoods served
           </h2>
           <p className="mt-3 max-w-prose text-body-lg text-ink-soft">
-            Each of these has its own pace, its own price band, and its own quirks. I&apos;ve
-            written about what I notice on the ground.
+            Each one has its own pace, its own price band, and its own quirks. Pick a guide to dig
+            into the details.
           </p>
 
           <ul className="mt-8 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
@@ -225,13 +222,8 @@ export default function HomePage() {
       {allTestimonials.length > 0 ? (
         <section aria-labelledby="testimonials-heading" className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
           <h2 id="testimonials-heading" className="text-display-lg text-ink">
-            What people are saying (so far)
+            What clients are saying
           </h2>
-          <p className="mt-3 max-w-prose text-body text-ink-soft">
-            These are the folks who&apos;ve been around me on the way in — mentors, referral
-            partners, friends who let me practise on them. Real client quotes will land here as
-            the work comes in. The drafts are labelled honestly.
-          </p>
           <ul className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {allTestimonials.map((t) => (
               <li key={t.id}>
@@ -250,7 +242,7 @@ export default function HomePage() {
               Recently closed
             </h2>
             <p className="mt-2 max-w-prose text-body text-ink-soft">
-              The work that&apos;s behind me, with the numbers attached.
+              A look at the deals that have come through this season.
             </p>
             <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {closed.map((l) => (

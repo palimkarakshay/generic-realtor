@@ -50,8 +50,8 @@ export default function OpenHousesPage() {
             Open houses
           </h1>
           <p className="mt-4 max-w-prose text-body-lg text-canvas/85">
-            Every upcoming open house on the schedule. No appointment needed — just show up, take your
-            time, ask anything. I&apos;ll be at the door.
+            Every upcoming open house on the schedule. No appointment needed — drop in, look around,
+            ask questions.
           </p>
         </div>
       </section>
@@ -60,8 +60,8 @@ export default function OpenHousesPage() {
         <section className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
           <h2 className="text-display-md text-ink">Nothing scheduled this week</h2>
           <p className="mt-3 max-w-prose text-body-lg text-ink-soft">
-            New open houses get posted as listings firm up. In the meantime, I can arrange a private
-            showing for anything you see on the{" "}
+            New open houses get posted as listings firm up. For now, private showings are available
+            for anything on the{" "}
             <Link href="/listings" className="underline">
               listings page
             </Link>
@@ -87,7 +87,7 @@ export default function OpenHousesPage() {
           <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
             <h2 className="text-display-md text-ink">The schedule</h2>
             <p className="mt-2 text-body text-ink-soft">
-              Grouped by day. Click &quot;Add to calendar&quot; to drop the visit into your phone.
+              Grouped by day. Use &quot;Add to calendar&quot; to drop a visit into your phone.
             </p>
             <div className="mt-10">
               <OpenHouseCalendar instances={instances} />

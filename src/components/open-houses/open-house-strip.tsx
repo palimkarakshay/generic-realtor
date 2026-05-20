@@ -14,7 +14,7 @@ export function OpenHouseStrip({ limit = 4 }: { limit?: number } = {}) {
           <div>
             <p className="text-caption uppercase text-moss">Open houses</p>
             <h2 id="open-houses-strip" className="mt-2 text-display-lg text-ink">
-              Coming up — walk through with me
+              Upcoming open houses
             </h2>
           </div>
           <Link

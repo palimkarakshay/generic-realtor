@@ -39,7 +39,7 @@ const pillars: {
     title: "Selling",
     intent: "Ready to list the home you have",
     blurb:
-      "A current valuation, an honest pricing strategy, and a marketing plan that doesn't oversell. No pressure to list before you're ready.",
+      "A current valuation, a pricing strategy backed by recent comps, and a marketing plan tailored to your home. List when you're ready.",
     cta: "Get a valuation",
     tone: "moss",
   },
@@ -79,11 +79,11 @@ export function FourPillars() {
   return (
     <section className="mx-auto max-w-6xl px-5 py-20 sm:px-8" aria-labelledby="pillars-heading">
       <h2 id="pillars-heading" className="text-display-lg text-ink">
-        Where are you in the picture?
+        How can I help?
       </h2>
       <p className="mt-3 max-w-prose text-body-lg text-ink-soft">
-        The first question I ask anyone is what side of the market they&apos;re on. The answer
-        changes almost every piece of advice that follows.
+        Buying, selling, renting, or leasing out — each side of the market needs a different
+        approach. Pick the one that fits you.
       </p>
 
       <div className="mt-10 grid gap-5 md:grid-cols-2">
