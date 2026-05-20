@@ -39,14 +39,14 @@ export default function HomePage() {
                 id="map-heading"
                 className="mt-1 font-display text-display-md text-ink sm:text-display-lg"
               >
-                Find a home on the map.
+                What&apos;s on the market in KW, right now.
               </h1>
             </div>
             <Link
               href="/listings"
               className="text-body-sm text-ink underline-offset-4 hover:text-accent-deep hover:underline"
             >
-              Browse all listings →
+              Skip the map, see the list →
             </Link>
           </div>
         </div>
@@ -114,7 +114,7 @@ export default function HomePage() {
                 {primary.sqft ? <span>{formatNumber(primary.sqft)} sqft</span> : null}
               </div>
               <span className="mt-6 inline-flex items-center gap-2 text-body-sm font-medium text-accent-deep group-hover:underline">
-                View this listing →
+                Take a closer look →
               </span>
             </div>
           </Link>
@@ -130,10 +130,13 @@ export default function HomePage() {
 
         {featured.length === 0 ? (
           <p className="mt-6 max-w-prose text-body text-ink-soft">
-            I&apos;m new to the business and don&apos;t have active listings yet. That doesn&apos;t
-            mean I can&apos;t help — most of my work happens before a listing exists, on the
-            buyer side. <Link href="/contact" className="underline">Send me a note</Link> and we can
-            talk about whether I&apos;m the right person for what you need.
+            Nothing of my own to show you yet — I&apos;m new. Most of my work happens before a
+            listing ever exists, on the buyer side.{" "}
+            <Link href="/contact" className="underline">
+              Send me a note
+            </Link>{" "}
+            and we&apos;ll figure out together whether I&apos;m the right person for what
+            you&apos;re after.
           </p>
         ) : null}
       </section>
@@ -177,7 +180,7 @@ export default function HomePage() {
               </Link>
             </div>
             <p className="mt-5 text-caption uppercase text-canvas/55">
-              {siteConfig.realtor.name} · {siteConfig.realtor.title} · New to the business, not to KW
+              {siteConfig.realtor.name} · {siteConfig.realtor.title} · New to the work, lifelong KW
             </p>
           </div>
         </div>
@@ -222,12 +225,12 @@ export default function HomePage() {
       {allTestimonials.length > 0 ? (
         <section aria-labelledby="testimonials-heading" className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
           <h2 id="testimonials-heading" className="text-display-lg text-ink">
-            Early voices
+            What people are saying (so far)
           </h2>
           <p className="mt-3 max-w-prose text-body text-ink-soft">
-            Riley is brand-new to the business. These are pre-licensing mentors, referral partners,
-            and mock-client conversations — labelled honestly. Real client quotes will replace the
-            drafts as the work happens.
+            These are the folks who&apos;ve been around me on the way in — mentors, referral
+            partners, friends who let me practise on them. Real client quotes will land here as
+            the work comes in. The drafts are labelled honestly.
           </p>
           <ul className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {allTestimonials.map((t) => (

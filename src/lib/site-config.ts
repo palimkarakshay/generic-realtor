@@ -18,9 +18,9 @@ export const siteConfig = {
     title: "Sales Representative",
     pronouns: "she/her",
     bioShort:
-      "Lifelong Kitchener-Waterloo resident, newly licensed REALTOR®. Patient real estate work for people who'd rather take a careful look than be pushed into a deal.",
+      "Born and raised in Kitchener-Waterloo. Newly licensed, deliberately slow — for people who'd rather think a deal through than be pushed into one.",
     bioLong:
-      "I grew up between Kitchener and Waterloo and watched the region go through three real estate cycles before deciding to get licensed. Friends kept asking me the same questions and deserved better answers than the ones they were getting elsewhere. I'm new to the business — not to the place. What I promise is simple: I won't push you into the wrong house or the wrong listing, and I'll tell you honestly when the answer is to wait.",
+      "I grew up between Kitchener and Waterloo and watched the region move through three full real estate cycles before getting licensed. Friends kept asking me the same questions and deserved better answers than the ones they were getting. I'm new to the work, not to the place. What I promise is simple: I won't push you into the wrong house or the wrong listing, and I'll tell you honestly when the answer is to wait.",
     photo: "https://image.pollinations.ai/prompt/Editorial%20portrait%20photograph%2C%2085mm%20lens%2C%20soft%20north-window%20natural%20daylight%2C%20a%20friendly%20Canadian%20woman%20real%20estate%20agent%20in%20her%20early%20thirties%20with%20a%20warm%20genuine%20smile%2C%20smart-casual%20blazer%20over%20a%20cream%20top%2C%20neutral%20warm-gray%20studio%20backdrop%2C%20shallow%20depth%20of%20field%2C%20natural%20skin%20tones%2C%20approachable%2C%20photoreal%2C%20no%20text%2C%20no%20watermark%2C%20no%20logo?width=1000&height=1300&seed=1011&model=flux&nologo=true",
     email: "hello@yourdomain.ca",
     phone: "+1-519-555-0100",
