@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { FourPillars } from "@/components/layout/four-pillars";
 import { BrandPromiseStrip } from "@/components/marketing/brand-promise-strip";
+import { FeaturedListingsBento } from "@/components/marketing/featured-listings-bento";
 import { HomepageSearchHero } from "@/components/search/homepage-search-hero";
 import { QuickAffordability } from "@/components/calculators/quick-affordability";
-import { ListingCard } from "@/components/listings/listing-card";
 import { JsonLd } from "@/components/layout/jsonld";
 import { activeSaleListings, activeRentListings } from "@/lib/listings";
 import { getAllInsights } from "@/lib/insights";
@@ -13,7 +13,7 @@ import { formatDate } from "@/lib/utils";
 
 export default function HomePage() {
   const heroListings = [...activeRentListings, ...activeSaleListings];
-  const featured = [...activeSaleListings, ...activeRentListings].slice(0, 3);
+  const featured = [...activeRentListings, ...activeSaleListings].slice(0, 6);
   const recentInsights = getAllInsights().slice(0, 3);
 
   return (
@@ -28,37 +28,7 @@ export default function HomePage() {
 
       <FourPillars />
 
-      {/* Featured listings or honest empty state */}
-      <section
-        aria-labelledby="featured-heading"
-        className="mx-auto max-w-6xl px-5 py-16 sm:px-8"
-      >
-        <div className="flex flex-wrap items-baseline justify-between gap-4">
-          <h2 id="featured-heading" className="text-display-lg text-ink">
-            {featured.length > 0 ? "Open this week in KW" : "Featured listings"}
-          </h2>
-          {featured.length > 0 ? (
-            <Link href="/listings" className="text-body-sm text-ink hover:text-lake-deep">
-              See all listings →
-            </Link>
-          ) : null}
-        </div>
-
-        {featured.length > 0 ? (
-          <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {featured.map((l) => (
-              <ListingCard key={l.slug} listing={l} />
-            ))}
-          </div>
-        ) : (
-          <p className="mt-6 max-w-prose text-body text-ink-soft">
-            No live listings on the wall right now. Most of the work happens before a listing
-            exists — browsing rentals, prepping a sale, getting pre-approved.{" "}
-            <Link href="/contact" className="underline">Get in touch</Link> and we&apos;ll start
-            with what you actually need.
-          </p>
-        )}
-      </section>
+      <FeaturedListingsBento listings={featured} />
 
       {/* Neighborhoods preview */}
       <section className="bg-canvas-elevated" aria-labelledby="neighborhoods-heading">
