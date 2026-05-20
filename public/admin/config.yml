@@ -1,0 +1,132 @@
+# Decap CMS configuration
+# https://decapcms.org/docs/
+#
+# v1: GitHub OAuth backend, free. Set up an OAuth app at github.com and
+# host the proxy on https://github.com/igk1972/netlify-cms-oauth-provider-node
+# (or use Cloudflare Worker OAuth proxy — free).
+#
+# For a brand-new realtor with no OAuth set up yet, use git-gateway via
+# Netlify Identity (also free) OR edit the JSON file directly in GitHub.
+
+backend:
+  name: github
+  repo: palimkarakshay/generic-realtor
+  branch: main
+  base_url: https://your-oauth-proxy.workers.dev  # CHANGE ME — free Cloudflare Worker OAuth proxy
+
+# Local development: edit content via http://localhost:3000/admin with no auth
+# (requires `npx decap-server` running on port 8081 — see docs)
+local_backend: true
+
+media_folder: public/images/listings
+public_folder: /images/listings
+
+publish_mode: editorial_workflow
+
+collections:
+  - name: listings
+    label: Listings
+    label_singular: Listing
+    folder: src/content/listings
+    create: false
+    files:
+      - name: listings
+        label: All listings
+        file: src/content/listings/index.json
+        format: json
+        fields:
+          - name: listings
+            label: Listings
+            label_singular: Listing
+            widget: list
+            fields:
+              - { name: listingId, label: Listing ID, widget: string }
+              - { name: slug, label: URL slug (kebab-case), widget: string }
+              - name: listingType
+                label: For sale or for rent?
+                widget: select
+                options:
+                  - { label: For sale, value: sale }
+                  - { label: For rent, value: rent }
+                default: sale
+              - { name: title, label: Title, widget: string }
+              - { name: address, label: Street address, widget: string }
+              - { name: city, label: City, widget: string, default: Kitchener }
+              - { name: province, label: Province, widget: string, default: ON }
+              - { name: postalCode, label: Postal code, widget: string, required: false }
+              # Sale-only fields (use conditional in the editor copy below)
+              - { name: price, label: Sale price (CAD), widget: number, required: false, hint: "For sale only" }
+              - name: status
+                label: Status
+                widget: select
+                options: [active, pending, sold, leased, expired]
+                default: active
+              # Rent-only fields
+              - { name: monthlyRent, label: Monthly rent (CAD), widget: number, required: false, hint: "For rent only" }
+              - name: leaseTerm
+                label: Lease term
+                widget: select
+                options: ["12-months", "month-to-month", "6-months", "other"]
+                required: false
+              - name: furnished
+                label: Furnished
+                widget: select
+                options: [none, partially, fully]
+                required: false
+              - name: petsAllowed
+                label: Pets allowed
+                widget: select
+                options: [yes, "cats-only", "no", "case-by-case"]
+                required: false
+              - { name: parkingIncluded, label: Parking included, widget: boolean, required: false }
+              - name: utilitiesIncluded
+                label: Utilities included (for rent)
+                widget: select
+                multiple: true
+                options: [heat, hydro, water, internet, none]
+                required: false
+              - { name: availableFrom, label: Available from, widget: date, required: false }
+              # Shared fields
+              - { name: beds, label: Bedrooms, widget: number }
+              - { name: baths, label: Bathrooms, widget: number, value_type: float }
+              - { name: sqft, label: Interior sqft, widget: number, required: false }
+              - { name: lotSizeSqft, label: Lot size sqft, widget: number, required: false }
+              - { name: yearBuilt, label: Year built, widget: number, required: false }
+              - name: propertyType
+                label: Property type
+                widget: select
+                options: [detached, semi-detached, townhouse, condo-apartment, condo-townhouse, duplex, triplex, land]
+              - { name: description, label: Description, widget: text }
+              - { name: features, label: Features, widget: list, required: false }
+              - name: photos
+                label: Photos
+                widget: list
+                required: false
+                fields:
+                  - { name: src, label: Image, widget: image }
+                  - { name: alt, label: Alt text, widget: string }
+              - { name: lat, label: Latitude, widget: number, value_type: float, required: false }
+              - { name: lng, label: Longitude, widget: number, value_type: float, required: false }
+              - { name: brokerage, label: Brokerage (override default), widget: string, required: false }
+              - { name: listedAt, label: Listed on, widget: date, required: false }
+              - { name: soldAt, label: Sold on, widget: date, required: false }
+              - { name: leasedAt, label: Leased on, widget: date, required: false }
+              - { name: createdAt, label: Created, widget: date }
+              - { name: updatedAt, label: Updated, widget: date, required: false }
+
+  - name: insights
+    label: Insights / Blog
+    label_singular: Post
+    folder: src/content/insights
+    create: true
+    slug: "{{slug}}"
+    extension: mdx
+    format: frontmatter
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: excerpt, label: One-line excerpt, widget: string }
+      - { name: publishedAt, label: Published, widget: datetime }
+      - { name: tags, label: Tags, widget: list, required: false }
+      - { name: cover, label: Cover image, widget: image, required: false }
+      - { name: published, label: Published?, widget: boolean, default: true }
+      - { name: body, label: Body, widget: markdown }
