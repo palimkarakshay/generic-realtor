@@ -68,17 +68,72 @@ export const siteConfig = {
     cta: "Book a 20-minute intro call",
   },
 
-  /** The 9 KW neighborhoods this site has pages for */
+  /** The 9 KW neighborhoods this site has pages for. `vibe` is a short
+   * one-liner used in card UI; the detail page carries the long-form notes. */
   neighborhoods: [
-    { slug: "downtown-kitchener", name: "Downtown Kitchener", lat: 43.4516, lng: -80.4925 },
-    { slug: "uptown-waterloo", name: "Uptown Waterloo", lat: 43.4643, lng: -80.5204 },
-    { slug: "westmount-kitchener", name: "Westmount (Kitchener)", lat: 43.4378, lng: -80.5072 },
-    { slug: "doon-south", name: "Doon South", lat: 43.3854, lng: -80.4376 },
-    { slug: "stanley-park", name: "Stanley Park", lat: 43.4742, lng: -80.4520 },
-    { slug: "laurelwood", name: "Laurelwood", lat: 43.4847, lng: -80.5701 },
-    { slug: "preston", name: "Preston (Cambridge)", lat: 43.3922, lng: -80.3582 },
-    { slug: "galt", name: "Galt (Cambridge)", lat: 43.3553, lng: -80.3145 },
-    { slug: "st-jacobs", name: "St. Jacobs", lat: 43.5435, lng: -80.5526 },
+    {
+      slug: "downtown-kitchener",
+      name: "Downtown Kitchener",
+      lat: 43.4516,
+      lng: -80.4925,
+      vibe: "Tech, ION light rail, brick-loft city living",
+    },
+    {
+      slug: "uptown-waterloo",
+      name: "Uptown Waterloo",
+      lat: 43.4643,
+      lng: -80.5204,
+      vibe: "Patios, indie shops, walk-everywhere",
+    },
+    {
+      slug: "westmount-kitchener",
+      name: "Westmount (Kitchener)",
+      lat: 43.4378,
+      lng: -80.5072,
+      vibe: "Mature trees, mid-century homes, family feel",
+    },
+    {
+      slug: "doon-south",
+      name: "Doon South",
+      lat: 43.3854,
+      lng: -80.4376,
+      vibe: "Newer suburban builds, growing families",
+    },
+    {
+      slug: "stanley-park",
+      name: "Stanley Park",
+      lat: 43.4742,
+      lng: -80.4520,
+      vibe: "Post-war detached, classic Kitchener residential",
+    },
+    {
+      slug: "laurelwood",
+      name: "Laurelwood",
+      lat: 43.4847,
+      lng: -80.5701,
+      vibe: "Trail access, modern family homes",
+    },
+    {
+      slug: "preston",
+      name: "Preston (Cambridge)",
+      lat: 43.3922,
+      lng: -80.3582,
+      vibe: "Historic small shops, quieter Cambridge",
+    },
+    {
+      slug: "galt",
+      name: "Galt (Cambridge)",
+      lat: 43.3553,
+      lng: -80.3145,
+      vibe: "Limestone Victorian downtown on the Grand",
+    },
+    {
+      slug: "st-jacobs",
+      name: "St. Jacobs",
+      lat: 43.5435,
+      lng: -80.5526,
+      vibe: "Rural mill town, farmers' market country",
+    },
   ],
 } as const;
 

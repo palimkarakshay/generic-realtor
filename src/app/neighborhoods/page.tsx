@@ -1,17 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { neighborhoods } from "@/lib/neighborhoods";
-import { SmartImage } from "@/components/ui/smart-image";
-import { pollinationsImage } from "@/lib/utils";
-
-function thumbForNeighborhood(slug: string, name: string): string {
-  let seed = 3300;
-  for (let i = 0; i < slug.length; i++) seed = (seed * 31 + slug.charCodeAt(i)) & 0xffff;
-  return pollinationsImage(
-    `Cinematic editorial neighborhood photograph, 35mm look, warm afternoon golden-hour light, characteristic residential street scene in ${name} Kitchener Waterloo Ontario, mature trees, soft long shadows, no people in frame, hyperreal architectural detail, photoreal, no text, no watermark, no logo`,
-    { seed, width: 1000, height: 750, model: "flux" },
-  );
-}
+import { NeighborhoodGrid } from "@/components/marketing/neighborhood-grid";
 
 export const metadata: Metadata = {
   title: "Kitchener-Waterloo neighborhoods",
@@ -21,40 +9,23 @@ export const metadata: Metadata = {
 
 export default function NeighborhoodsPage() {
   return (
-    <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
-      <header className="max-w-2xl">
-        <h1 className="font-display text-display-xl text-ink">Neighborhoods</h1>
-        <p className="mt-4 text-body-lg text-ink-soft">
+    <>
+      <header className="mx-auto max-w-6xl px-5 pt-16 sm:px-8">
+        <p className="text-caption text-lake-deep">Kitchener · Waterloo · Cambridge</p>
+        <h1 className="mt-3 font-display text-display-xl text-ink">Neighborhoods</h1>
+        <p className="mt-4 max-w-2xl text-body-lg text-ink-soft">
           The KW region isn&apos;t one market — it&apos;s a dozen. What pulls you to Uptown
-          Waterloo is the opposite of what pulls someone to Doon South. These are short, honest
-          notes on each.
+          Waterloo is the opposite of what pulls someone to Doon South. These are short,
+          honest notes on each.
         </p>
       </header>
 
-      <ul className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {neighborhoods.map((n) => (
-          <li key={n.slug}>
-            <Link
-              href={`/neighborhoods/${n.slug}`}
-              className="group block h-full overflow-hidden rounded-lg border border-border-subtle bg-canvas-elevated transition hover:border-accent hover:shadow-sm"
-            >
-              <SmartImage
-                src={thumbForNeighborhood(n.slug, n.name)}
-                alt={`A scene from ${n.name}`}
-                loading="lazy"
-                className="aspect-[4/3] w-full object-cover transition group-hover:scale-[1.02]"
-              />
-              <div className="p-6">
-                <h2 className="font-display text-display-sm text-ink">{n.name}</h2>
-                <p className="mt-3 text-body-sm text-ink-soft">
-                  Read about the vibe, what to expect for prices, and what surprised me.
-                </p>
-                <p className="mt-4 text-caption text-accent-deep">Read more →</p>
-              </div>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+      <NeighborhoodGrid
+        title="All nine guides"
+        intro="Click any to read what the neighborhood is actually like — pace, price band, quirks, and what surprised me."
+        ctaHref=""
+        ctaLabel=""
+      />
+    </>
   );
 }
