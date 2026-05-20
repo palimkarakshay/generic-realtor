@@ -111,15 +111,29 @@ describe("matchesBeds", () => {
     expect(matchesBeds(sale({ beds: 7 }), [])).toBe(true);
   });
 
-  it("treats the max chip as open-ended (>=)", () => {
-    expect(matchesBeds(sale({ beds: 4 }), [1, 2, 3])).toBe(true); // 4 >= max(3)
-    expect(matchesBeds(sale({ beds: 10 }), [1, 2, 3])).toBe(true);
-    expect(matchesBeds(sale({ beds: 0 }), [1, 2, 3])).toBe(false);
+  it("matches exact bed counts for non-open chips", () => {
+    expect(matchesBeds(sale({ beds: 1 }), [1, 2, 3])).toBe(true);
+    expect(matchesBeds(sale({ beds: 3 }), [1, 2, 3])).toBe(true);
+    expect(matchesBeds(sale({ beds: 5 }), [1, 2, 3])).toBe(false);
   });
 
-  it("matches exact for chips below the max", () => {
-    expect(matchesBeds(sale({ beds: 1 }), [1, 2, 3])).toBe(true);
-    expect(matchesBeds(sale({ beds: 2 }), [1, 3])).toBe(false);
+  it("treats only the 4+ chip as open-ended", () => {
+    expect(matchesBeds(sale({ beds: 4 }), [4])).toBe(true);
+    expect(matchesBeds(sale({ beds: 7 }), [4])).toBe(true);
+    expect(matchesBeds(sale({ beds: 3 }), [4])).toBe(false);
+  });
+
+  it("does not treat single-chip selections like [0] as open-ended", () => {
+    expect(matchesBeds(sale({ beds: 0 }), [0])).toBe(true);
+    expect(matchesBeds(sale({ beds: 1 }), [0])).toBe(false);
+    expect(matchesBeds(sale({ beds: 5 }), [0])).toBe(false);
+  });
+
+  it("composes 4+ alongside exact chips", () => {
+    expect(matchesBeds(sale({ beds: 2 }), [2, 4])).toBe(true);
+    expect(matchesBeds(sale({ beds: 4 }), [2, 4])).toBe(true);
+    expect(matchesBeds(sale({ beds: 5 }), [2, 4])).toBe(true);
+    expect(matchesBeds(sale({ beds: 3 }), [2, 4])).toBe(false);
   });
 });
 
@@ -155,13 +169,19 @@ describe("applyFilters", () => {
     ).toEqual(["b"]);
   });
 
-  it("filters by beds chips (max chip is open-ended)", () => {
+  it("filters by exact beds chips", () => {
     expect(
       applyFilters(universe, { mode: "sale", beds: [3] }).map((l) => l.slug),
-    ).toEqual(["a", "b"]); // beds >= 3
+    ).toEqual(["a"]); // exactly 3
     expect(
       applyFilters(universe, { mode: "rent", beds: [1, 2] }).map((l) => l.slug),
-    ).toEqual(["r1", "r2", "r3"]); // 1, 2, and 3+ all match because max=2 is open
+    ).toEqual(["r1", "r2"]); // only the 1bd and 2bd, not the 3bd
+  });
+
+  it("filters by 4+ open-ended chip", () => {
+    expect(
+      applyFilters(universe, { mode: "sale", beds: [3, 4] }).map((l) => l.slug),
+    ).toEqual(["a", "b"]); // exactly 3 OR 4+
   });
 
   it("filters by property types", () => {

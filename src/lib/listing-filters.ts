@@ -18,9 +18,10 @@ export interface ListingFilters {
   /** Inclusive max, in dollars. 0 or undefined means no upper bound. */
   priceMax?: number;
   /**
-   * Bedroom counts to include. Each entry matches listings whose `beds`
-   * equals the value, EXCEPT the largest entry, which matches `>=`.
-   * So [1,2,3] matches 1bd, 2bd, 3bd+. Empty array means any.
+   * Bedroom counts to include. Each entry matches an exact bed count,
+   * EXCEPT the open-ended sentinel OPEN_ENDED_BEDS (4) which matches `>=4`.
+   * So [1,2,3] = strictly 1, 2, or 3 beds; [1,2,3,4] = 1, 2, 3, or 4+ beds.
+   * Empty array means any.
    */
   beds?: number[];
   /** Property types to include. Empty means any. */
@@ -56,14 +57,20 @@ export function priceFor(listing: Listing, mode: ListingMode): number {
 }
 
 /**
+ * Sentinel value for the "4+" chip. When present in a beds filter, listings
+ * with `beds >= 4` match.
+ */
+export const OPEN_ENDED_BEDS = 4;
+
+/**
  * Decide whether a listing matches the bedroom chips.
- * Empty/undefined chips = match anything. The largest chip is open-ended
- * ("4+" matches any beds >= 4).
+ * - undefined / empty → match anything
+ * - chips match exact bed counts
+ * - OPEN_ENDED_BEDS (4) is the only open-ended chip; it matches `beds >= 4`
  */
 export function matchesBeds(listing: Listing, beds: number[] | undefined): boolean {
   if (!beds || beds.length === 0) return true;
-  const max = Math.max(...beds);
-  if (listing.beds >= max) return true;
+  if (beds.includes(OPEN_ENDED_BEDS) && listing.beds >= OPEN_ENDED_BEDS) return true;
   return beds.includes(listing.beds);
 }
 
