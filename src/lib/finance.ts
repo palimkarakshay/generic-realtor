@@ -83,11 +83,18 @@ export function firstTimeBuyerLTTRebate(ltt: number): number {
 
 /**
  * CMHC insurance premium (rough — for educational use, not financing).
- * Premium tiers by LTV (loan-to-value):
- *   80.01–85%:  2.80%
- *   85.01–90%:  3.10%
- *   90.01–95%:  4.00%
- *   ≥95.01% or non-insurable (price > $1.5M, etc.): 0
+ * In Canada, CMHC mortgage default insurance is only required when the
+ * loan-to-value (LTV) ratio exceeds 80% — i.e. when the down payment is
+ * less than 20%. Below that, no premium applies on a conventional purchase.
+ *
+ * Premium tiers (CMHC purchase, 2025):
+ *   LTV ≤ 80%:            0  (not required; conventional mortgage)
+ *   80.01% – 85%:         2.80%
+ *   85.01% – 90%:         3.10%
+ *   90.01% – 95%:         4.00%
+ *   > 95% (or home value > $1.5M): not insurable → 0
+ *
+ * The premium is added to the mortgage principal, not paid upfront.
  */
 export function cmhcPremium(args: { price: number; downPayment: number }): number {
   const { price, downPayment } = args;
@@ -95,11 +102,9 @@ export function cmhcPremium(args: { price: number; downPayment: number }): numbe
   if (downPayment >= price) return 0;
   const principal = price - downPayment;
   const ltv = principal / price;
+  if (ltv <= 0.80) return 0;
   let rate = 0;
-  if (ltv <= 0.65) rate = 0.006;
-  else if (ltv <= 0.75) rate = 0.017;
-  else if (ltv <= 0.80) rate = 0.024;
-  else if (ltv <= 0.85) rate = 0.028;
+  if (ltv <= 0.85) rate = 0.028;
   else if (ltv <= 0.90) rate = 0.031;
   else if (ltv <= 0.95) rate = 0.04;
   else return 0;

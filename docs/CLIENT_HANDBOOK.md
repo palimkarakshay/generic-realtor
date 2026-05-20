@@ -21,7 +21,7 @@ The realtor's primary handbook for running this site. Read this start-to-finish 
 3. Click **Listings** → **All listings** → **Add Listing**.
 4. Fill in the fields. **Set `listingType` first** — it controls which fields matter.
 5. Upload the photos. First one becomes the card image.
-6. Save. Decap commits to GitHub, Cloudflare Pages rebuilds in ~60 seconds, the listing is live.
+6. Save. Decap commits to GitHub, the host (Vercel / Netlify) rebuilds in ~60 seconds, the listing is live.
 
 ### Mark a listing as sold or leased
 1. Open the listing in `/admin`.
@@ -31,8 +31,12 @@ The realtor's primary handbook for running this site. Read this start-to-finish 
 
 ### Publish an insight / blog post
 1. `/admin` → **Insights** → **New Post**.
-2. Fill in title, excerpt, body (Markdown).
+2. Fill in title, excerpt, body (Markdown). The body is plain Markdown — headings with `#`, bold with `**`, links with `[text](url)`.
 3. Set `published: true` when ready.
+4. Save. The post commits to GitHub, the host rebuilds, and it appears at `/insights/your-slug` in ~60 seconds.
+5. Posts you mark `published: false` are saved but hidden from the public site.
+
+The site automatically picks up new posts from `src/content/insights/` — no code changes needed.
 
 ## Photo prep (for listings you photograph yourself)
 
@@ -68,8 +72,8 @@ Talk to your developer before adding any of these. Each one costs money to integ
 ## Emergencies
 
 **The site is down.**
-- Cloudflare Pages dashboard → check the latest deploy. Roll back to a previous deploy if needed (free, one click).
-- If Cloudflare itself is down (rare), there's nothing to do — wait it out.
+- the host (Vercel / Netlify) dashboard → check the latest deploy. Roll back to a previous deploy if needed (free, one click).
+- If the host or Cloudflare itself is down (rare), there's nothing to do — wait it out.
 
 **A listing has a typo or wrong price.**
 - Edit in `/admin` → save. Live in ~60 seconds.

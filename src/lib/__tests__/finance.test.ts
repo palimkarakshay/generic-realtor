@@ -81,9 +81,26 @@ describe("cmhcPremium", () => {
     expect(cmhcPremium({ price: 1_600_000, downPayment: 320_000 })).toBe(0);
   });
 
-  it("scales by LTV band", () => {
-    // $500k home, 5% down ($25k) -> LTV 95% -> 4% premium on $475k = $19,000
+  it("returns 0 when LTV is 80% or less (conventional mortgage, no insurance required)", () => {
+    // $500k home, 20% down ($100k) -> LTV 80% -> 0
+    expect(cmhcPremium({ price: 500_000, downPayment: 100_000 })).toBe(0);
+    // $500k home, 25% down ($125k) -> LTV 75% -> 0
+    expect(cmhcPremium({ price: 500_000, downPayment: 125_000 })).toBe(0);
+  });
+
+  it("charges 2.80% at LTV 80.01%–85%", () => {
+    // $500k home, 15% down ($75k) -> LTV 85% -> 2.8% of $425k = $11,900
+    expect(cmhcPremium({ price: 500_000, downPayment: 75_000 })).toBe(11_900);
+  });
+
+  it("charges 4.00% at maximum-LTV insurance band (95%)", () => {
+    // $500k home, 5% down ($25k) -> LTV 95% -> 4% of $475k = $19,000
     expect(cmhcPremium({ price: 500_000, downPayment: 25_000 })).toBe(19_000);
+  });
+
+  it("returns 0 above 95% LTV (uninsurable)", () => {
+    // $500k home, 1% down -> LTV 99% -> 0
+    expect(cmhcPremium({ price: 500_000, downPayment: 5_000 })).toBe(0);
   });
 });
 

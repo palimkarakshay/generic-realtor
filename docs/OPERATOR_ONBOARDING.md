@@ -110,18 +110,54 @@ See `public/fonts/README.md`. Replace the empty `.woff2` placeholders with real 
 - `public/images/realtor-headshot-placeholder.svg` → real headshot
 - `public/images/listings/*.svg` → real listing photos (or delete the seed listings in `src/content/listings/index.json`)
 
-## 12. Deploy to Cloudflare Pages
+## 12. Deploy
+
+### Demo deploy — Vercel Hobby (free)
+
+For the demo you show the realtor before they commit, use Vercel's free Hobby tier. It supports everything in the stack out of the box (Node.js API route, dynamic routes, MDX) with zero configuration.
 
 1. Push the repo to GitHub.
-2. Cloudflare Pages → Create project → Connect to Git → select repo.
-3. Build settings:
-   - Build command: `npm run build`
-   - Output directory: `.next`
-   - Node version: 20.x
-4. Add environment variables (copy from `.env.local`).
-5. Save & deploy.
+2. Go to vercel.com/new → Import from GitHub → select the repo.
+3. Vercel auto-detects Next.js. No framework preset to choose, no build command to set.
+4. **Before clicking Deploy**, add environment variables from `.env.local`:
+   - `NEXT_PUBLIC_SITE_URL` (will be your Vercel preview URL initially, e.g. `https://your-project.vercel.app`)
+   - `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `RESEND_TO_EMAIL`
+   - `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`
+   - `NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN` (optional)
+   - `GOOGLE_SHEETS_WEBHOOK_URL` (optional)
+5. Click Deploy. First build takes ~90 seconds.
 
-First deploy takes ~2 minutes. Subsequent deploys ~60 seconds.
+Subsequent pushes to `main` redeploy automatically.
+
+### When the realtor signs off — moving to a commercial-OK host
+
+Vercel's Hobby plan is **non-commercial use only**. Once the realtor wants their site at `theirdomain.ca` for commercial use, pick one:
+
+#### Option A — Vercel Pro ($20/mo per seat, easiest)
+
+1. Upgrade the project to Pro in Vercel dashboard.
+2. Add `theirdomain.ca` as a custom domain.
+3. Point Cloudflare DNS at Vercel's nameservers (or use a CNAME record).
+4. Wait for SSL provisioning (~5 min).
+
+#### Option B — Netlify Free (free + commercial-OK)
+
+1. Create a Netlify account.
+2. Import from GitHub.
+3. Netlify auto-detects Next.js. Same env vars apply.
+4. Free tier includes 100GB bandwidth, custom domain, automatic HTTPS, and explicit commercial-use permission.
+
+#### Option C — Cloudflare Pages with `@cloudflare/next-on-pages` (free + commercial-OK, more setup)
+
+Requires converting the API route + dynamic pages to the edge runtime. See `@cloudflare/next-on-pages` docs. Free tier is generous but the conversion is non-trivial. Recommend this only if the realtor wants everything on Cloudflare.
+
+### After the migration
+
+Update the realtor's domain in three places:
+
+- `siteConfig.site.url` in `src/lib/site-config.ts` (or `NEXT_PUBLIC_SITE_URL` env var on the host)
+- Resend (verify the new domain there)
+- Cloudflare Email Routing (point `hello@theirdomain.ca` at their Gmail)
 
 ## 13. Test the full lead path
 

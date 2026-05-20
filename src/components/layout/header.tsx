@@ -7,6 +7,7 @@ const navLinks: { href: string; label: string }[] = [
   { href: "/sell", label: "Sell" },
   { href: "/lease-out", label: "Lease out" },
   { href: "/neighborhoods", label: "Neighborhoods" },
+  { href: "/insights", label: "Insights" },
   { href: "/about", label: "About" },
 ];
 

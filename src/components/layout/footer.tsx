@@ -47,6 +47,11 @@ export function Footer() {
                   Neighborhoods
                 </Link>
               </li>
+              <li>
+                <Link href="/insights" className="hover:text-accent-deep">
+                  Insights
+                </Link>
+              </li>
             </ul>
           </div>
 

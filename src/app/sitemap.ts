@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site-config";
 import { allListings } from "@/lib/listings";
+import { getAllInsights } from "@/lib/insights";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.site.url;
@@ -14,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/lease-out",
     "/listings",
     "/neighborhoods",
+    "/insights",
     "/about",
     "/contact",
     "/privacy",
@@ -24,6 +26,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: now,
     changeFrequency: "weekly",
     priority: p === "" ? 1.0 : 0.7,
+  }));
+
+  const insightPaths: MetadataRoute.Sitemap = getAllInsights().map((p) => ({
+    url: `${base}/insights/${p.slug}`,
+    lastModified: p.frontmatter.publishedAt,
+    changeFrequency: "monthly",
+    priority: 0.6,
   }));
 
   const listingPaths: MetadataRoute.Sitemap = allListings.map((l) => ({
@@ -40,5 +49,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticPaths, ...listingPaths, ...neighborhoodPaths];
+  return [...staticPaths, ...listingPaths, ...neighborhoodPaths, ...insightPaths];
 }

@@ -6,9 +6,9 @@ A free, open-source marketing website template for brand-new realtors in Ontario
 
 - **Next.js 16** (App Router) + **React 19** + **TypeScript**
 - **Tailwind v4** + **shadcn/ui** (base-nova style)
-- **MDX** for content (insights, neighborhoods)
+- **MDX** + `next-mdx-remote` for insights / neighborhoods
 - **Resend** for transactional email (free tier: 100/day)
-- **Cloudflare Pages** for hosting (free, unlimited bandwidth)
+- **Vercel** for hosting (Hobby plan — free, used for the demo)
 - **Cloudflare Turnstile** for bot protection (free)
 - **Cloudflare Email Routing** for vanity email (free)
 - **Leaflet + OpenStreetMap** for maps (free, no API key, no credit card)
@@ -38,7 +38,25 @@ npm run dev                  # http://localhost:3000
 
 ## Deploy
 
-Deploys to Cloudflare Pages with zero configuration. Connect the GitHub repo in the Cloudflare Pages dashboard, point at the `main` branch, build command `npm run build`, output directory `.next`.
+### Demo: Vercel free (Hobby) tier
+
+```bash
+npx vercel deploy
+```
+
+Or connect the GitHub repo at vercel.com/new — Vercel auto-detects Next.js, no configuration needed. First deploy takes ~90 seconds; subsequent pushes redeploy automatically.
+
+Add the env vars from `.env.example` to the Vercel project settings before promoting the preview to production.
+
+### Important: commercial-use caveat
+
+Vercel's **Hobby plan is for non-commercial use only**. It's perfect for a developer's demo or a hobbyist's site, but the realtor's actual production site (which is a commercial use) needs one of:
+
+- **Vercel Pro** — $20/mo per seat. Easiest upgrade path.
+- **Netlify Free** — explicitly permits commercial use on the free tier.
+- **Cloudflare Pages** — free + commercial-OK, but Next.js SSR requires the `@cloudflare/next-on-pages` adapter and converting the API route + dynamic routes to the edge runtime.
+
+For the initial demo we ship on Vercel Hobby; when the realtor signs off and wants to put it on their own domain commercially, follow `docs/OPERATOR_ONBOARDING.md` for the migration path.
 
 ## What's intentionally NOT included (v1)
 

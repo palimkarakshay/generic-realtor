@@ -1,6 +1,6 @@
 import type { MDXComponents } from "mdx/types";
 
-const components: MDXComponents = {
+export const mdxComponents: MDXComponents = {
   h1: ({ children }) => <h1 className="text-display-lg text-ink mt-12 mb-6">{children}</h1>,
   h2: ({ children }) => <h2 className="text-display-md text-ink mt-10 mb-5">{children}</h2>,
   h3: ({ children }) => <h3 className="text-display-sm text-ink mt-8 mb-4">{children}</h3>,
@@ -35,6 +35,10 @@ const components: MDXComponents = {
   ),
 };
 
+// Next.js convention: a `useMDXComponents` export at the project root is the
+// global MDX component map. The hook-named export is required by @next/mdx;
+// we also export `mdxComponents` (above) for use in server components, where
+// React's hook rules forbid calling a function whose name starts with `use`.
 export function useMDXComponents(): MDXComponents {
-  return components;
+  return mdxComponents;
 }

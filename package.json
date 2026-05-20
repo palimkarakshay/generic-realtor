@@ -2,6 +2,9 @@
   "name": "generic-realtor",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -24,6 +27,7 @@
     "leaflet": "^1.9.4",
     "lucide-react": "^1.8.0",
     "next": "16.2.4",
+    "next-mdx-remote": "^6.0.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-hook-form": "^7.73.1",
