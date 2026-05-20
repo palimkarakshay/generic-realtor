@@ -1,12 +1,14 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { ListingSearchPanel } from "@/components/search/listing-search-panel";
 import { ListingCard } from "@/components/listings/listing-card";
 import { ListingsMap } from "@/components/maps/listings-map";
 import {
   applyFilters,
-  priceBounds,
+  defaultFilters,
+  filtersToSearchParams,
   type ListingFilters,
 } from "@/lib/listing-filters";
 import { allListings } from "@/lib/listings";
@@ -17,15 +19,15 @@ import { allListings } from "@/lib/listings";
  * lands in the homepage hero. Deleted after Wave 2.5 (homepage rebuild).
  */
 export default function SearchPreviewPage() {
-  const [filters, setFilters] = useState<ListingFilters>({
-    mode: "rent",
-    priceMin: priceBounds.rent.min,
-    priceMax: priceBounds.rent.max,
-    beds: [],
-    propertyTypes: [],
-  });
+  const router = useRouter();
+  const [filters, setFilters] = useState<ListingFilters>(() => defaultFilters("rent"));
 
   const results = useMemo(() => applyFilters(allListings, filters), [filters]);
+
+  const handleSubmit = (f: ListingFilters) => {
+    const params = filtersToSearchParams(f);
+    router.push(`/listings?${params.toString()}`);
+  };
 
   return (
     <div className="mx-auto max-w-6xl px-5 py-12 sm:px-8">
@@ -43,6 +45,7 @@ export default function SearchPreviewPage() {
           <ListingSearchPanel
             value={filters}
             onChange={setFilters}
+            onSubmit={handleSubmit}
             resultCount={results.length}
           />
           <details className="mt-4 rounded-lg border border-border-subtle bg-canvas-elevated p-3 text-body-sm text-ink-soft">

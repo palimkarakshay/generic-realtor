@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 import {
   applyFilters,
+  defaultFilters,
+  filtersFromSearchParams,
+  filtersToSearchParams,
   listingsForMode,
   matchesBeds,
   priceFor,
@@ -212,5 +215,60 @@ describe("applyFilters", () => {
         city: "Waterloo",
       }).map((l) => l.slug),
     ).toEqual(["r2"]);
+  });
+});
+
+describe("URL serialization", () => {
+  it("defaultFilters returns mode-appropriate bounds", () => {
+    expect(defaultFilters("rent").priceMax).toBe(6000);
+    expect(defaultFilters("sale").priceMin).toBe(300_000);
+    expect(defaultFilters().mode).toBe("rent");
+  });
+
+  it("filtersToSearchParams omits defaults for a clean URL", () => {
+    const out = filtersToSearchParams(defaultFilters("rent"));
+    expect(out.get("mode")).toBe("rent");
+    expect(out.get("min")).toBeNull();
+    expect(out.get("max")).toBeNull();
+    expect(out.get("beds")).toBeNull();
+  });
+
+  it("filtersToSearchParams emits only non-default fields", () => {
+    const out = filtersToSearchParams({
+      mode: "sale",
+      priceMin: 300_000, // default — omit
+      priceMax: 900_000, // non-default — include
+      beds: [2, 3],
+      propertyTypes: ["detached"],
+      city: "Kitchener",
+    });
+    expect(out.get("mode")).toBe("sale");
+    expect(out.get("min")).toBeNull();
+    expect(out.get("max")).toBe("900000");
+    expect(out.get("beds")).toBe("2,3");
+    expect(out.get("types")).toBe("detached");
+    expect(out.get("city")).toBe("Kitchener");
+  });
+
+  it("filtersFromSearchParams round-trips", () => {
+    const original = {
+      mode: "sale" as const,
+      priceMin: 300_000,
+      priceMax: 900_000,
+      beds: [2, 3],
+      propertyTypes: ["detached" as const],
+      city: undefined,
+      neighborhoodSlug: undefined,
+    };
+    const params = filtersToSearchParams(original);
+    const parsed = filtersFromSearchParams(params);
+    expect(parsed).toEqual(original);
+  });
+
+  it("filtersFromSearchParams rejects invalid mode/types", () => {
+    const params = new URLSearchParams("mode=bogus&types=invalid,detached");
+    const parsed = filtersFromSearchParams(params);
+    expect(parsed.mode).toBe("rent"); // fallback
+    expect(parsed.propertyTypes).toEqual(["detached"]); // bogus dropped
   });
 });

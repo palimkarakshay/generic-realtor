@@ -107,3 +107,85 @@ export const priceBounds: Record<ListingMode, { min: number; max: number; step: 
   sale: { min: 300_000, max: 2_500_000, step: 10_000 },
   sold: { min: 300_000, max: 2_500_000, step: 10_000 },
 };
+
+/** Build an initial filter state for a mode with default bounds. */
+export function defaultFilters(mode: ListingMode = "rent"): ListingFilters {
+  const b = priceBounds[mode];
+  return { mode, priceMin: b.min, priceMax: b.max, beds: [], propertyTypes: [] };
+}
+
+/**
+ * Serialize filters into a URL query string. Inverse of filtersFromSearchParams.
+ * Omits defaults so the URL stays clean.
+ */
+export function filtersToSearchParams(filters: ListingFilters): URLSearchParams {
+  const params = new URLSearchParams();
+  const b = priceBounds[filters.mode];
+
+  params.set("mode", filters.mode);
+  if (typeof filters.priceMin === "number" && filters.priceMin !== b.min)
+    params.set("min", String(filters.priceMin));
+  if (typeof filters.priceMax === "number" && filters.priceMax !== b.max)
+    params.set("max", String(filters.priceMax));
+  if (filters.beds && filters.beds.length > 0)
+    params.set("beds", filters.beds.join(","));
+  if (filters.propertyTypes && filters.propertyTypes.length > 0)
+    params.set("types", filters.propertyTypes.join(","));
+  if (filters.city && filters.city.trim()) params.set("city", filters.city.trim());
+  if (filters.neighborhoodSlug) params.set("hood", filters.neighborhoodSlug);
+
+  return params;
+}
+
+const VALID_MODES: readonly ListingMode[] = ["rent", "sale", "sold"];
+const VALID_TYPES: readonly PropertyTypeFilter[] = [
+  "detached",
+  "semi-detached",
+  "townhouse",
+  "condo-apartment",
+  "condo-townhouse",
+  "duplex",
+  "triplex",
+  "land",
+];
+
+/** Parse a URL query into a filter state. Invalid params fall back to defaults. */
+export function filtersFromSearchParams(
+  params: URLSearchParams | ReadonlyURLSearchParams,
+): ListingFilters {
+  const rawMode = params.get("mode") as ListingMode | null;
+  const mode: ListingMode = rawMode && VALID_MODES.includes(rawMode) ? rawMode : "rent";
+  const b = priceBounds[mode];
+
+  const minStr = params.get("min");
+  const maxStr = params.get("max");
+  const priceMin = minStr && Number.isFinite(Number(minStr)) ? Number(minStr) : b.min;
+  const priceMax = maxStr && Number.isFinite(Number(maxStr)) ? Number(maxStr) : b.max;
+
+  const beds = (params.get("beds") ?? "")
+    .split(",")
+    .map((s) => Number(s.trim()))
+    .filter((n) => Number.isFinite(n) && n >= 0);
+
+  const propertyTypes = (params.get("types") ?? "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter((s): s is PropertyTypeFilter =>
+      (VALID_TYPES as readonly string[]).includes(s),
+    );
+
+  return {
+    mode,
+    priceMin,
+    priceMax,
+    beds,
+    propertyTypes,
+    city: params.get("city") ?? undefined,
+    neighborhoodSlug: params.get("hood") ?? undefined,
+  };
+}
+
+/** Type alias to keep filtersFromSearchParams typings tidy. */
+type ReadonlyURLSearchParams = {
+  get(name: string): string | null;
+};
