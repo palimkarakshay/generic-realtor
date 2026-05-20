@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { siteConfig } from "@/lib/site-config";
+import { SmartImage } from "@/components/ui/smart-image";
+import { pollinationsImage } from "@/lib/utils";
+
+const fieldPhoto = pollinationsImage(
+  "Real estate agent in a Kitchener coffee shop sitting across from clients reviewing paper documents on a wooden table, daylight from window, warm authentic photograph",
+  { seed: 102 },
+);
 
 export const metadata: Metadata = {
   title: "About",
@@ -17,8 +24,7 @@ export default function AboutPage() {
       </p>
 
       <div className="mt-10 grid gap-8 md:grid-cols-[1fr_2fr]">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <SmartImage
           src={siteConfig.realtor.photo}
           alt={`${siteConfig.realtor.name}, ${siteConfig.realtor.title}`}
           loading="lazy"
@@ -62,6 +68,14 @@ export default function AboutPage() {
             <li>{siteConfig.brokerage.name}</li>
             <li>Languages: {siteConfig.realtor.languages.join(", ")}</li>
           </ul>
+
+          <SmartImage
+            src={fieldPhoto}
+            alt="Riley meeting with clients over coffee in Kitchener"
+            loading="lazy"
+            decoding="async"
+            className="mt-10 aspect-[16/9] w-full rounded-lg object-cover"
+          />
 
           <div className="mt-10 flex flex-wrap gap-3">
             <Link

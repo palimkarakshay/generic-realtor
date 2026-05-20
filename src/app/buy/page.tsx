@@ -3,8 +3,15 @@ import Link from "next/link";
 import { ListingsGrid } from "@/components/listings/listings-grid";
 import { MortgageCalculator } from "@/components/calculators/mortgage-calculator";
 import { LTTCalculator } from "@/components/calculators/ltt-calculator";
+import { PageHero } from "@/components/layout/page-hero";
 import { activeSaleListings } from "@/lib/listings";
 import { siteConfig } from "@/lib/site-config";
+import { pollinationsImage } from "@/lib/utils";
+
+const heroImage = pollinationsImage(
+  "Young couple touring a Kitchener Ontario brick home with a real estate agent, daylight, looking at the front porch, candid moment, real estate photograph",
+  { seed: 201, width: 1800, height: 600 },
+);
 
 export const metadata: Metadata = {
   title: "Buying in Kitchener-Waterloo",
@@ -15,6 +22,7 @@ export const metadata: Metadata = {
 export default function BuyPage() {
   return (
     <>
+      <PageHero src={heroImage} alt="Young couple touring a Kitchener home with their agent" />
       <section className="border-b border-border-subtle">
         <div className="mx-auto max-w-4xl px-5 py-16 sm:px-8 md:py-24">
           <p className="text-caption text-accent-deep">For buyers</p>

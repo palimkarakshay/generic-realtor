@@ -1,6 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { neighborhoods } from "@/lib/neighborhoods";
+import { SmartImage } from "@/components/ui/smart-image";
+import { pollinationsImage } from "@/lib/utils";
+
+function thumbForNeighborhood(slug: string, name: string): string {
+  let seed = 300;
+  for (let i = 0; i < slug.length; i++) seed = (seed * 31 + slug.charCodeAt(i)) & 0xffff;
+  return pollinationsImage(
+    `${name} neighborhood in Kitchener Waterloo Ontario, residential street scene, daylight, photograph`,
+    { seed, width: 800, height: 600 },
+  );
+}
 
 export const metadata: Metadata = {
   title: "Kitchener-Waterloo neighborhoods",
@@ -25,13 +36,21 @@ export default function NeighborhoodsPage() {
           <li key={n.slug}>
             <Link
               href={`/neighborhoods/${n.slug}`}
-              className="block h-full rounded-lg border border-border-subtle bg-canvas-elevated p-6 transition hover:border-accent hover:shadow-sm"
+              className="group block h-full overflow-hidden rounded-lg border border-border-subtle bg-canvas-elevated transition hover:border-accent hover:shadow-sm"
             >
-              <h2 className="font-display text-display-sm text-ink">{n.name}</h2>
-              <p className="mt-3 text-body-sm text-ink-soft">
-                Read about the vibe, what to expect for prices, and what surprised me.
-              </p>
-              <p className="mt-4 text-caption text-accent-deep">Read more →</p>
+              <SmartImage
+                src={thumbForNeighborhood(n.slug, n.name)}
+                alt={`A scene from ${n.name}`}
+                loading="lazy"
+                className="aspect-[4/3] w-full object-cover transition group-hover:scale-[1.02]"
+              />
+              <div className="p-6">
+                <h2 className="font-display text-display-sm text-ink">{n.name}</h2>
+                <p className="mt-3 text-body-sm text-ink-soft">
+                  Read about the vibe, what to expect for prices, and what surprised me.
+                </p>
+                <p className="mt-4 text-caption text-accent-deep">Read more →</p>
+              </div>
             </Link>
           </li>
         ))}

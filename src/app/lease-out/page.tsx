@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { PageHero } from "@/components/layout/page-hero";
+import { pollinationsImage } from "@/lib/utils";
+
+const heroImage = pollinationsImage(
+  "Interior of a freshly cleaned and empty Ontario rental apartment ready for new tenants, hardwood floors, sunlight from windows, calm uncluttered, real estate photograph",
+  { seed: 204, width: 1800, height: 600 },
+);
 
 export const metadata: Metadata = {
   title: "Leasing out a property in KW",
@@ -38,6 +45,10 @@ const steps = [
 export default function LeaseOutPage() {
   return (
     <>
+      <PageHero
+        src={heroImage}
+        alt="A clean and empty Ontario rental apartment ready for new tenants"
+      />
       <section className="border-b border-border-subtle">
         <div className="mx-auto max-w-4xl px-5 py-16 sm:px-8 md:py-24">
           <p className="text-caption text-accent-deep">For landlords</p>

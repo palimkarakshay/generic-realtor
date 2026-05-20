@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { type Listing } from "@/lib/schemas";
 import { formatCAD, formatNumber, daysSince } from "@/lib/utils";
+import { SmartImage } from "@/components/ui/smart-image";
 
 export function ListingCard({ listing }: { listing: Listing }) {
   const photo = listing.photos[0];
@@ -15,12 +16,11 @@ export function ListingCard({ listing }: { listing: Listing }) {
     >
       <div className="relative aspect-[4/3] bg-parchment">
         {photo ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <SmartImage
             src={photo.src}
             alt={photo.alt}
-            className="h-full w-full object-cover transition group-hover:scale-[1.02]"
             loading="lazy"
+            className="h-full w-full object-cover transition group-hover:scale-[1.02]"
           />
         ) : (
           <div className="flex h-full items-center justify-center text-muted">

@@ -2,8 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ListingsGrid } from "@/components/listings/listings-grid";
 import { RentAffordabilityCalculator } from "@/components/calculators/rent-affordability";
+import { PageHero } from "@/components/layout/page-hero";
 import { activeRentListings } from "@/lib/listings";
 import { siteConfig } from "@/lib/site-config";
+import { pollinationsImage } from "@/lib/utils";
+
+const heroImage = pollinationsImage(
+  "Quiet Uptown Waterloo Ontario apartment building exterior with mature trees, brick facade, afternoon daylight, residential street, photograph",
+  { seed: 202, width: 1800, height: 600 },
+);
 
 export const metadata: Metadata = {
   title: "Renting in Kitchener-Waterloo",
@@ -14,6 +21,7 @@ export const metadata: Metadata = {
 export default function RentPage() {
   return (
     <>
+      <PageHero src={heroImage} alt="Apartment building exterior in Uptown Waterloo" />
       <section className="border-b border-border-subtle">
         <div className="mx-auto max-w-4xl px-5 py-16 sm:px-8 md:py-24">
           <p className="text-caption text-accent-deep">For renters</p>

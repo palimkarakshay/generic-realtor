@@ -5,6 +5,39 @@ import { neighborhoods, getNeighborhoodBySlug } from "@/lib/neighborhoods";
 import { ListingMap } from "@/components/maps/listing-map";
 import { activeSaleListings, activeRentListings } from "@/lib/listings";
 import { ListingCard } from "@/components/listings/listing-card";
+import { PageHero } from "@/components/layout/page-hero";
+import { pollinationsImage } from "@/lib/utils";
+
+const neighborhoodHeroPrompts: Record<string, string> = {
+  "downtown-kitchener":
+    "Downtown Kitchener Ontario King Street with the LRT and historic Walper Hotel facade, summer afternoon, photograph",
+  "uptown-waterloo":
+    "Uptown Waterloo Ontario King Street North brick storefronts and restaurants, golden hour, photograph",
+  "westmount-kitchener":
+    "Quiet residential tree-lined street in Westmount Kitchener Ontario with mid-century brick houses, mature maples, daylight, photograph",
+  "doon-south":
+    "Modern suburban street in Doon South Kitchener Ontario with new build townhomes and well-kept lawns, midday light, photograph",
+  "stanley-park":
+    "Quiet residential street in Stanley Park Kitchener Ontario with mature trees and modest post war homes, summer afternoon, photograph",
+  "laurelwood":
+    "Suburban Laurelwood neighborhood Waterloo Ontario with forested trail next to family homes, daylight, photograph",
+  "preston":
+    "Old Preston Cambridge Ontario historic brick downtown street with small shops, autumn afternoon, photograph",
+  "galt":
+    "Historic Galt Cambridge Ontario with old stone bridges over the Grand River and brick downtown buildings, soft daylight, photograph",
+  "st-jacobs":
+    "Rural St Jacobs Ontario Mennonite countryside with historic mill, horse and buggy on country road, golden hour, photograph",
+};
+
+function heroForNeighborhood(slug: string, name: string): string {
+  const prompt =
+    neighborhoodHeroPrompts[slug] ??
+    `${name} residential street in Kitchener Waterloo Ontario, mature trees, daylight, photograph`;
+  // Stable seed per slug
+  let seed = 300;
+  for (let i = 0; i < slug.length; i++) seed = (seed * 31 + slug.charCodeAt(i)) & 0xffff;
+  return pollinationsImage(prompt, { seed, width: 1800, height: 600 });
+}
 
 export async function generateStaticParams() {
   return neighborhoods.map((n) => ({ slug: n.slug }));
@@ -81,47 +114,52 @@ export default async function NeighborhoodPage({
     .slice(0, 3);
 
   return (
-    <article className="mx-auto max-w-4xl px-5 py-16 sm:px-8">
-      <p className="text-caption text-accent-deep">Neighborhood</p>
-      <h1 className="mt-3 font-display text-display-xl text-ink">{n.name}</h1>
-      <p className="mt-4 text-body-lg text-ink-soft">{guide.tagline}</p>
+    <article>
+      <PageHero src={heroForNeighborhood(slug, n.name)} alt={`A scene from ${n.name}`} />
 
-      <div className="mt-10 overflow-hidden rounded-lg border border-border-subtle">
-        <ListingMap lat={n.lat} lng={n.lng} label={n.name} />
-      </div>
+      <div className="mx-auto max-w-4xl px-5 py-12 sm:px-8 md:py-16">
+        <p className="text-caption text-accent-deep">Neighborhood</p>
+        <h1 className="mt-3 font-display text-display-xl text-ink">{n.name}</h1>
+        <p className="mt-4 text-body-lg text-ink-soft">{guide.tagline}</p>
 
-      <div className="mt-12 max-w-prose space-y-10">
-        {guide.sections.map((s) => (
-          <section key={s.heading}>
-            <h2 className="font-display text-display-md text-ink">{s.heading}</h2>
-            <p className="mt-4 text-body text-ink-soft">{s.body}</p>
+        <div className="mt-10 overflow-hidden rounded-lg border border-border-subtle">
+          <ListingMap lat={n.lat} lng={n.lng} label={n.name} />
+        </div>
+
+        <div className="mt-12 max-w-prose space-y-10">
+          {guide.sections.map((s) => (
+            <section key={s.heading}>
+              <h2 className="font-display text-display-md text-ink">{s.heading}</h2>
+              <p className="mt-4 text-body text-ink-soft">{s.body}</p>
+            </section>
+          ))}
+        </div>
+
+        {relevantListings.length > 0 ? (
+          <section className="mt-16">
+            <h2 className="font-display text-display-md text-ink">
+              Currently in {n.name.split(",")[0]}
+            </h2>
+            <div className="mt-6 grid gap-6 md:grid-cols-3">
+              {relevantListings.map((l) => (
+                <ListingCard key={l.slug} listing={l} />
+              ))}
+            </div>
           </section>
-        ))}
-      </div>
+        ) : null}
 
-      {relevantListings.length > 0 ? (
-        <section className="mt-16">
-          <h2 className="font-display text-display-md text-ink">
-            Currently in {n.name.split(",")[0]}
-          </h2>
-          <div className="mt-6 grid gap-6 md:grid-cols-3">
-            {relevantListings.map((l) => (
-              <ListingCard key={l.slug} listing={l} />
-            ))}
-          </div>
-        </section>
-      ) : null}
-
-      <div className="mt-16 rounded-lg border border-border-subtle bg-canvas-elevated p-6 text-center">
-        <p className="text-body text-ink-soft">
-          Thinking about {n.name.split(",")[0]} specifically? Tell me what you&apos;re looking for.
-        </p>
-        <Link
-          href="/contact"
-          className="mt-4 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm text-canvas transition hover:bg-accent-deep"
-        >
-          Start a conversation
-        </Link>
+        <div className="mt-16 rounded-lg border border-border-subtle bg-canvas-elevated p-6 text-center">
+          <p className="text-body text-ink-soft">
+            Thinking about {n.name.split(",")[0]} specifically? Tell me what you&apos;re looking
+            for.
+          </p>
+          <Link
+            href="/contact"
+            className="mt-4 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm text-canvas transition hover:bg-accent-deep"
+          >
+            Start a conversation
+          </Link>
+        </div>
       </div>
     </article>
   );

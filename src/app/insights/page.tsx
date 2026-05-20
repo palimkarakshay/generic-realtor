@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getAllInsights } from "@/lib/insights";
 import { formatDate } from "@/lib/utils";
+import { SmartImage } from "@/components/ui/smart-image";
 
 export const metadata: Metadata = {
   title: "Insights",
@@ -27,10 +28,20 @@ export default function InsightsIndexPage() {
           No posts yet. The first one will land soon.
         </p>
       ) : (
-        <ul className="mt-12 space-y-10">
+        <ul className="mt-12 space-y-12">
           {posts.map((p) => (
-            <li key={p.slug} className="border-b border-border-subtle pb-10 last:border-b-0">
-              <p className="text-caption text-muted">
+            <li key={p.slug} className="border-b border-border-subtle pb-12 last:border-b-0">
+              {p.frontmatter.cover ? (
+                <Link href={`/insights/${p.slug}`} className="group block">
+                  <SmartImage
+                    src={p.frontmatter.cover}
+                    alt={p.frontmatter.title}
+                    loading="lazy"
+                    className="aspect-[16/9] w-full overflow-hidden rounded-lg object-cover transition group-hover:opacity-90"
+                  />
+                </Link>
+              ) : null}
+              <p className={`${p.frontmatter.cover ? "mt-6" : ""} text-caption text-muted`}>
                 {formatDate(p.frontmatter.publishedAt)}
                 {p.frontmatter.tags.length > 0
                   ? ` · ${p.frontmatter.tags.join(", ")}`

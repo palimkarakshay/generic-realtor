@@ -2,11 +2,17 @@ import Link from "next/link";
 import { FourPillars } from "@/components/layout/four-pillars";
 import { ListingCard } from "@/components/listings/listing-card";
 import { JsonLd } from "@/components/layout/jsonld";
+import { SmartImage } from "@/components/ui/smart-image";
 import { activeSaleListings, activeRentListings } from "@/lib/listings";
 import { getAllInsights } from "@/lib/insights";
 import { siteConfig } from "@/lib/site-config";
 import { realEstateAgentLD } from "@/lib/structured-data";
-import { formatDate } from "@/lib/utils";
+import { formatDate, pollinationsImage } from "@/lib/utils";
+
+const heroImage = pollinationsImage(
+  "View over downtown Kitchener Ontario at golden hour with rooftops, brick buildings, and the green ridges of Doon Hills in the distance, warm autumn light, photograph",
+  { seed: 1, width: 1400, height: 1600 },
+);
 
 export default function HomePage() {
   const featured = [...activeSaleListings, ...activeRentListings].slice(0, 3);
@@ -50,22 +56,31 @@ export default function HomePage() {
             </p>
           </div>
 
-          <aside className="relative hidden rounded-lg border border-border-subtle bg-canvas-elevated p-8 md:block">
-            <p className="text-caption text-muted">What I offer</p>
-            <ul className="mt-4 space-y-3 text-body text-ink-soft">
-              <li>
-                <span className="font-display text-ink">Time.</span> A first conversation is 30
-                minutes, no pitch, no commitment.
-              </li>
-              <li>
-                <span className="font-display text-ink">Patience.</span> The right offer can
-                wait a few weeks. The wrong one stays with you for years.
-              </li>
-              <li>
-                <span className="font-display text-ink">Honesty.</span> Including when the
-                answer is &quot;it&apos;s not the right time&quot; or &quot;keep renting.&quot;
-              </li>
-            </ul>
+          <aside className="relative hidden overflow-hidden rounded-lg border border-border-subtle md:block">
+            <SmartImage
+              src={heroImage}
+              alt="Kitchener-Waterloo at golden hour"
+              loading="eager"
+              decoding="async"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="relative h-full min-h-[420px] bg-gradient-to-t from-canvas/90 via-canvas/40 to-transparent p-8 pt-48">
+              <p className="text-caption text-canvas drop-shadow">What I offer</p>
+              <ul className="mt-4 space-y-3 text-body text-ink-soft">
+                <li className="rounded-md bg-canvas/90 px-3 py-2 backdrop-blur-sm">
+                  <span className="font-display text-ink">Time.</span> A first conversation is 30
+                  minutes, no pitch, no commitment.
+                </li>
+                <li className="rounded-md bg-canvas/90 px-3 py-2 backdrop-blur-sm">
+                  <span className="font-display text-ink">Patience.</span> The right offer can
+                  wait a few weeks. The wrong one stays with you for years.
+                </li>
+                <li className="rounded-md bg-canvas/90 px-3 py-2 backdrop-blur-sm">
+                  <span className="font-display text-ink">Honesty.</span> Including when the
+                  answer is &quot;it&apos;s not the right time&quot; or &quot;keep renting.&quot;
+                </li>
+              </ul>
+            </div>
           </aside>
         </div>
       </section>

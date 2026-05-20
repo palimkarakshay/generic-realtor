@@ -6,6 +6,7 @@ import { getAllInsights, getInsightBySlug } from "@/lib/insights";
 import { mdxComponents } from "../../../../mdx-components";
 import { formatDate } from "@/lib/utils";
 import { siteConfig } from "@/lib/site-config";
+import { SmartImage } from "@/components/ui/smart-image";
 
 export async function generateStaticParams() {
   return getAllInsights().map((p) => ({ slug: p.slug }));
@@ -48,6 +49,16 @@ export default async function InsightPage({
       </p>
       <h1 className="mt-3 font-display text-display-xl text-ink">{post.frontmatter.title}</h1>
       <p className="mt-4 text-body-lg text-ink-soft">{post.frontmatter.excerpt}</p>
+
+      {post.frontmatter.cover ? (
+        <SmartImage
+          src={post.frontmatter.cover}
+          alt={post.frontmatter.title}
+          loading="eager"
+          decoding="async"
+          className="mt-10 aspect-[16/9] w-full overflow-hidden rounded-lg object-cover"
+        />
+      ) : null}
 
       <div className="mt-10 max-w-prose">
         <MDXRemote source={post.body} components={mdxComponents} />

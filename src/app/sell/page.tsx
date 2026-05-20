@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { PageHero } from "@/components/layout/page-hero";
 import { siteConfig } from "@/lib/site-config";
+import { pollinationsImage } from "@/lib/utils";
+
+const heroImage = pollinationsImage(
+  "Beautiful Kitchener Ontario red brick detached family home exterior with For Sale sign on the front lawn, mature trees, sunny afternoon, real estate photograph",
+  { seed: 203, width: 1800, height: 600 },
+);
 
 export const metadata: Metadata = {
   title: "Selling in Kitchener-Waterloo",
@@ -39,6 +46,10 @@ const steps = [
 export default function SellPage() {
   return (
     <>
+      <PageHero
+        src={heroImage}
+        alt="A Kitchener brick family home with a For Sale sign on the front lawn"
+      />
       <section className="border-b border-border-subtle">
         <div className="mx-auto max-w-4xl px-5 py-16 sm:px-8 md:py-24">
           <p className="text-caption text-accent-deep">For sellers</p>

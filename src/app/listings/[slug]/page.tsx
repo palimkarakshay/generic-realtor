@@ -9,6 +9,7 @@ import { JsonLd } from "@/components/layout/jsonld";
 import { breadcrumbLD, listingLD } from "@/lib/structured-data";
 import { siteConfig } from "@/lib/site-config";
 import { formatCAD, formatNumber, daysSince } from "@/lib/utils";
+import { SmartImage } from "@/components/ui/smart-image";
 
 export async function generateStaticParams() {
   return allListings.map((l) => ({ slug: l.slug }));
@@ -65,8 +66,7 @@ export default async function ListingDetailPage({
       {/* Photo strip */}
       <div className="grid gap-2 overflow-hidden rounded-lg md:grid-cols-3">
         {listing.photos.slice(0, 3).map((p, i) => (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <SmartImage
             key={i}
             src={p.src}
             alt={p.alt}
