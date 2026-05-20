@@ -2,6 +2,7 @@ import Link from "next/link";
 import { FourPillars } from "@/components/layout/four-pillars";
 import { BrandPromiseStrip } from "@/components/marketing/brand-promise-strip";
 import { HomepageSearchHero } from "@/components/search/homepage-search-hero";
+import { QuickAffordability } from "@/components/calculators/quick-affordability";
 import { ListingCard } from "@/components/listings/listing-card";
 import { JsonLd } from "@/components/layout/jsonld";
 import { activeSaleListings, activeRentListings } from "@/lib/listings";
@@ -22,6 +23,8 @@ export default function HomePage() {
       <HomepageSearchHero listings={heroListings} />
 
       <BrandPromiseStrip />
+
+      <QuickAffordability />
 
       <FourPillars />
 
