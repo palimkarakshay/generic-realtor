@@ -8,8 +8,8 @@ import { siteConfig } from "@/lib/site-config";
 import { pollinationsImage } from "@/lib/utils";
 
 const heroImage = pollinationsImage(
-  "Quiet Uptown Waterloo Ontario apartment building exterior with mature trees, brick facade, afternoon daylight, residential street, photograph",
-  { seed: 202, width: 1800, height: 600 },
+  "Cinematic editorial photograph, 50mm lens, low afternoon sun, a young woman with a backpack walking past a leafy King Street North apartment building in Uptown Waterloo Ontario, modern mid-rise brick facade with balconies, mature maples turning amber, warm golden hour light, shallow depth of field, photoreal, no text, no watermark, no logo",
+  { seed: 2022, width: 1800, height: 720, model: "flux" },
 );
 
 export const metadata: Metadata = {

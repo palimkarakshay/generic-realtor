@@ -18,10 +18,10 @@ export const siteConfig = {
     title: "Sales Representative",
     pronouns: "she/her",
     bioShort:
-      "Brand-new to real estate, lifelong KW resident, and committed to earning your trust through patient, careful work — not slick pitches.",
+      "Lifelong Kitchener-Waterloo resident, newly licensed REALTOR®. Patient real estate work for people who'd rather take a careful look than be pushed into a deal.",
     bioLong:
-      "I grew up between Kitchener and Waterloo, watched the region change through three real-estate cycles, and decided to get licensed because friends kept asking me the same questions and deserved better answers than what they were getting. I'm new to the business but not to the place. What I can promise: a slower, more careful pace; honest answers, including the ones you don't want to hear; and a refusal to push a deal that isn't right for you.",
-    photo: "https://image.pollinations.ai/prompt/Professional%20headshot%20photograph%20of%20a%20friendly%20Canadian%20woman%20real%20estate%20agent%20in%20her%20early%20thirties%2C%20warm%20natural%20smile%2C%20soft%20daylight%2C%20neutral%20cream%20studio%20background%2C%20smart-casual%20blazer%2C%20approachable%2C%20sharp%20focus%2C%20photorealistic?width=900&height=1200&seed=101&model=flux&nologo=true",
+      "I grew up between Kitchener and Waterloo and watched the region go through three real estate cycles before deciding to get licensed. Friends kept asking me the same questions and deserved better answers than the ones they were getting elsewhere. I'm new to the business — not to the place. What I promise is simple: I won't push you into the wrong house or the wrong listing, and I'll tell you honestly when the answer is to wait.",
+    photo: "https://image.pollinations.ai/prompt/Editorial%20portrait%20photograph%2C%2085mm%20lens%2C%20soft%20north-window%20natural%20daylight%2C%20a%20friendly%20Canadian%20woman%20real%20estate%20agent%20in%20her%20early%20thirties%20with%20a%20warm%20genuine%20smile%2C%20smart-casual%20blazer%20over%20a%20cream%20top%2C%20neutral%20warm-gray%20studio%20backdrop%2C%20shallow%20depth%20of%20field%2C%20natural%20skin%20tones%2C%20approachable%2C%20photoreal%2C%20no%20text%2C%20no%20watermark%2C%20no%20logo?width=1000&height=1300&seed=1011&model=flux&nologo=true",
     email: "hello@yourdomain.ca",
     phone: "+1-519-555-0100",
     languages: ["English"] as string[],
@@ -68,17 +68,72 @@ export const siteConfig = {
     cta: "Book a 20-minute intro call",
   },
 
-  /** The 9 KW neighborhoods this site has pages for */
+  /** The 9 KW neighborhoods this site has pages for. `vibe` is a short
+   * one-liner used in card UI; the detail page carries the long-form notes. */
   neighborhoods: [
-    { slug: "downtown-kitchener", name: "Downtown Kitchener", lat: 43.4516, lng: -80.4925 },
-    { slug: "uptown-waterloo", name: "Uptown Waterloo", lat: 43.4643, lng: -80.5204 },
-    { slug: "westmount-kitchener", name: "Westmount (Kitchener)", lat: 43.4378, lng: -80.5072 },
-    { slug: "doon-south", name: "Doon South", lat: 43.3854, lng: -80.4376 },
-    { slug: "stanley-park", name: "Stanley Park", lat: 43.4742, lng: -80.4520 },
-    { slug: "laurelwood", name: "Laurelwood", lat: 43.4847, lng: -80.5701 },
-    { slug: "preston", name: "Preston (Cambridge)", lat: 43.3922, lng: -80.3582 },
-    { slug: "galt", name: "Galt (Cambridge)", lat: 43.3553, lng: -80.3145 },
-    { slug: "st-jacobs", name: "St. Jacobs", lat: 43.5435, lng: -80.5526 },
+    {
+      slug: "downtown-kitchener",
+      name: "Downtown Kitchener",
+      lat: 43.4516,
+      lng: -80.4925,
+      vibe: "Tech, ION light rail, brick-loft city living",
+    },
+    {
+      slug: "uptown-waterloo",
+      name: "Uptown Waterloo",
+      lat: 43.4643,
+      lng: -80.5204,
+      vibe: "Patios, indie shops, walk-everywhere",
+    },
+    {
+      slug: "westmount-kitchener",
+      name: "Westmount (Kitchener)",
+      lat: 43.4378,
+      lng: -80.5072,
+      vibe: "Mature trees, mid-century homes, family feel",
+    },
+    {
+      slug: "doon-south",
+      name: "Doon South",
+      lat: 43.3854,
+      lng: -80.4376,
+      vibe: "Newer suburban builds, growing families",
+    },
+    {
+      slug: "stanley-park",
+      name: "Stanley Park",
+      lat: 43.4742,
+      lng: -80.4520,
+      vibe: "Post-war detached, classic Kitchener residential",
+    },
+    {
+      slug: "laurelwood",
+      name: "Laurelwood",
+      lat: 43.4847,
+      lng: -80.5701,
+      vibe: "Trail access, modern family homes",
+    },
+    {
+      slug: "preston",
+      name: "Preston (Cambridge)",
+      lat: 43.3922,
+      lng: -80.3582,
+      vibe: "Historic small shops, quieter Cambridge",
+    },
+    {
+      slug: "galt",
+      name: "Galt (Cambridge)",
+      lat: 43.3553,
+      lng: -80.3145,
+      vibe: "Limestone Victorian downtown on the Grand",
+    },
+    {
+      slug: "st-jacobs",
+      name: "St. Jacobs",
+      lat: 43.5435,
+      lng: -80.5526,
+      vibe: "Rural mill town, farmers' market country",
+    },
   ],
 } as const;
 

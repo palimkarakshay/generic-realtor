@@ -4,8 +4,8 @@ import { PageHero } from "@/components/layout/page-hero";
 import { pollinationsImage } from "@/lib/utils";
 
 const heroImage = pollinationsImage(
-  "Interior of a freshly cleaned and empty Ontario rental apartment ready for new tenants, hardwood floors, sunlight from windows, calm uncluttered, real estate photograph",
-  { seed: 204, width: 1800, height: 600 },
+  "Wide-angle architectural interior photograph of an empty freshly-painted Ontario rental apartment ready for new tenants, warm hardwood floors, soft afternoon daylight streaming through tall windows, neutral cream walls, clean and uncluttered, professionally staged real estate listing shot, photoreal, no text, no watermark, no logo",
+  { seed: 2044, width: 1800, height: 720, model: "flux" },
 );
 
 export const metadata: Metadata = {

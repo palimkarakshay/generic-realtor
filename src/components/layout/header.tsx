@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SmartImage } from "@/components/ui/smart-image";
 import { siteConfig } from "@/lib/site-config";
+import { HeaderSearchButton } from "./header-search-button";
 
 const navLinks: { href: string; label: string }[] = [
   { href: "/buy", label: "Buy" },
@@ -56,12 +57,15 @@ export function Header() {
           ))}
         </ul>
 
-        <Link
-          href="/contact"
-          className="inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2 text-sm text-canvas transition hover:bg-accent-deep"
-        >
-          Get in touch
-        </Link>
+        <div className="flex items-center gap-2">
+          <HeaderSearchButton />
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2 text-sm text-canvas transition hover:bg-accent-deep"
+          >
+            Get in touch
+          </Link>
+        </div>
       </nav>
 
       {/* Mobile nav */}

@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   cmhcPremium,
   firstTimeBuyerLTTRebate,
+  maxAffordablePurchasePrice,
   minimumDownPayment,
   monthlyMortgagePayment,
   ontarioLTT,
@@ -113,5 +114,77 @@ describe("rentAffordability", () => {
   it("flags >40% as unaffordable", () => {
     const r = rentAffordability({ grossMonthlyIncome: 4_000, targetMonthlyRent: 2_000 });
     expect(r.verdict).toBe("unaffordable");
+  });
+});
+
+describe("maxAffordablePurchasePrice", () => {
+  it("is the inverse of monthlyMortgagePayment within rounding", () => {
+    const income = 120_000;
+    const down = 80_000;
+    const rate = 5;
+    const years = 25;
+    const max = maxAffordablePurchasePrice({
+      grossAnnualIncome: income,
+      downPayment: down,
+      annualRatePct: rate,
+      amortizationYears: years,
+    });
+    const principal = max - down;
+    const monthly = monthlyMortgagePayment({
+      principal,
+      annualRatePct: rate,
+      amortizationYears: years,
+    });
+    // 32% of monthly gross income
+    const targetMonthly = (income / 12) * 0.32;
+    expect(monthly).toBeCloseTo(targetMonthly, 0);
+  });
+
+  it("handles a 0% rate as a straight-line amortization", () => {
+    const max = maxAffordablePurchasePrice({
+      grossAnnualIncome: 120_000,
+      downPayment: 0,
+      annualRatePct: 0,
+      amortizationYears: 25,
+    });
+    // monthly cap = 120k/12 * 0.32 = 3200; 25*12 = 300 periods => 3200*300 = 960000
+    expect(max).toBeCloseTo(960_000, 0);
+  });
+
+  it("clamps to zero on non-positive income or amortization", () => {
+    expect(
+      maxAffordablePurchasePrice({
+        grossAnnualIncome: 0,
+        downPayment: 50_000,
+        annualRatePct: 5,
+        amortizationYears: 25,
+      }),
+    ).toBe(0);
+    expect(
+      maxAffordablePurchasePrice({
+        grossAnnualIncome: 120_000,
+        downPayment: 50_000,
+        annualRatePct: 5,
+        amortizationYears: 0,
+      }),
+    ).toBe(0);
+  });
+
+  it("respects a custom paymentRatio", () => {
+    const conservative = maxAffordablePurchasePrice({
+      grossAnnualIncome: 120_000,
+      downPayment: 0,
+      annualRatePct: 5,
+      amortizationYears: 25,
+      paymentRatio: 0.25,
+    });
+    const standard = maxAffordablePurchasePrice({
+      grossAnnualIncome: 120_000,
+      downPayment: 0,
+      annualRatePct: 5,
+      amortizationYears: 25,
+      paymentRatio: 0.32,
+    });
+    expect(conservative).toBeLessThan(standard);
   });
 });

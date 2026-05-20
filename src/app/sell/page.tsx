@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/layout/page-hero";
+import { ContactForm } from "@/components/forms/contact-form";
 import { siteConfig } from "@/lib/site-config";
 import { pollinationsImage } from "@/lib/utils";
 
 const heroImage = pollinationsImage(
-  "Beautiful Kitchener Ontario red brick detached family home exterior with For Sale sign on the front lawn, mature trees, sunny afternoon, real estate photograph",
-  { seed: 203, width: 1800, height: 600 },
+  "Cinematic real estate listing photograph, late golden hour, a beautifully maintained two-storey red brick detached family home in Westmount Kitchener Ontario, neat green lawn with a freshly placed agent For Sale sign, warm front porch light just turning on, mature trees framing the house, soft long shadows, hyperreal architectural detail, 35mm look, photoreal, no text on signs, no watermark, no logo",
+  { seed: 2033, width: 1800, height: 720, model: "flux" },
 );
 
 export const metadata: Metadata = {
@@ -50,17 +51,45 @@ export default function SellPage() {
         src={heroImage}
         alt="A Kitchener brick family home with a For Sale sign on the front lawn"
       />
-      <section className="border-b border-border-subtle">
-        <div className="mx-auto max-w-4xl px-5 py-16 sm:px-8 md:py-24">
-          <p className="text-caption text-accent-deep">For sellers</p>
-          <h1 className="mt-3 font-display text-display-xl text-ink">
-            Selling the home you have
-          </h1>
-          <p className="mt-6 max-w-prose text-body-lg text-ink-soft">
-            A current valuation, a pricing strategy that matches today&apos;s market, and a
-            marketing plan that doesn&apos;t oversell what the photos can&apos;t hide. No
-            pressure to list before you&apos;re ready.
-          </p>
+
+      <section
+        aria-labelledby="sell-hero-heading"
+        className="border-b border-border-subtle bg-canvas-elevated"
+      >
+        <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 md:py-20">
+          <div className="grid gap-10 md:grid-cols-[1.05fr_1fr] md:gap-14">
+            <div>
+              <p className="text-caption text-moss">For sellers</p>
+              <h1
+                id="sell-hero-heading"
+                className="mt-3 font-display text-display-xl text-ink"
+              >
+                What&apos;s your KW home worth this week?
+              </h1>
+              <p className="mt-6 max-w-prose text-body-lg text-ink-soft">
+                Send me your address and a few details. I&apos;ll come back with a real CMA —
+                three comparable recent sales, an honest price range, and zero obligation.
+              </p>
+              <ul className="mt-6 space-y-2 text-body text-ink-soft">
+                <li className="flex gap-2">
+                  <span aria-hidden className="text-moss">·</span>
+                  Free. Takes me a couple business days.
+                </li>
+                <li className="flex gap-2">
+                  <span aria-hidden className="text-moss">·</span>
+                  Written CMA emailed back to you, not a sales call.
+                </li>
+                <li className="flex gap-2">
+                  <span aria-hidden className="text-moss">·</span>
+                  No follow-up if you tell me you&apos;re not ready.
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <ContactForm defaultIntent="valuation" source="sell-hero" />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -77,25 +106,6 @@ export default function SellPage() {
             </li>
           ))}
         </ol>
-      </section>
-
-      <section className="bg-canvas-elevated">
-        <div className="mx-auto max-w-3xl px-5 py-16 sm:px-8">
-          <h2 className="text-display-lg text-ink">What&apos;s your home worth?</h2>
-          <p className="mt-2 max-w-prose text-body text-ink-soft">
-            Send me your address and a few details. I&apos;ll come back with a real CMA — three
-            comparable recent sales, an honest price range, and zero obligation.
-          </p>
-          <Link
-            href="/contact?intent=valuation"
-            className="mt-6 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm text-canvas transition hover:bg-accent-deep"
-          >
-            Request a valuation
-          </Link>
-          <p className="mt-4 text-caption text-muted">
-            Free. Takes me a couple days. No follow-up if you tell me you&apos;re not ready.
-          </p>
-        </div>
       </section>
 
       <section className="mx-auto max-w-3xl px-5 py-16 sm:px-8">
