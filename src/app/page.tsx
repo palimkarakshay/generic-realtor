@@ -27,55 +27,31 @@ export default function HomePage() {
   return (
     <>
       <JsonLd data={realEstateAgentLD()} />
-      {/* Hero — dark, dramatic, agent-led, with searchable listings map */}
-      <section className="relative overflow-hidden bg-ink text-canvas">
-        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1fr_1.15fr] md:py-20">
-          <div className="flex flex-col justify-center">
-            <p className="text-caption uppercase text-accent">
-              Kitchener · Waterloo · Cambridge
-            </p>
-            <h1 className="mt-4 font-display text-display-xl text-canvas md:text-display-2xl">
-              Slow real estate, careful answers, no pressure.
-            </h1>
-            <p className="mt-5 font-display text-display-lg text-accent-soft">
-              {siteConfig.realtor.name},{" "}
-              <span className="text-canvas/80">{siteConfig.realtor.title}</span>
-            </p>
-            <p className="mt-5 max-w-prose text-body-lg text-canvas/85">
-              {siteConfig.realtor.bioShort}
-            </p>
-
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-medium text-ink transition hover:bg-accent-soft"
+      {/* Map-led top — what the visitor came for */}
+      <section aria-labelledby="map-heading" className="bg-canvas-elevated">
+        <div className="mx-auto max-w-6xl px-5 pt-8 sm:px-8">
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <p className="text-caption uppercase text-accent-deep">
+                Kitchener · Waterloo · Cambridge
+              </p>
+              <h1
+                id="map-heading"
+                className="mt-1 font-display text-display-md text-ink sm:text-display-lg"
               >
-                Start a conversation
-              </Link>
-              <Link
-                href={siteConfig.calendly.url}
-                className="inline-flex items-center gap-2 rounded-full border border-canvas/40 px-5 py-3 text-sm text-canvas transition hover:border-accent hover:text-accent"
-              >
-                {siteConfig.calendly.cta}
-              </Link>
+                Find a home on the map.
+              </h1>
             </div>
-
-            <p className="mt-6 text-caption uppercase text-canvas/55">
-              New to real estate. Not new to KW.
-            </p>
+            <Link
+              href="/listings"
+              className="text-body-sm text-ink underline-offset-4 hover:text-accent-deep hover:underline"
+            >
+              Browse all listings →
+            </Link>
           </div>
-
-          <aside aria-label="Search active listings" className="flex flex-col">
-            <p className="text-caption uppercase text-accent">
-              Explore the market
-            </p>
-            <p className="mt-1 text-body-sm text-canvas/75">
-              Every active listing on the map. Filter by type or beds, search by address.
-            </p>
-            <div className="mt-4 flex-1">
-              <SearchableListingMap listings={allActive} height={520} />
-            </div>
-          </aside>
+        </div>
+        <div className="mx-auto max-w-6xl px-5 pb-12 pt-5 sm:px-8">
+          <SearchableListingMap listings={allActive} height={560} />
         </div>
       </section>
 
@@ -160,6 +136,51 @@ export default function HomePage() {
             talk about whether I&apos;m the right person for what you need.
           </p>
         ) : null}
+      </section>
+
+      {/* Compact agent intro — secondary placement, honest about being new */}
+      <section aria-labelledby="agent-intro" className="bg-ink text-canvas">
+        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1fr_2fr] md:items-center md:py-20">
+          <div className="overflow-hidden rounded-lg border border-canvas/10">
+            <SmartImage
+              src={siteConfig.realtor.photo}
+              alt={`Portrait of ${siteConfig.realtor.name}`}
+              loading="lazy"
+              className="aspect-square w-full object-cover"
+            />
+          </div>
+          <div>
+            <p className="text-caption uppercase text-accent">
+              Working with me
+            </p>
+            <h2
+              id="agent-intro"
+              className="mt-3 font-display text-display-md text-canvas md:text-display-lg"
+            >
+              Slow real estate, careful answers, no pressure.
+            </h2>
+            <p className="mt-4 max-w-prose text-body-lg text-canvas/85">
+              {siteConfig.realtor.bioShort}
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-medium text-ink transition hover:bg-accent-soft"
+              >
+                Start a conversation
+              </Link>
+              <Link
+                href={siteConfig.calendly.url}
+                className="inline-flex items-center gap-2 rounded-full border border-canvas/40 px-5 py-3 text-sm text-canvas transition hover:border-accent hover:text-accent"
+              >
+                {siteConfig.calendly.cta}
+              </Link>
+            </div>
+            <p className="mt-5 text-caption uppercase text-canvas/55">
+              {siteConfig.realtor.name} · {siteConfig.realtor.title} · New to the business, not to KW
+            </p>
+          </div>
+        </div>
       </section>
 
       <FourPillars />
