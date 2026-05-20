@@ -20,7 +20,7 @@ const verdictCopy: Record<
   },
   stretched: {
     label: "Stretched",
-    color: "text-accent-deep",
+    color: "text-accent",
     note: "35–40% of gross — risky if anything else changes.",
   },
   unaffordable: {
@@ -45,7 +45,7 @@ export function RentAffordabilityCalculator() {
   const v = verdictCopy[verdict];
 
   return (
-    <div className="rounded-lg border border-border-subtle bg-canvas-elevated p-6 sm:p-8">
+    <div className="rounded-xl bg-canvas-elevated p-6 shadow-sm ring-1 ring-border-subtle sm:p-8">
       <h3 className="font-display text-display-sm text-ink">Rent affordability check</h3>
       <p className="mt-2 text-body-sm text-muted">
         The 30%-of-gross-income rule is a starting point, not a final answer. It doesn&apos;t
@@ -56,14 +56,14 @@ export function RentAffordabilityCalculator() {
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
         <label className="block">
           <span className="text-caption text-muted">Your gross annual income</span>
-          <div className="mt-1 flex items-center gap-2 rounded-md border border-border bg-canvas px-3 py-2 focus-within:border-accent">
+          <div className="mt-1 flex items-center gap-2 rounded-md border border-border bg-canvas px-3 py-2 focus-within:border-lake">
             <input
               type="number"
               value={grossAnnual}
               onChange={(e) => setGrossAnnual(Number(e.target.value))}
               min={0}
               step={1_000}
-              className="w-full bg-transparent text-body text-ink outline-none"
+              className="w-full bg-transparent text-body text-ink outline-none tabular-nums"
             />
             <span className="text-caption text-muted">CAD</span>
           </div>
@@ -74,14 +74,14 @@ export function RentAffordabilityCalculator() {
 
         <label className="block">
           <span className="text-caption text-muted">Target monthly rent</span>
-          <div className="mt-1 flex items-center gap-2 rounded-md border border-border bg-canvas px-3 py-2 focus-within:border-accent">
+          <div className="mt-1 flex items-center gap-2 rounded-md border border-border bg-canvas px-3 py-2 focus-within:border-lake">
             <input
               type="number"
               value={targetRent}
               onChange={(e) => setTargetRent(Number(e.target.value))}
               min={0}
               step={50}
-              className="w-full bg-transparent text-body text-ink outline-none"
+              className="w-full bg-transparent text-body text-ink outline-none tabular-nums"
             />
             <span className="text-caption text-muted">CAD/mo</span>
           </div>
@@ -91,13 +91,13 @@ export function RentAffordabilityCalculator() {
       <dl className="mt-8 grid gap-4 border-t border-border-subtle pt-6 sm:grid-cols-3">
         <div>
           <dt className="text-caption text-muted">Ratio of gross income</dt>
-          <dd className="mt-1 font-display text-display-sm text-ink">
+          <dd className="mt-1 font-display text-display-sm text-ink tabular-nums">
             {(ratio * 100).toFixed(1)}%
           </dd>
         </div>
         <div>
           <dt className="text-caption text-muted">Recommended max (30%)</dt>
-          <dd className="mt-1 font-display text-display-sm text-ink">
+          <dd className="mt-1 font-display text-display-sm text-ink tabular-nums">
             {formatCAD(maxRecommended)}/mo
           </dd>
         </div>
