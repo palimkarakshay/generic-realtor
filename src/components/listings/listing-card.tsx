@@ -44,6 +44,9 @@ export function ListingCard({ listing, variant = "default" }: ListingCardProps) 
   // Days on Market — only show if we have a listedAt date.
   const dom = listing.listedAt ? daysSince(listing.listedAt) : null;
 
+  const todayISO = new Date().toISOString().slice(0, 10);
+  const hasUpcomingOpenHouse = (listing.openHouses ?? []).some((oh) => oh.date >= todayISO);
+
   return (
     <Link
       href={`/listings/${listing.slug}`}
@@ -70,7 +73,7 @@ export function ListingCard({ listing, variant = "default" }: ListingCardProps) 
               "rounded-full px-2.5 py-1 text-caption font-medium uppercase shadow-sm " +
               (listing.listingType === "sale"
                 ? "bg-accent text-canvas"
-                : "bg-lake text-canvas")
+                : "bg-moss text-canvas")
             }
           >
             {listing.listingType === "sale" ? "For sale" : "For rent"}
@@ -78,6 +81,11 @@ export function ListingCard({ listing, variant = "default" }: ListingCardProps) 
           {listing.status !== "active" ? (
             <span className="rounded-full bg-ink px-2.5 py-1 text-caption font-medium uppercase text-canvas">
               {listing.status}
+            </span>
+          ) : null}
+          {hasUpcomingOpenHouse ? (
+            <span className="rounded-full bg-moss px-2.5 py-1 text-caption font-medium uppercase text-canvas">
+              Open house
             </span>
           ) : null}
         </div>

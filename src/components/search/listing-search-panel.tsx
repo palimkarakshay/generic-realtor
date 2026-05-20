@@ -123,7 +123,7 @@ export function ListingSearchPanel({
 
       <button
         type="submit"
-        className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-ink px-5 py-3 text-sm text-canvas transition hover:bg-lake-deep"
+        className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-ink px-5 py-3 text-sm text-canvas transition hover:bg-accent-deep"
       >
         {typeof resultCount === "number"
           ? `Show ${resultCount} ${resultCount === 1 ? "listing" : "listings"}`

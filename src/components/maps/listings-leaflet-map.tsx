@@ -13,8 +13,8 @@ const KW_DEFAULT_ZOOM = 12;
 
 /**
  * Tone-coded pins so the map reads at a glance:
- * - lake (teal)      → for-rent
- * - accent (terracotta) → for-sale
+ * - moss (coral)  → for-rent
+ * - accent (teal) → for-sale
  * - ink (near-black) → sold
  */
 function makePin(fill: string, dot: string): L.DivIcon {
@@ -30,9 +30,9 @@ function makePin(fill: string, dot: string): L.DivIcon {
   });
 }
 
-const PIN_RENT = makePin("#0e7490", "#cffafe"); // lake / lake-soft
-const PIN_SALE = makePin("#c2410c", "#f7f2e7"); // accent / canvas
-const PIN_SOLD = makePin("#0f1419", "#f7f2e7"); // ink / canvas
+const PIN_RENT = makePin("#ff6b4a", "#ffffff"); // moss (coral) / canvas
+const PIN_SALE = makePin("#0fb39a", "#ffffff"); // accent (teal) / canvas
+const PIN_SOLD = makePin("#0b1f1c", "#ffffff"); // ink / canvas
 
 function iconFor(listing: Listing): L.DivIcon {
   if (listing.listingType === "rent") return PIN_RENT;

@@ -23,7 +23,7 @@ export function LTTCalculator({ defaultPrice = 750_000 }: { defaultPrice?: numbe
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
         <label className="block">
           <span className="text-caption text-muted">Purchase price</span>
-          <div className="mt-1 flex items-center gap-2 rounded-md border border-border bg-canvas px-3 py-2 focus-within:border-lake">
+          <div className="mt-1 flex items-center gap-2 rounded-md border border-border bg-canvas px-3 py-2 focus-within:border-accent">
             <input
               type="number"
               value={price}
@@ -62,7 +62,7 @@ export function LTTCalculator({ defaultPrice = 750_000 }: { defaultPrice?: numbe
         </div>
         <div>
           <dt className="text-caption text-muted">Net LTT owing</dt>
-          <dd className="mt-1 font-display text-display-md text-lake-deep tabular-nums">{formatCAD(net)}</dd>
+          <dd className="mt-1 font-display text-display-md text-accent-deep tabular-nums">{formatCAD(net)}</dd>
         </div>
       </dl>
     </div>

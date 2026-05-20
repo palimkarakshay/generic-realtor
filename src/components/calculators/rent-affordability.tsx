@@ -56,7 +56,7 @@ export function RentAffordabilityCalculator() {
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
         <label className="block">
           <span className="text-caption text-muted">Your gross annual income</span>
-          <div className="mt-1 flex items-center gap-2 rounded-md border border-border bg-canvas px-3 py-2 focus-within:border-lake">
+          <div className="mt-1 flex items-center gap-2 rounded-md border border-border bg-canvas px-3 py-2 focus-within:border-accent">
             <input
               type="number"
               value={grossAnnual}
@@ -74,7 +74,7 @@ export function RentAffordabilityCalculator() {
 
         <label className="block">
           <span className="text-caption text-muted">Target monthly rent</span>
-          <div className="mt-1 flex items-center gap-2 rounded-md border border-border bg-canvas px-3 py-2 focus-within:border-lake">
+          <div className="mt-1 flex items-center gap-2 rounded-md border border-border bg-canvas px-3 py-2 focus-within:border-accent">
             <input
               type="number"
               value={targetRent}

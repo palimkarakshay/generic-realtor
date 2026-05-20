@@ -17,13 +17,13 @@ export const metadata: Metadata = {
 const steps = [
   {
     n: "01",
-    title: "Realistic comparable rents",
-    body: "What similar units in your neighborhood are actually leasing for — not the wishful asking prices that sit empty for 4 months.",
+    title: "Comparable-rent analysis",
+    body: "What similar units in your neighborhood have actually leased for in the last 60 days, with a realistic asking-rent range.",
   },
   {
     n: "02",
     title: "Photos and listing copy",
-    body: "Honest representation that doesn't waste anyone's time. Bad photos waste your time more than the tenant's.",
+    body: "Professional photos and a written listing that surfaces the details applicants ask about: utilities, parking, pets, lease term.",
   },
   {
     n: "03",
@@ -56,9 +56,9 @@ export default function LeaseOutPage() {
             Leasing out your KW property
           </h1>
           <p className="mt-6 max-w-prose text-body-lg text-ink-soft">
-            Realistic rent, careful tenant screening, and the Ontario Residential Tenancies Act
-            basics — so you don&apos;t end up at the Landlord and Tenant Board six months in
-            because of a clause that was never enforceable.
+            Comparable-rent analysis, tenant screening that complies with the Ontario Human Rights
+            Code, and a lease built around the standard form — so the deal holds up if it ever
+            gets tested at the Landlord and Tenant Board.
           </p>
         </div>
       </section>

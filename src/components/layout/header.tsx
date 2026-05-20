@@ -1,10 +1,12 @@
 import Link from "next/link";
+import { SmartImage } from "@/components/ui/smart-image";
 import { siteConfig } from "@/lib/site-config";
 import { HeaderSearchButton } from "./header-search-button";
 
 const navLinks: { href: string; label: string }[] = [
   { href: "/buy", label: "Buy" },
   { href: "/rent", label: "Rent" },
+  { href: "/open-houses", label: "Open houses" },
   { href: "/sell", label: "Sell" },
   { href: "/lease-out", label: "Lease out" },
   { href: "/neighborhoods", label: "Neighborhoods" },
@@ -14,18 +16,31 @@ const navLinks: { href: string; label: string }[] = [
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-40 border-b border-border-subtle bg-canvas/85 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-border-subtle bg-canvas/90 backdrop-blur-md">
       <nav
         aria-label="Primary"
-        className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8"
+        className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3 sm:px-8"
       >
         <Link
           href="/"
-          className="font-display text-lg leading-none text-ink transition hover:text-accent-deep"
+          className="group flex items-center gap-3 transition"
         >
-          {siteConfig.realtor.name}
-          <span className="ml-2 hidden text-caption text-muted sm:inline">
-            {siteConfig.realtor.title}
+          <span className="h-11 w-11 overflow-hidden rounded-full border border-border bg-parchment ring-2 ring-accent/30 transition group-hover:ring-accent">
+            <SmartImage
+              src={siteConfig.realtor.photo}
+              alt={`Portrait of ${siteConfig.realtor.name}`}
+              loading="eager"
+              decoding="async"
+              className="h-full w-full object-cover"
+            />
+          </span>
+          <span className="flex flex-col leading-tight">
+            <span className="font-display text-base text-ink transition group-hover:text-accent-deep">
+              {siteConfig.realtor.name}
+            </span>
+            <span className="hidden text-caption text-muted sm:inline">
+              {siteConfig.realtor.title}
+            </span>
           </span>
         </Link>
 

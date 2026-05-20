@@ -18,9 +18,9 @@ export const siteConfig = {
     title: "Sales Representative",
     pronouns: "she/her",
     bioShort:
-      "Lifelong Kitchener-Waterloo resident, newly licensed REALTOR®. Patient real estate work for people who'd rather take a careful look than be pushed into a deal.",
+      "Real estate agent serving Kitchener, Waterloo, Cambridge, and the surrounding townships. Buying, selling, renting, and leasing — with the local knowledge to back it up.",
     bioLong:
-      "I grew up between Kitchener and Waterloo and watched the region go through three real estate cycles before deciding to get licensed. Friends kept asking me the same questions and deserved better answers than the ones they were getting elsewhere. I'm new to the business — not to the place. What I promise is simple: I won't push you into the wrong house or the wrong listing, and I'll tell you honestly when the answer is to wait.",
+      "A full-service realtor working across Kitchener-Waterloo, Cambridge, and the surrounding townships. From first-time buyers to investors, family homes to downtown condos, the goal is the same: help you find the right place at the right price, on terms that work. Replace this paragraph with your own story — what brought you into real estate, your background, and what working with you looks like.",
     photo: "https://image.pollinations.ai/prompt/Editorial%20portrait%20photograph%2C%2085mm%20lens%2C%20soft%20north-window%20natural%20daylight%2C%20a%20friendly%20Canadian%20woman%20real%20estate%20agent%20in%20her%20early%20thirties%20with%20a%20warm%20genuine%20smile%2C%20smart-casual%20blazer%20over%20a%20cream%20top%2C%20neutral%20warm-gray%20studio%20backdrop%2C%20shallow%20depth%20of%20field%2C%20natural%20skin%20tones%2C%20approachable%2C%20photoreal%2C%20no%20text%2C%20no%20watermark%2C%20no%20logo?width=1000&height=1300&seed=1011&model=flux&nologo=true",
     email: "hello@yourdomain.ca",
     phone: "+1-519-555-0100",
@@ -43,7 +43,7 @@ export const siteConfig = {
     name: "Riley Avery — Kitchener Real Estate",
     shortName: "Riley Avery",
     description:
-      "Honest, patient real-estate help in Kitchener-Waterloo. New to the business, not to the area. Buying, selling, renting, or leasing out — let's talk first.",
+      "Real estate in Kitchener, Waterloo, and Cambridge. Buying, selling, renting, and leasing — search every active listing, browse open houses, and book a conversation.",
     url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://yourdomain.ca",
     locale: "en-CA",
     timezone: "America/Toronto",
@@ -65,7 +65,7 @@ export const siteConfig = {
   /** Calendly */
   calendly: {
     url: process.env.NEXT_PUBLIC_CALENDLY_URL ?? "https://calendly.com/your-username/intro",
-    cta: "Book a 20-minute intro call",
+    cta: "Book a call",
   },
 
   /** The 9 KW neighborhoods this site has pages for. `vibe` is a short

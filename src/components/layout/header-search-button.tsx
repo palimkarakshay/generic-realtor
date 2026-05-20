@@ -26,7 +26,7 @@ export function HeaderSearchButton() {
       aria-hidden={!shown}
       tabIndex={shown ? 0 : -1}
       className={
-        "hidden items-center gap-2 rounded-full border border-ink px-4 py-2 text-sm text-ink transition md:inline-flex md:hover:border-lake-deep md:hover:text-lake-deep " +
+        "hidden items-center gap-2 rounded-full border border-ink px-4 py-2 text-sm text-ink transition md:inline-flex md:hover:border-accent-deep md:hover:text-accent-deep " +
         (shown ? "opacity-100" : "pointer-events-none opacity-0")
       }
     >

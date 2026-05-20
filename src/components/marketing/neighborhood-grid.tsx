@@ -97,7 +97,7 @@ export function NeighborhoodGrid({
         {ctaHref ? (
           <Link
             href={ctaHref}
-            className="mt-10 inline-flex items-center gap-1 text-body-sm text-ink transition hover:text-lake-deep"
+            className="mt-10 inline-flex items-center gap-1 text-body-sm text-ink transition hover:text-accent-deep"
           >
             {ctaLabel}
           </Link>

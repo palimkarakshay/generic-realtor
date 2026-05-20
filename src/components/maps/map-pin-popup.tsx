@@ -35,7 +35,7 @@ export function MapPinPopup({ listing }: { listing: Listing }) {
       </p>
       <Link
         href={`/listings/${listing.slug}`}
-        className="mt-2 inline-block text-xs font-medium text-lake-deep hover:underline"
+        className="mt-2 inline-block text-xs font-medium text-accent-deep hover:underline"
       >
         View listing →
       </Link>

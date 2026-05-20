@@ -13,34 +13,34 @@ const heroImage = pollinationsImage(
 export const metadata: Metadata = {
   title: "Selling in Kitchener-Waterloo",
   description:
-    "Honest help selling your home in Kitchener, Waterloo, or Cambridge. Current valuation, pricing strategy, and a marketing plan that doesn't oversell.",
+    "Sell your home in Kitchener, Waterloo, or Cambridge. Free home valuation, pricing strategy, marketing, and full representation through close.",
 };
 
 const steps = [
   {
     n: "01",
-    title: "First conversation, no commitment",
-    body: "We walk through your home together, talk about timing, talk about price. You decide if I'm the right person to work with.",
+    title: "First conversation",
+    body: "We walk through your home, talk about timing, talk about price. You decide whether we're a good fit before anything is signed.",
   },
   {
     n: "02",
-    title: "A current valuation, not a wishful one",
-    body: "Comparable Market Analysis using actual KW sale data from the last 60 days. I'll show you the high, the low, and where I think your home lands.",
+    title: "Comparable Market Analysis",
+    body: "A written CMA using actual KW sale data from the last 60 days. You'll see the high, the low, and where your home lands.",
   },
   {
     n: "03",
-    title: "Prep work that pays for itself",
-    body: "What to fix, what to leave alone, what to declutter. Most homes need surprisingly little — overspending on staging is the most common waste.",
+    title: "Prep work",
+    body: "What to fix, what to leave alone, what to declutter. Most homes need less than you think — staging recommendations are practical, not glossy.",
   },
   {
     n: "04",
     title: "Listing, photography, marketing",
-    body: "Pro photos, a written listing that respects the buyer's intelligence, MLS, social, neighborhood letters where it makes sense. No drone shots for the sake of drone shots.",
+    body: "Professional photos, a written listing that respects the buyer's intelligence, MLS, social, neighborhood mailers where it makes sense.",
   },
   {
     n: "05",
     title: "Offers, negotiation, close",
-    body: "I explain every line of every offer. You make the decision; I do the back-and-forth. We close.",
+    body: "Every line of every offer explained. You make the decisions; I handle the back-and-forth and the paperwork through close.",
   },
 ];
 
@@ -67,21 +67,21 @@ export default function SellPage() {
                 What&apos;s your KW home worth this week?
               </h1>
               <p className="mt-6 max-w-prose text-body-lg text-ink-soft">
-                Send me your address and a few details. I&apos;ll come back with a real CMA —
-                three comparable recent sales, an honest price range, and zero obligation.
+                Send your address and a few details. I&apos;ll come back with a CMA — three
+                comparable recent sales and a realistic price range.
               </p>
               <ul className="mt-6 space-y-2 text-body text-ink-soft">
                 <li className="flex gap-2">
                   <span aria-hidden className="text-moss">·</span>
-                  Free. Takes me a couple business days.
+                  Free. Usually back within two business days.
                 </li>
                 <li className="flex gap-2">
                   <span aria-hidden className="text-moss">·</span>
-                  Written CMA emailed back to you, not a sales call.
+                  Written report emailed to you — not a sales call.
                 </li>
                 <li className="flex gap-2">
                   <span aria-hidden className="text-moss">·</span>
-                  No follow-up if you tell me you&apos;re not ready.
+                  No obligation to list.
                 </li>
               </ul>
             </div>
@@ -112,13 +112,12 @@ export default function SellPage() {
         <h2 className="text-display-lg text-ink">A note on commission</h2>
         <p className="mt-3 text-body text-ink-soft">
           KW seller commissions typically run 4–5% of the sale price (split between listing and
-          buyer&apos;s agent, plus HST). What you&apos;re paying for: pricing strategy, marketing,
-          showings, paperwork, negotiation, and the legal liability of representing you. Cheap
-          commission means cheap effort on at least one of those.
+          buyer&apos;s agent, plus HST). It covers pricing strategy, marketing, showings,
+          paperwork, negotiation, and the legal representation that comes with the listing.
         </p>
         <p className="mt-3 text-body text-ink-soft">
-          I&apos;m happy to walk through what my commission specifically buys, line by line, on
-          the first call. No hidden fees, no surprise add-ons.
+          Happy to walk through exactly what the commission covers, line by line, on the first
+          call. No hidden fees, no surprise add-ons.
         </p>
       </section>
 
@@ -127,9 +126,8 @@ export default function SellPage() {
           <div className="rounded-lg border border-border-subtle bg-canvas p-8 text-center">
             <h2 className="font-display text-display-md text-ink">Not ready yet?</h2>
             <p className="mt-3 text-body text-ink-soft">
-              That&apos;s the most common situation. Send me your address anyway — I&apos;ll do
-              the math and put it in your inbox. When you&apos;re ready in 6 months or 2 years
-              or never, you&apos;ll have the number.
+              Send your address anyway. You&apos;ll get a written valuation in your inbox to keep
+              for when the timing is right — six months, two years, or whenever.
             </p>
             <Link
               href={`mailto:${siteConfig.realtor.email}`}

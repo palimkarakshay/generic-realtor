@@ -53,7 +53,7 @@ export function PriceRangeSlider({
               if (!Number.isFinite(next)) return;
               onChange({ min: Math.min(next, value.max), max: value.max });
             }}
-            className="mt-1 w-full rounded-md border border-border bg-canvas px-3 py-2 text-body text-ink outline-none focus:border-lake tabular-nums"
+            className="mt-1 w-full rounded-md border border-border bg-canvas px-3 py-2 text-body text-ink outline-none focus:border-accent tabular-nums"
             aria-label="Minimum price"
           />
         </label>
@@ -70,7 +70,7 @@ export function PriceRangeSlider({
               if (!Number.isFinite(next)) return;
               onChange({ min: value.min, max: Math.max(next, value.min) });
             }}
-            className="mt-1 w-full rounded-md border border-border bg-canvas px-3 py-2 text-body text-ink outline-none focus:border-lake tabular-nums"
+            className="mt-1 w-full rounded-md border border-border bg-canvas px-3 py-2 text-body text-ink outline-none focus:border-accent tabular-nums"
             aria-label="Maximum price"
           />
         </label>

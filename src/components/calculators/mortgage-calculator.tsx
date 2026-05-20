@@ -11,7 +11,7 @@ import { formatCAD } from "@/lib/utils";
 export function MortgageCalculator({ defaultPrice = 750_000 }: { defaultPrice?: number }) {
   const [price, setPrice] = useState(defaultPrice);
   const [downPayment, setDownPayment] = useState(Math.round(defaultPrice * 0.10));
-  const [rate, setRate] = useState(5.04);
+  const [rate, setRate] = useState(5.5);
   const [amortYears, setAmortYears] = useState(25);
 
   const minDown = useMemo(() => minimumDownPayment(price), [price]);
@@ -24,10 +24,12 @@ export function MortgageCalculator({ defaultPrice = 750_000 }: { defaultPrice?: 
     () => monthlyMortgagePayment({ principal, annualRatePct: rate, amortizationYears: amortYears }),
     [principal, rate, amortYears],
   );
+  const totalCost = useMemo(() => monthly * amortYears * 12, [monthly, amortYears]);
+  const totalInterest = useMemo(() => Math.max(totalCost - principal, 0), [totalCost, principal]);
   const shortDown = downPayment < minDown;
 
   return (
-    <div className="rounded-xl bg-canvas-elevated p-6 shadow-sm ring-1 ring-border-subtle sm:p-8">
+    <div className="rounded-lg border border-border-subtle bg-canvas-elevated p-6 sm:p-8">
       <h3 className="font-display text-display-sm text-ink">Mortgage estimator</h3>
       <p className="mt-2 text-body-sm text-muted">
         Educational. Real rates depend on the lender, term, your credit, and the date. Always
@@ -74,13 +76,15 @@ export function MortgageCalculator({ defaultPrice = 750_000 }: { defaultPrice?: 
         />
       </div>
 
-      <dl className="mt-8 grid gap-4 border-t border-border-subtle pt-6 sm:grid-cols-3">
+      <dl className="mt-8 grid gap-4 border-t border-border-subtle pt-6 sm:grid-cols-3 lg:grid-cols-5">
         <Stat label="Estimated monthly payment" value={formatCAD(monthly, { decimals: 0 })} primary />
         <Stat label="Mortgage principal" value={formatCAD(principal)} />
         <Stat
           label="CMHC insurance"
           value={insurance > 0 ? formatCAD(insurance) : "Not insured"}
         />
+        <Stat label="Total interest" value={formatCAD(totalInterest)} />
+        <Stat label="Total cost over term" value={formatCAD(totalCost)} />
       </dl>
 
       <p className="mt-6 text-caption text-muted">
@@ -117,7 +121,7 @@ function Field({
   return (
     <label className="block">
       <span className="text-caption text-muted">{label}</span>
-      <div className="mt-1 flex items-center gap-2 rounded-md border border-border bg-canvas px-3 py-2 focus-within:border-lake">
+      <div className="mt-1 flex items-center gap-2 rounded-md border border-border bg-canvas px-3 py-2 focus-within:border-accent">
         <input
           type="number"
           value={Number.isFinite(value) ? value.toFixed(decimals) : ""}
@@ -125,7 +129,7 @@ function Field({
           min={min}
           max={max}
           step={step}
-          className="w-full bg-transparent text-body text-ink outline-none tabular-nums"
+          className="w-full bg-transparent text-body text-ink outline-none"
         />
         {suffix ? <span className="text-caption text-muted">{suffix}</span> : null}
       </div>
@@ -153,8 +157,8 @@ function Stat({
       <dd
         className={
           primary
-            ? "mt-1 font-display text-display-md text-lake-deep tabular-nums"
-            : "mt-1 font-display text-display-sm text-ink tabular-nums"
+            ? "mt-1 font-display text-display-md text-accent"
+            : "mt-1 font-display text-display-sm text-ink"
         }
       >
         {value}

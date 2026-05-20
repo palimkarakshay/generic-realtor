@@ -35,18 +35,12 @@ export default function AboutPage() {
         <div>
           <p className="text-body-lg text-ink-soft">{siteConfig.realtor.bioLong}</p>
 
-          <h2 className="mt-10 font-display text-display-md text-ink">What I&apos;m doing while I get going</h2>
+          <h2 className="mt-10 font-display text-display-md text-ink">What I do</h2>
           <p className="mt-4 text-body text-ink-soft">
-            Most brand-new realtors paper over inexperience with stock photos of skylines, an
-            inflated headshot, and a font that takes itself too seriously. I&apos;m doing the
-            opposite: keep it small, keep it honest, do the homework, earn the next client through
-            the work I do for the current one.
-          </p>
-          <p className="mt-4 text-body text-ink-soft">
-            What I&apos;m studying right now: hyper-local KW pricing trends, the mortgage stress
-            test math, the way the Residential Tenancies Act actually gets enforced at the LTB.
-            Real estate&apos;s a service business; I&apos;d rather come to a conversation knowing
-            the answer than improvising.
+            Full-service residential real estate: buyer representation, listing services, rentals
+            for tenants and landlords, and the paperwork in between. Working knowledge of the
+            Ontario Residential Tenancies Act, the mortgage stress test, and how local pricing
+            moves block by block.
           </p>
 
           <h2 className="mt-10 font-display text-display-md text-ink">Service areas</h2>
@@ -71,7 +65,7 @@ export default function AboutPage() {
 
           <SmartImage
             src={fieldPhoto}
-            alt="Riley meeting with clients over coffee in Kitchener"
+            alt={`${siteConfig.realtor.name} meeting with clients in Kitchener`}
             loading="lazy"
             decoding="async"
             className="mt-10 aspect-[16/9] w-full rounded-lg object-cover"
@@ -82,7 +76,7 @@ export default function AboutPage() {
               href="/contact"
               className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm text-canvas transition hover:bg-accent-deep"
             >
-              Start a conversation
+              Get in touch
             </Link>
             <Link
               href={siteConfig.calendly.url}

@@ -11,7 +11,7 @@ export default function NeighborhoodsPage() {
   return (
     <>
       <header className="mx-auto max-w-6xl px-5 pt-16 sm:px-8">
-        <p className="text-caption text-lake-deep">Kitchener · Waterloo · Cambridge</p>
+        <p className="text-caption text-accent-deep">Kitchener · Waterloo · Cambridge</p>
         <h1 className="mt-3 font-display text-display-xl text-ink">Neighborhoods</h1>
         <p className="mt-4 max-w-2xl text-body-lg text-ink-soft">
           The KW region isn&apos;t one market — it&apos;s a dozen. What pulls you to Uptown

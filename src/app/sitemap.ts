@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/sell",
     "/lease-out",
     "/listings",
+    "/open-houses",
     "/neighborhoods",
     "/insights",
     "/about",

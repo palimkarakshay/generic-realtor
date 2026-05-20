@@ -54,13 +54,13 @@ export function ListingsSearchExperience({ listings }: ListingsSearchExperienceP
   return (
     <div className="mx-auto max-w-7xl px-5 pb-16 pt-12 sm:px-8">
       <header className="max-w-3xl">
-        <p className="text-caption text-lake-deep">All listings</p>
+        <p className="text-caption text-accent-deep">All listings</p>
         <h1 className="mt-3 font-display text-display-xl text-ink">
-          Search Kitchener-Waterloo
+          Everything on the market in KW.
         </h1>
         <p className="mt-3 text-body-lg text-ink-soft">
-          Filter on the left, watch the pins move on the right. Click any pin or card
-          to open the full listing.
+          Set the filters on the left. The map and the cards update together — click any
+          one to open the listing.
         </p>
       </header>
 
@@ -114,8 +114,8 @@ export function ListingsSearchExperience({ listings }: ListingsSearchExperienceP
           <div className={view === "map" ? "hidden lg:block" : "block"}>
             {results.length === 0 ? (
               <p className="mt-6 max-w-prose text-body text-ink-soft">
-                Nothing matches the current filters. Try widening the price range, clearing
-                the bedroom chips, or switching mode at the top of the panel.
+                Nothing matches what you&apos;ve asked for. Widen the price range, drop a
+                bedroom filter, or flip between buy and rent at the top of the panel.
               </p>
             ) : (
               <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
