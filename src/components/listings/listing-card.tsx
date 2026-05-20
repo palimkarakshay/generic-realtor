@@ -3,8 +3,43 @@ import { type Listing } from "@/lib/schemas";
 import { formatCAD, formatNumber, daysSince } from "@/lib/utils";
 import { SmartImage } from "@/components/ui/smart-image";
 
-export function ListingCard({ listing }: { listing: Listing }) {
+export type ListingCardVariant = "default" | "feature" | "compact";
+
+const variantStyles: Record<
+  ListingCardVariant,
+  { image: string; body: string; price: string; address: string; meta: string }
+> = {
+  default: {
+    image: "aspect-[4/3]",
+    body: "p-5",
+    price: "font-display text-display-sm text-ink tabular-nums",
+    address: "mt-1 text-body-sm text-ink-soft",
+    meta: "mt-3 flex flex-wrap gap-x-4 gap-y-1 text-caption text-muted",
+  },
+  feature: {
+    image: "aspect-[16/10] md:aspect-[3/2]",
+    body: "p-6 sm:p-7",
+    price: "font-display text-display-md text-ink tabular-nums md:text-display-lg",
+    address: "mt-2 text-body text-ink-soft",
+    meta: "mt-4 flex flex-wrap gap-x-5 gap-y-1 text-body-sm text-muted",
+  },
+  compact: {
+    image: "aspect-[4/3]",
+    body: "p-4",
+    price: "font-display text-display-sm text-ink tabular-nums",
+    address: "mt-0.5 text-caption text-ink-soft",
+    meta: "mt-2 flex flex-wrap gap-x-3 gap-y-0.5 text-caption text-muted",
+  },
+};
+
+interface ListingCardProps {
+  listing: Listing;
+  variant?: ListingCardVariant;
+}
+
+export function ListingCard({ listing, variant = "default" }: ListingCardProps) {
   const photo = listing.photos[0];
+  const s = variantStyles[variant];
 
   // Days on Market — only show if we have a listedAt date.
   const dom = listing.listedAt ? daysSince(listing.listedAt) : null;
@@ -12,9 +47,10 @@ export function ListingCard({ listing }: { listing: Listing }) {
   return (
     <Link
       href={`/listings/${listing.slug}`}
+      data-variant={variant}
       className="group block overflow-hidden rounded-xl bg-canvas-elevated shadow-sm ring-1 ring-border-subtle transition hover:shadow-xl hover:ring-accent"
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-parchment">
+      <div className={`relative overflow-hidden bg-parchment ${s.image}`}>
         {photo ? (
           <SmartImage
             src={photo.src}
@@ -53,21 +89,23 @@ export function ListingCard({ listing }: { listing: Listing }) {
         ) : null}
       </div>
 
-      <div className="p-5">
-        <p className="font-display text-display-sm text-ink tabular-nums">
+      <div className={s.body}>
+        <p className={s.price}>
           {listing.listingType === "sale"
             ? formatCAD(listing.price)
             : `${formatCAD(listing.monthlyRent)}/mo`}
         </p>
 
-        <p className="mt-1 text-body-sm text-ink-soft">
+        <p className={s.address}>
           {listing.address}, {listing.city}
         </p>
 
-        <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-caption text-muted">
+        <div className={s.meta}>
           <span className="tabular-nums">{listing.beds} bd</span>
           <span className="tabular-nums">{listing.baths} ba</span>
-          {listing.sqft ? <span className="tabular-nums">{formatNumber(listing.sqft)} sqft</span> : null}
+          {listing.sqft ? (
+            <span className="tabular-nums">{formatNumber(listing.sqft)} sqft</span>
+          ) : null}
           {listing.listingType === "rent" && listing.parkingIncluded ? (
             <span>· parking</span>
           ) : null}
