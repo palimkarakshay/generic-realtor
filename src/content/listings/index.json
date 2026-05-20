@@ -1,0 +1,111 @@
+[
+  {
+    "listingId": "L-2026-001",
+    "slug": "42-mill-street-galt",
+    "listingType": "sale",
+    "title": "1908 brick semi on a quiet Galt street",
+    "address": "42 Mill Street",
+    "city": "Cambridge",
+    "province": "ON",
+    "postalCode": "N1R 1W3",
+    "price": 689000,
+    "status": "active",
+    "beds": 3,
+    "baths": 2,
+    "sqft": 1650,
+    "lotSizeSqft": 4800,
+    "yearBuilt": 1908,
+    "propertyType": "semi-detached",
+    "description": "A century semi that's been quietly cared for — original trim, refinished oak floors, new roof (2023), updated 100A panel. Walking distance to the Cambridge farmers' market and the Grand River trail. The kind of house where you can hear the river when the windows are open.",
+    "features": [
+      "Original 1908 trim",
+      "Refinished oak floors",
+      "Roof replaced 2023",
+      "100A electrical updated",
+      "South-facing back garden",
+      "Walk to Grand River trail"
+    ],
+    "photos": [
+      { "src": "/images/listings/galt-1.svg", "alt": "Brick exterior of 1908 Galt semi" },
+      { "src": "/images/listings/galt-2.svg", "alt": "Living room with original trim" },
+      { "src": "/images/listings/galt-3.svg", "alt": "Refinished oak floors in dining room" }
+    ],
+    "lat": 43.3553,
+    "lng": -80.3145,
+    "listedAt": "2026-04-22",
+    "createdAt": "2026-04-22",
+    "updatedAt": "2026-05-01"
+  },
+  {
+    "listingId": "L-2026-002",
+    "slug": "118-erb-street-uptown-2br",
+    "listingType": "rent",
+    "title": "Bright 2BR loft above an Uptown bookshop",
+    "address": "118 Erb Street West, Unit 2",
+    "city": "Waterloo",
+    "province": "ON",
+    "postalCode": "N2L 1T5",
+    "monthlyRent": 2350,
+    "status": "active",
+    "leaseTerm": "12-months",
+    "furnished": "none",
+    "petsAllowed": "cats-only",
+    "parkingIncluded": true,
+    "utilitiesIncluded": ["water"],
+    "availableFrom": "2026-07-01",
+    "beds": 2,
+    "baths": 1,
+    "sqft": 920,
+    "propertyType": "condo-apartment",
+    "description": "Second-floor walk-up with 11-foot ceilings and original tin-tile detail. One assigned parking spot in the back lot. Tenant pays heat (gas) and hydro; landlord covers water. Cats allowed; sorry, no dogs in this building.",
+    "features": [
+      "11-foot ceilings",
+      "Original tin-tile ceiling detail",
+      "One assigned parking spot",
+      "In-suite laundry",
+      "Walk to Uptown Waterloo restaurants",
+      "10 min to UW campus"
+    ],
+    "photos": [
+      { "src": "/images/listings/uptown-1.svg", "alt": "Loft living room with tall ceilings" },
+      { "src": "/images/listings/uptown-2.svg", "alt": "Kitchen with butcher block counters" }
+    ],
+    "lat": 43.4643,
+    "lng": -80.5204,
+    "listedAt": "2026-05-10",
+    "createdAt": "2026-05-10"
+  },
+  {
+    "listingId": "L-2026-003",
+    "slug": "27-laurelwood-end-unit-townhouse",
+    "listingType": "sale",
+    "title": "End-unit townhouse backing onto Laurel Creek",
+    "address": "27 Laurelwood Drive",
+    "city": "Waterloo",
+    "province": "ON",
+    "postalCode": "N2J 4S8",
+    "price": 825000,
+    "status": "active",
+    "beds": 3,
+    "baths": 3,
+    "sqft": 1875,
+    "lotSizeSqft": 3200,
+    "yearBuilt": 2008,
+    "propertyType": "townhouse",
+    "description": "End-unit on the trail-facing side of the block. Open main floor, finished basement, low-maintenance landscaping. Roof 2019, furnace 2021. Great for a couple growing into a family — the schools are 8 minutes by foot.",
+    "features": [
+      "Backs onto Laurel Creek trail",
+      "End-unit (extra side windows)",
+      "Finished basement",
+      "Roof 2019, furnace 2021",
+      "8 min walk to Laurelwood PS"
+    ],
+    "photos": [
+      { "src": "/images/listings/laurelwood-1.svg", "alt": "Townhouse exterior with trail in background" }
+    ],
+    "lat": 43.4847,
+    "lng": -80.5701,
+    "listedAt": "2026-05-03",
+    "createdAt": "2026-05-03"
+  }
+]

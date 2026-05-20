@@ -1,0 +1,37 @@
+# dependencies
+node_modules
+.pnp
+.pnp.js
+
+# build outputs
+.next
+out
+build
+dist
+
+# env files
+.env
+.env.local
+.env*.local
+!.env.example
+
+# logs
+*.log
+npm-debug.log*
+
+# misc
+.DS_Store
+.vscode/
+.idea/
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# generated content
+public/og/*.png
+public/og/*.jpg
+!public/og/.gitkeep
+
+# lead log (contains PII)
+data/leads.jsonl
