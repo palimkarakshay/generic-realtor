@@ -1,0 +1,370 @@
+[
+  {
+    "listingId": "L-2026-001",
+    "slug": "42-mill-street-galt",
+    "listingType": "sale",
+    "title": "1908 brick semi on a quiet Galt street",
+    "address": "42 Mill Street",
+    "city": "Cambridge",
+    "province": "ON",
+    "postalCode": "N1R 1W3",
+    "price": 689000,
+    "status": "active",
+    "beds": 3,
+    "baths": 2,
+    "sqft": 1650,
+    "lotSizeSqft": 4800,
+    "yearBuilt": 1908,
+    "propertyType": "semi-detached",
+    "description": "A century semi that's been quietly cared for — original trim, refinished oak floors, new roof (2023), updated 100A panel. Walking distance to the Cambridge farmers' market and the Grand River trail. The kind of house where you can hear the river when the windows are open.",
+    "features": [
+      "Original 1908 trim",
+      "Refinished oak floors",
+      "Roof replaced 2023",
+      "100A electrical updated",
+      "South-facing back garden",
+      "Walk to Grand River trail"
+    ],
+    "photos": [
+      {
+        "src": "https://image.pollinations.ai/prompt/Exterior%20photograph%20of%20a%20historic%201908%20red%20brick%20semi%20detached%20house%20in%20Cambridge%20Ontario%2C%20autumn%20afternoon%20golden%20light%2C%20mature%20maple%20trees%2C%20restored%20Victorian%20trim%2C%20residential%20real%20estate%20listing%20photo%2C%20photorealistic?width=1200&height=900&seed=11&model=flux&nologo=true",
+        "alt": "Brick exterior of 1908 Galt semi"
+      },
+      {
+        "src": "https://image.pollinations.ai/prompt/Interior%20living%20room%20of%20a%20restored%20Ontario%20century%20home%2C%20original%20dark%20wood%20trim%2C%20refinished%20oak%20hardwood%20floors%2C%20neutral%20furniture%2C%20light%20from%20tall%20south%20facing%20windows%2C%20lived%20in%20but%20tidy%2C%20real%20estate%20listing%20photograph?width=1200&height=900&seed=12&model=flux&nologo=true",
+        "alt": "Living room with original trim"
+      },
+      {
+        "src": "https://image.pollinations.ai/prompt/Dining%20room%20of%20a%201908%20Ontario%20century%20home%20with%20refinished%20oak%20hardwood%20floors%2C%20modest%20wooden%20dining%20table%2C%20soft%20daylight%20from%20tall%20windows%2C%20calm%20uncluttered%2C%20real%20estate%20listing%20photograph?width=1200&height=900&seed=13&model=flux&nologo=true",
+        "alt": "Refinished oak floors in dining room"
+      }
+    ],
+    "lat": 43.3553,
+    "lng": -80.3145,
+    "listedAt": "2026-04-22",
+    "createdAt": "2026-04-22",
+    "updatedAt": "2026-05-01"
+  },
+  {
+    "listingId": "L-2026-002",
+    "slug": "118-erb-street-uptown-2br",
+    "listingType": "rent",
+    "title": "Bright 2BR loft above an Uptown bookshop",
+    "address": "118 Erb Street West, Unit 2",
+    "city": "Waterloo",
+    "province": "ON",
+    "postalCode": "N2L 1T5",
+    "monthlyRent": 2350,
+    "status": "active",
+    "leaseTerm": "12-months",
+    "furnished": "none",
+    "petsAllowed": "cats-only",
+    "parkingIncluded": true,
+    "utilitiesIncluded": [
+      "water"
+    ],
+    "availableFrom": "2026-07-01",
+    "beds": 2,
+    "baths": 1,
+    "sqft": 920,
+    "propertyType": "condo-apartment",
+    "description": "Second-floor walk-up with 11-foot ceilings and original tin-tile detail. One assigned parking spot in the back lot. Tenant pays heat (gas) and hydro; landlord covers water. Cats allowed; sorry, no dogs in this building.",
+    "features": [
+      "11-foot ceilings",
+      "Original tin-tile ceiling detail",
+      "One assigned parking spot",
+      "In-suite laundry",
+      "Walk to Uptown Waterloo restaurants",
+      "10 min to UW campus"
+    ],
+    "photos": [
+      {
+        "src": "https://image.pollinations.ai/prompt/Bright%20loft%20living%20room%20in%20a%20converted%201920s%20building%20above%20a%20bookshop%20in%20Waterloo%20Ontario%2C%20eleven%20foot%20ceilings%2C%20original%20tin%20tile%20ceiling%20detail%2C%20tall%20vintage%20windows%2C%20exposed%20brick%20accent%20wall%2C%20minimal%20modern%20furniture%2C%20midday%20natural%20light%2C%20real%20estate%20listing%20photograph?width=1200&height=900&seed=21&model=flux&nologo=true",
+        "alt": "Loft living room with tall ceilings"
+      },
+      {
+        "src": "https://image.pollinations.ai/prompt/Compact%20kitchen%20in%20a%20Waterloo%20loft%20apartment%20with%20butcher%20block%20counters%2C%20white%20shaker%20cabinets%2C%20a%20small%20window%20over%20the%20sink%2C%20late%20morning%20daylight%2C%20scandinavian%20style%2C%20real%20estate%20listing%20photograph?width=1200&height=900&seed=22&model=flux&nologo=true",
+        "alt": "Kitchen with butcher block counters"
+      }
+    ],
+    "lat": 43.4643,
+    "lng": -80.5204,
+    "listedAt": "2026-05-10",
+    "createdAt": "2026-05-10"
+  },
+  {
+    "listingId": "L-2026-003",
+    "slug": "27-laurelwood-end-unit-townhouse",
+    "listingType": "sale",
+    "title": "End-unit townhouse backing onto Laurel Creek",
+    "address": "27 Laurelwood Drive",
+    "city": "Waterloo",
+    "province": "ON",
+    "postalCode": "N2J 4S8",
+    "price": 825000,
+    "status": "active",
+    "beds": 3,
+    "baths": 3,
+    "sqft": 1875,
+    "lotSizeSqft": 3200,
+    "yearBuilt": 2008,
+    "propertyType": "townhouse",
+    "description": "End-unit on the trail-facing side of the block. Open main floor, finished basement, low-maintenance landscaping. Roof 2019, furnace 2021. Great for a couple growing into a family — the schools are 8 minutes by foot.",
+    "features": [
+      "Backs onto Laurel Creek trail",
+      "End-unit (extra side windows)",
+      "Finished basement",
+      "Roof 2019, furnace 2021",
+      "8 min walk to Laurelwood PS"
+    ],
+    "photos": [
+      {
+        "src": "https://image.pollinations.ai/prompt/Exterior%20of%20a%20modern%20end-unit%20townhouse%20in%20Waterloo%20Ontario%2C%20beige%20siding%2C%20two-car%20driveway%2C%20manicured%20front%20lawn%2C%20a%20forested%20trail%20visible%20behind%20the%20property%2C%20soft%20autumn%20light%2C%20real%20estate%20listing%20photograph?width=1200&height=900&seed=31&model=flux&nologo=true",
+        "alt": "Townhouse exterior with trail in background"
+      }
+    ],
+    "lat": 43.4847,
+    "lng": -80.5701,
+    "listedAt": "2026-05-03",
+    "createdAt": "2026-05-03"
+  },
+  {
+    "listingId": "L-2026-004",
+    "slug": "210-king-street-downtown-condo",
+    "listingType": "sale",
+    "title": "South-facing 1+den condo in downtown Kitchener",
+    "address": "210 King Street West, Unit 1208",
+    "city": "Kitchener",
+    "province": "ON",
+    "postalCode": "N2G 1A8",
+    "price": 489000,
+    "status": "active",
+    "beds": 1,
+    "baths": 1,
+    "sqft": 705,
+    "yearBuilt": 2019,
+    "propertyType": "condo-apartment",
+    "description": "12th floor with unobstructed southern light — you can see all the way to the Doon hills on a clear day. The den fits a real desk; we used it as a home office for three years. Steps from the LRT and the Friday-night Walper crowd. Building has a gym, party room, and a rooftop terrace.",
+    "features": [
+      "Unobstructed southern exposure",
+      "Real den (fits a desk)",
+      "In-suite laundry",
+      "1 underground parking",
+      "1 locker",
+      "Gym + party room + rooftop",
+      "LRT 2 min walk"
+    ],
+    "photos": [
+      {
+        "src": "https://image.pollinations.ai/prompt/Modern%20high%20floor%20condominium%20interior%20in%20downtown%20Kitchener%20Ontario%2C%20floor%20to%20ceiling%20south%20facing%20windows%2C%20view%20of%20small%20city%20skyline%20and%20distant%20hills%2C%20contemporary%20furniture%2C%20late%20afternoon%20golden%20light%2C%20real%20estate%20listing%20photograph?width=1200&height=900&seed=41&model=flux&nologo=true",
+        "alt": "Condo interior with downtown view"
+      },
+      {
+        "src": "https://image.pollinations.ai/prompt/Small%20home%20office%20den%20inside%20a%20modern%20Canadian%20condo%2C%20simple%20wood%20desk%20and%20ergonomic%20chair%2C%20neutral%20palette%2C%20natural%20light%20from%20a%20city%20facing%20window%2C%20organized%20and%20uncluttered%2C%20real%20estate%20listing%20photograph?width=1200&height=900&seed=42&model=flux&nologo=true",
+        "alt": "Den setup as home office"
+      }
+    ],
+    "lat": 43.4516,
+    "lng": -80.4925,
+    "listedAt": "2026-05-05",
+    "createdAt": "2026-05-05"
+  },
+  {
+    "listingId": "L-2026-005",
+    "slug": "94-belmont-westmount-detached",
+    "listingType": "sale",
+    "title": "1952 raised bungalow on a Westmount corner lot",
+    "address": "94 Belmont Avenue West",
+    "city": "Kitchener",
+    "province": "ON",
+    "postalCode": "N2M 1N8",
+    "price": 1095000,
+    "status": "active",
+    "beds": 4,
+    "baths": 3,
+    "sqft": 2200,
+    "lotSizeSqft": 7800,
+    "yearBuilt": 1952,
+    "propertyType": "detached",
+    "description": "Original-owner family selling after 73 years. Raised bungalow on a 60-foot lot with a mature backyard — silver maple, two apple trees, and a quietly excellent vegetable garden. Most updates are 90s-era but the bones are great. Basement is finished with a separate side entrance — in-law-suite possible.",
+    "features": [
+      "60-foot corner lot",
+      "Mature backyard (apple trees)",
+      "Finished basement",
+      "Separate side entrance (in-law suite potential)",
+      "Original hardwood under most carpet",
+      "Walk to Belmont Village"
+    ],
+    "photos": [
+      {
+        "src": "https://image.pollinations.ai/prompt/Exterior%20of%20a%201952%20raised%20bungalow%20on%20a%20corner%20lot%20in%20Westmount%20Kitchener%20Ontario%2C%20mixed%20brick%20and%20painted%20wood%20siding%2C%20mature%20silver%20maple%20trees%2C%20neat%20front%20lawn%2C%20late%20summer%20afternoon%20light%2C%20real%20estate%20listing%20photograph?width=1200&height=900&seed=51&model=flux&nologo=true",
+        "alt": "Westmount bungalow front view"
+      }
+    ],
+    "lat": 43.4378,
+    "lng": -80.5072,
+    "listedAt": "2026-04-30",
+    "createdAt": "2026-04-30"
+  },
+  {
+    "listingId": "L-2026-006",
+    "slug": "33-doon-south-townhome",
+    "listingType": "sale",
+    "title": "3-bedroom townhome in Doon South — accepted offer",
+    "address": "33 Doon South Drive",
+    "city": "Kitchener",
+    "province": "ON",
+    "postalCode": "N2P 0E9",
+    "price": 749000,
+    "status": "pending",
+    "beds": 3,
+    "baths": 3,
+    "sqft": 1750,
+    "lotSizeSqft": 2400,
+    "yearBuilt": 2017,
+    "propertyType": "townhouse",
+    "description": "Conditional sale in place — keeping the listing live until firm. 9-foot main-floor ceilings, kitchen open to the great room, attached single garage. Two minutes to the 401 on-ramp.",
+    "features": [
+      "9-foot ceilings",
+      "Open-concept main floor",
+      "Attached garage",
+      "Quick 401 access"
+    ],
+    "photos": [
+      {
+        "src": "https://image.pollinations.ai/prompt/Exterior%20of%20a%202017%20build%20modern%20townhouse%20in%20suburban%20Doon%20South%20Kitchener%20Ontario%2C%20neutral%20grey%20siding%2C%20attached%20single%20garage%2C%20manicured%20low%20maintenance%20landscaping%2C%20bright%20midday%20light%2C%20real%20estate%20listing%20photograph?width=1200&height=900&seed=61&model=flux&nologo=true",
+        "alt": "Townhome exterior"
+      }
+    ],
+    "lat": 43.3854,
+    "lng": -80.4376,
+    "listedAt": "2026-05-01",
+    "createdAt": "2026-05-01",
+    "updatedAt": "2026-05-15"
+  },
+  {
+    "listingId": "L-2025-018",
+    "slug": "76-fountain-st-preston-sold",
+    "listingType": "sale",
+    "title": "1958 brick bungalow in Preston — sold March 2026",
+    "address": "76 Fountain Street",
+    "city": "Cambridge",
+    "province": "ON",
+    "postalCode": "N3H 1S3",
+    "price": 625000,
+    "soldPrice": 612000,
+    "status": "sold",
+    "beds": 3,
+    "baths": 2,
+    "sqft": 1380,
+    "lotSizeSqft": 5500,
+    "yearBuilt": 1958,
+    "propertyType": "detached",
+    "description": "Brick bungalow on a mature Preston street. Single-owner family. Updated kitchen (2018), windows (2015), roof (2020). Closed at $612k after 22 days on market — under ask but above the September comparable on the same block.",
+    "features": [
+      "Brick exterior",
+      "Updated kitchen (2018)",
+      "New windows (2015)",
+      "Roof 2020",
+      "Detached garage"
+    ],
+    "photos": [
+      {
+        "src": "https://image.pollinations.ai/prompt/Exterior%20of%20a%201958%20red%20brick%20bungalow%20on%20a%20mature%20Preston%20Cambridge%20Ontario%20street%2C%20single%20storey%2C%20detached%20garage%20at%20the%20back%2C%20tall%20front%20yard%20trees%2C%20warm%20afternoon%20light%2C%20real%20estate%20listing%20photograph?width=1200&height=900&seed=71&model=flux&nologo=true",
+        "alt": "Preston brick bungalow"
+      }
+    ],
+    "lat": 43.3922,
+    "lng": -80.3582,
+    "listedAt": "2026-02-12",
+    "soldAt": "2026-03-06",
+    "createdAt": "2026-02-12",
+    "updatedAt": "2026-03-06"
+  },
+  {
+    "listingId": "L-2026-007",
+    "slug": "188-weber-st-stanley-park-1br",
+    "listingType": "rent",
+    "title": "1BR garden suite in Stanley Park",
+    "address": "188 Weber Street North, lower",
+    "city": "Kitchener",
+    "province": "ON",
+    "postalCode": "N2H 4B2",
+    "monthlyRent": 1450,
+    "status": "active",
+    "leaseTerm": "12-months",
+    "furnished": "none",
+    "petsAllowed": "case-by-case",
+    "parkingIncluded": true,
+    "utilitiesIncluded": [
+      "heat",
+      "water"
+    ],
+    "availableFrom": "2026-06-15",
+    "beds": 1,
+    "baths": 1,
+    "sqft": 580,
+    "propertyType": "duplex",
+    "description": "Lower unit of a quiet duplex on a tree-lined Stanley Park street. Separate entrance, small private patio out back. Tenant pays hydro and internet; landlord covers heat (gas) and water. Pet decisions made case-by-case — please tell me about your animal up front.",
+    "features": [
+      "Separate entrance",
+      "Private back patio",
+      "Heat and water included",
+      "On-street parking permit available",
+      "10 min walk to Stanley Park"
+    ],
+    "photos": [
+      {
+        "src": "https://image.pollinations.ai/prompt/Exterior%20of%20the%20lower%20garden%20suite%20of%20a%20quiet%20brick%20duplex%20in%20Stanley%20Park%20Kitchener%20Ontario%2C%20separate%20side%20entrance%2C%20small%20private%20patio%20with%20potted%20plants%2C%20mature%20trees%20overhead%2C%20daylight%2C%20real%20estate%20listing%20photograph?width=1200&height=900&seed=81&model=flux&nologo=true",
+        "alt": "Stanley Park duplex exterior"
+      }
+    ],
+    "lat": 43.4742,
+    "lng": -80.452,
+    "listedAt": "2026-05-12",
+    "createdAt": "2026-05-12"
+  },
+  {
+    "listingId": "L-2026-008",
+    "slug": "55-queen-st-downtown-studio-leased",
+    "listingType": "rent",
+    "title": "Studio in a 1920s downtown walk-up — leased April 2026",
+    "address": "55 Queen Street South, Unit 3",
+    "city": "Kitchener",
+    "province": "ON",
+    "postalCode": "N2G 1V8",
+    "monthlyRent": 1350,
+    "status": "leased",
+    "leaseTerm": "12-months",
+    "furnished": "none",
+    "petsAllowed": "no",
+    "parkingIncluded": false,
+    "utilitiesIncluded": [
+      "heat",
+      "water"
+    ],
+    "beds": 0,
+    "baths": 1,
+    "sqft": 410,
+    "propertyType": "condo-apartment",
+    "description": "Studio in a small character building south of the Walper. Hardwood, single hung windows, character radiator heat. Leased in 11 days at full ask after seven showings.",
+    "features": [
+      "Original hardwood",
+      "Radiator heat included",
+      "Walk to LRT and downtown",
+      "Coin laundry in basement"
+    ],
+    "photos": [
+      {
+        "src": "https://image.pollinations.ai/prompt/Interior%20of%20a%20small%201920s%20walk-up%20studio%20apartment%20in%20downtown%20Kitchener%20Ontario%2C%20original%20hardwood%20floor%2C%20single%20tall%20sash%20window%20with%20daylight%2C%20a%20cast%20iron%20radiator%2C%20minimal%20mid%20century%20furniture%2C%20warm%20and%20quiet%2C%20real%20estate%20listing%20photograph?width=1200&height=900&seed=91&model=flux&nologo=true",
+        "alt": "Studio apartment interior"
+      }
+    ],
+    "lat": 43.4475,
+    "lng": -80.4912,
+    "listedAt": "2026-03-28",
+    "leasedAt": "2026-04-08",
+    "createdAt": "2026-03-28",
+    "updatedAt": "2026-04-08"
+  }
+]

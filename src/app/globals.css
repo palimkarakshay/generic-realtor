@@ -1,0 +1,198 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ─────────────────────────────────────────────────────────────
+ * Design tokens — warm KW palette for a brand-new realtor's
+ * personal site. Inspired by the Lumivara editorial system but
+ * dialed warmer for residential real estate.
+ * ────────────────────────────────────────────────────────────*/
+
+:root {
+  /* Brand palette — light mode (default) */
+  --canvas: #faf6ef;
+  --canvas-elevated: #fdfaf3;
+  --ink: #1a1410;
+  --ink-soft: #3a2f26;
+  --muted: #786a5d;
+  --parchment: #efe7d6;
+  --accent: #b86d3a;            /* warm terracotta — KW autumn brick */
+  --accent-soft: #d18c5a;
+  --accent-deep: #93521f;
+  --moss: #6b7d4f;               /* secondary — KW greenbelt */
+  --moss-soft: #8b9b6e;
+  --border: #e2d8c4;
+  --border-subtle: #ede4d1;
+  --success: #4a7c59;
+  --error: #a13d3d;
+  --warning: #c08400;
+
+  /* Motion */
+  --ease-out-quart: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-reveal: 520ms;
+
+  /* Shadcn semantic mappings */
+  --background: var(--canvas);
+  --foreground: var(--ink-soft);
+  --card: var(--canvas-elevated);
+  --card-foreground: var(--ink-soft);
+  --popover: var(--canvas-elevated);
+  --popover-foreground: var(--ink-soft);
+  --primary: var(--ink);
+  --primary-foreground: var(--canvas);
+  --secondary: var(--parchment);
+  --secondary-foreground: var(--ink);
+  --muted-foreground: var(--muted);
+  --accent-foreground: var(--canvas);
+  --destructive: var(--error);
+  --input: var(--border);
+  --ring: var(--accent);
+
+  --radius: 0.5rem;
+}
+
+.dark {
+  --canvas: #14110d;
+  --canvas-elevated: #1c1814;
+  --ink: #faf6ef;
+  --ink-soft: #d8cdb9;
+  --muted: #8e8170;
+  --parchment: #2a241c;
+  --accent: #d18c5a;
+  --accent-soft: #e0a576;
+  --accent-deep: #b86d3a;
+  --moss: #8b9b6e;
+  --moss-soft: #a4b288;
+  --border: #2c261d;
+  --border-subtle: #221d16;
+
+  --background: var(--canvas);
+  --foreground: var(--ink-soft);
+  --card: var(--canvas-elevated);
+  --card-foreground: var(--ink-soft);
+  --popover: var(--canvas-elevated);
+  --popover-foreground: var(--ink-soft);
+  --primary: var(--ink);
+  --primary-foreground: var(--canvas);
+  --secondary: var(--parchment);
+  --secondary-foreground: var(--ink);
+  --muted-foreground: var(--muted);
+  --input: var(--border);
+  --ring: var(--accent);
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * Self-hosted display + body fonts.
+ * Public Sans for body; Fraunces for display. Both Open Font License.
+ * Subset and place files at /public/fonts/.
+ * ────────────────────────────────────────────────────────────*/
+@font-face {
+  font-family: "Fraunces";
+  src: url("/fonts/Fraunces-Variable.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Public Sans";
+  src: url("/fonts/PublicSans-Variable.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * Theme: expose tokens as Tailwind utilities.
+ * ────────────────────────────────────────────────────────────*/
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-canvas-elevated: var(--canvas-elevated);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-parchment: var(--parchment);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-deep: var(--accent-deep);
+  --color-moss: var(--moss);
+  --color-moss-soft: var(--moss-soft);
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+  --color-success: var(--success);
+  --color-error: var(--error);
+  --color-warning: var(--warning);
+
+  --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+  --font-body: "Public Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* Typography scale */
+  --text-display-2xl: 4.5rem;
+  --text-display-xl: 3.5rem;
+  --text-display-lg: 2.75rem;
+  --text-display-md: 2.125rem;
+  --text-display-sm: 1.625rem;
+  --text-body-lg: 1.125rem;
+  --text-body: 1rem;
+  --text-body-sm: 0.9rem;
+  --text-caption: 0.8rem;
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * Base layer
+ * ────────────────────────────────────────────────────────────*/
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--canvas);
+    color: var(--ink-soft);
+    font-family: var(--font-body);
+    font-feature-settings: "ss01", "cv11";
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    color: var(--ink);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: var(--canvas);
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * Utility helpers
+ * ────────────────────────────────────────────────────────────*/
+.container-prose {
+  max-width: 68ch;
+  margin-inline: auto;
+}
+
+.surface-elevated {
+  background-color: var(--canvas-elevated);
+  border: 1px solid var(--border-subtle);
+}
+
+.text-display-2xl { font-size: var(--text-display-2xl); line-height: 1.05; }
+.text-display-xl  { font-size: var(--text-display-xl);  line-height: 1.1; }
+.text-display-lg  { font-size: var(--text-display-lg);  line-height: 1.15; }
+.text-display-md  { font-size: var(--text-display-md);  line-height: 1.2; }
+.text-display-sm  { font-size: var(--text-display-sm);  line-height: 1.3; }
+.text-body-lg     { font-size: var(--text-body-lg);     line-height: 1.65; }
+.text-caption     { font-size: var(--text-caption);     line-height: 1.4; letter-spacing: 0.04em; text-transform: uppercase; }
