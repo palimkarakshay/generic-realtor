@@ -1,14 +1,13 @@
-name: Codex review (OpenAI gpt-5.5)
+name: Codex review (ChatGPT sign-in)
 
-# Reviews every PR diff with the OpenAI API (branded "Codex review", matching
-# the lumivara-site / cca-f-prep convention). Comment-only: posts a structured
-# review and labels the PR. codex-pr-fix.yml reacts to that comment and lets
-# Claude Opus apply the fixes. Requires repo secret OPENAI_API_KEY (optional
-# OPENAI_API_KEY_BACKUP). Degrades cleanly (warn + exit 0) if no key is set.
+# Reviews every PR diff using the Codex CLI authenticated with a ChatGPT
+# account (Plus/Pro/Team) -- NOT an OpenAI API key. The CLI auth is restored
+# from the CODEX_AUTH_JSON secret (contents of a local ~/.codex/auth.json
+# produced by `codex login`). Comment-only: posts a structured review and
+# labels the PR. codex-pr-fix.yml reacts to that comment.
 #
 # NOTE: pull_request / schedule / issue_comment workflows only run from the
-# repository's DEFAULT branch, so this file must be merged to main before it
-# takes effect.
+# repository's DEFAULT branch (this proof runs from the PR head branch).
 
 on:
   pull_request:
@@ -18,10 +17,6 @@ on:
       pr:
         description: "PR number to (re-)review"
         required: true
-      model:
-        description: "OpenAI model id (default gpt-5.5)"
-        required: false
-        default: "gpt-5.5"
 
 permissions:
   contents: read
@@ -41,38 +36,39 @@ jobs:
           fetch-depth: 0
 
       - name: Install Codex CLI
-        run: npm install -g @openai/codex || true
+        run: npm install -g @openai/codex
 
       - name: Resolve target PR
         id: target
         env:
           INPUT_PR: ${{ inputs.pr }}
-          INPUT_MODEL: ${{ inputs.model }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
           EVENT_NAME: ${{ github.event_name }}
         run: |
           set -euo pipefail
-          MODEL="${INPUT_MODEL:-gpt-5.5}"
           if [ "$EVENT_NAME" = "pull_request" ]; then PR="$PR_NUMBER"; else PR="$INPUT_PR"; fi
           if [ -z "$PR" ]; then echo "::error::Could not resolve PR number."; exit 1; fi
           echo "pr=$PR" >> "$GITHUB_OUTPUT"
-          echo "model=$MODEL" >> "$GITHUB_OUTPUT"
 
       - name: Run Codex review
         id: review
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_API_KEY_BACKUP: ${{ secrets.OPENAI_API_KEY_BACKUP }}
+          CODEX_AUTH_JSON: ${{ secrets.CODEX_AUTH_JSON }}
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
           PR: ${{ steps.target.outputs.pr }}
-          MODEL: ${{ steps.target.outputs.model }}
         run: |
           set -euo pipefail
-          if [ -z "${OPENAI_API_KEY:-}" ] && [ -z "${OPENAI_API_KEY_BACKUP:-}" ]; then
-            echo "::warning::No OPENAI_API_KEY configured -- skipping Codex review."
+          if [ -z "${CODEX_AUTH_JSON:-}" ]; then
+            echo "::warning::No CODEX_AUTH_JSON configured -- skipping Codex review."
             exit 0
           fi
+
+          # Restore the ChatGPT-account auth the Codex CLI uses (no API key).
+          mkdir -p "$HOME/.codex"
+          printf '%s' "$CODEX_AUTH_JSON" > "$HOME/.codex/auth.json"
+          chmod 600 "$HOME/.codex/auth.json"
+          codex --version || true
 
           gh pr view "$PR" --repo "$REPO" --json number,title,body > /tmp/pr.json
           TITLE=$(python3 -c 'import json;print(json.load(open("/tmp/pr.json"))["title"])')
@@ -92,6 +88,8 @@ jobs:
               "You are the Codex code reviewer for this repository. Review the change",
               "below for (1) consistency with the project's conventions and (2)",
               "correctness, security, accessibility, and performance.",
+              "",
+              "Output ONLY the review markdown. Do not run commands or modify files.",
               "",
               "Format requirements (a downstream auto-fixer parses this -- follow exactly):",
               "- Use these exact section headers, in order: `## Consistency findings`,",
@@ -120,39 +118,31 @@ jobs:
           print("\n".join(parts))
           PY
 
-          OPENAI_MODEL="$MODEL" PROMPT_FILE=/tmp/prompt.txt REVIEW_OUT=/tmp/review.md python3 - <<'PY'
-          import json, os, sys, urllib.request, urllib.error
-          prompt = open(os.environ["PROMPT_FILE"]).read()
-          out = os.environ.get("REVIEW_OUT", "/tmp/review.md")
-          model = os.environ.get("OPENAI_MODEL", "gpt-5.5")
-          keys = [k for k in [os.environ.get("OPENAI_API_KEY", "").strip(),
-                              os.environ.get("OPENAI_API_KEY_BACKUP", "").strip()] if k]
-          def call(key):
-              req = urllib.request.Request(
-                  "https://api.openai.com/v1/chat/completions",
-                  data=json.dumps({"model": model,
-                                   "messages": [{"role": "user", "content": prompt}],
-                                   "temperature": 0.2}).encode(),
-                  headers={"Authorization": "Bearer " + key, "Content-Type": "application/json"},
-                  method="POST")
-              with urllib.request.urlopen(req, timeout=120) as r:
-                  return json.loads(r.read())["choices"][0]["message"]["content"]
-          review = None
-          for key in keys:
-              try:
-                  review = call(key); break
-              except Exception as e:
-                  print("::warning::OpenAI call failed: %s" % e, file=sys.stderr)
-          if not review:
-              open(out, "w").write("## Code review unavailable\n\nOpenAI was unavailable this pass.\n\n## Verdict\n\nrequest-changes\n")
-              print("ENGINE=deferred")
-          else:
-              open(out, "w").write(review)
-              print("ENGINE=openai")
-          PY
+          # Headless Codex run on the ChatGPT account. --output-last-message
+          # writes ONLY the final assistant message (the review) to the file.
+          codex exec \
+            --sandbox read-only \
+            --cd "$GITHUB_WORKSPACE" \
+            --output-last-message /tmp/review.md \
+            "$(cat /tmp/prompt.txt)" > /tmp/codex.log 2>&1 || true
+          echo "----- codex log (tail) -----"; tail -n 40 /tmp/codex.log || true
+
+          if [ ! -s /tmp/review.md ]; then
+            {
+              echo "## Code review unavailable"
+              echo ""
+              echo "The Codex CLI (ChatGPT sign-in) produced no output this pass. Verify the"
+              echo "CODEX_AUTH_JSON secret is a current ~/.codex/auth.json and within ChatGPT"
+              echo "usage limits; see the workflow logs above."
+              echo ""
+              echo "## Verdict"
+              echo ""
+              echo "request-changes"
+            } > /tmp/review.md
+          fi
 
           {
-            echo "## Code review (Codex / $MODEL)"
+            echo "## Code review (Codex via ChatGPT sign-in)"
             echo ""
             cat /tmp/review.md
             echo ""
