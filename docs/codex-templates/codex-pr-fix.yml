@@ -1,0 +1,159 @@
+name: Apply Codex fixes (Claude Opus)
+
+# Reacts to a Codex review comment on a PR and lets Claude Opus apply the
+# mechanical fixes, pushing commits DIRECTLY to the PR branch. Requires repo
+# secret CLAUDE_CODE_OAUTH_TOKEN. Opt out per-PR with the `human-only` label.
+#
+# NOTE: issue_comment workflows only run from the default branch -- merge this
+# file to main for it to fire.
+
+on:
+  issue_comment:
+    types: [created]
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: "PR number to apply Codex fixes to"
+        required: true
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: codex-pr-fix-${{ github.event.issue.number || inputs.pr }}
+  cancel-in-progress: false
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      proceed: ${{ steps.gate.outputs.proceed }}
+      pr: ${{ steps.gate.outputs.pr }}
+      head_ref: ${{ steps.gate.outputs.head_ref }}
+    steps:
+      - name: Decide whether to run
+        id: gate
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          EVENT_NAME: ${{ github.event_name }}
+          IS_PR: ${{ github.event.issue.pull_request != null }}
+          COMMENT_BODY: ${{ github.event.comment.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          INPUT_PR: ${{ inputs.pr }}
+        run: |
+          set -euo pipefail
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            PR="$INPUT_PR"
+          else
+            if [ "$IS_PR" != "true" ]; then
+              echo "Not a PR comment -- skipping."; echo "proceed=false" >> "$GITHUB_OUTPUT"; exit 0
+            fi
+            if ! printf '%s' "$COMMENT_BODY" | grep -q "Posted by codex-review.yml"; then
+              echo "Not a Codex review comment -- skipping."; echo "proceed=false" >> "$GITHUB_OUTPUT"; exit 0
+            fi
+            PR="$ISSUE_NUMBER"
+          fi
+          gh pr view "$PR" --repo "$REPO" --json number,headRefName,labels > /tmp/pr.json
+          HEAD=$(python3 -c 'import json;print(json.load(open("/tmp/pr.json"))["headRefName"])')
+          LABELS=$(python3 -c 'import json;print(",".join(l["name"] for l in json.load(open("/tmp/pr.json"))["labels"]))')
+          echo "PR #$PR head=$HEAD labels=$LABELS"
+          if printf '%s' "$LABELS" | grep -q "human-only"; then
+            echo "human-only label -- bot must not modify."; echo "proceed=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          echo "pr=$PR" >> "$GITHUB_OUTPUT"
+          echo "head_ref=$HEAD" >> "$GITHUB_OUTPUT"
+          echo "proceed=true" >> "$GITHUB_OUTPUT"
+
+  apply:
+    needs: gate
+    if: needs.gate.outputs.proceed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.gate.outputs.head_ref }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      # If this is a Python repo, also add:
+      # - uses: actions/setup-python@v5
+      #   with:
+      #     python-version: '3.11'
+      - name: Configure git identity
+        run: |
+          git config user.name "claude-auto"
+          git config user.email "claude-auto@users.noreply.github.com"
+
+      - name: Fetch latest Codex review
+        id: fetchreview
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR: ${{ needs.gate.outputs.pr }}
+        run: |
+          set -euo pipefail
+          gh pr view "$PR" --repo "$REPO" --json comments \
+            --jq '[.comments[] | select(.body | contains("Posted by codex-review.yml"))] | last | .body' \
+            > /tmp/review.md || true
+          if [ ! -s /tmp/review.md ] || [ "$(cat /tmp/review.md)" = "null" ]; then
+            echo "No Codex review comment found."; echo "found=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          echo "found=true" >> "$GITHUB_OUTPUT"
+
+      - name: Apply fixes via Claude Opus
+        id: claude_fix
+        if: steps.fetchreview.outputs.found == 'true'
+        continue-on-error: true
+        uses: anthropics/claude-code-action@v1
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          settings: |
+            {"permissions":{"allow":["Bash","Read","Write","Edit","Glob","Grep"]}}
+          prompt: |
+            A Codex code review was posted on PR #${{ needs.gate.outputs.pr }} of
+            repo ${{ github.repository }}; its full text is in /tmp/review.md.
+
+            Apply ONLY the items under its `## Suggested fixes` section that are
+            mechanical, low-risk, and whose cited file paths actually exist on
+            disk. For each: read the file, make the smallest edit that satisfies
+            the suggestion. If a suggestion is wrong, hallucinated, or already
+            satisfied, SKIP it and append a one-line reason to /tmp/skipped.md.
+            Never force a bad edit.
+
+            NEVER edit any of these: .github/workflows/*, .env*, lockfiles,
+            dependency manifests (package.json, requirements*.txt, pyproject.toml).
+
+            After edits, run the repo verification commands:
+              # >>> EDIT: replace with this repo's build/test/lint, e.g.
+              #   npm ci && npm run lint && npm run type-check && npm run test
+              #   (python repo) pip install -r requirements.txt && pytest -q
+              echo "TODO: add verification commands for this repo"
+            If anything regresses versus the pre-edit state, revert the
+            offending edit.
+
+            Then commit and push directly to the PR branch:
+              git add -A
+              git commit -m "fix(codex-review): apply consistency findings"
+              git push origin HEAD
+            If there is nothing staged, do NOT create an empty commit.
+
+            Finally write a short summary to /tmp/summary.md (how many findings
+            applied vs skipped, one line per skipped item) and post it:
+              gh pr comment ${{ needs.gate.outputs.pr }} --repo ${{ github.repository }} --body-file /tmp/summary.md
+          claude_args: |
+            --max-turns 200
+            --model claude-opus-4-7
+
+      - name: Surface outcome
+        if: always()
+        run: |
+          echo "## codex-pr-fix outcome -- PR #${{ needs.gate.outputs.pr }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Claude apply step: ${{ steps.claude_fix.outcome || 'see logs' }}" >> "$GITHUB_STEP_SUMMARY"
