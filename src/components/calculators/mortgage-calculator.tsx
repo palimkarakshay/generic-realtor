@@ -11,7 +11,7 @@ import { formatCAD } from "@/lib/utils";
 export function MortgageCalculator({ defaultPrice = 750_000 }: { defaultPrice?: number }) {
   const [price, setPrice] = useState(defaultPrice);
   const [downPayment, setDownPayment] = useState(Math.round(defaultPrice * 0.10));
-  const [rate, setRate] = useState(5.04);
+  const [rate, setRate] = useState(5.5);
   const [amortYears, setAmortYears] = useState(25);
 
   const minDown = useMemo(() => minimumDownPayment(price), [price]);
@@ -24,6 +24,8 @@ export function MortgageCalculator({ defaultPrice = 750_000 }: { defaultPrice?: 
     () => monthlyMortgagePayment({ principal, annualRatePct: rate, amortizationYears: amortYears }),
     [principal, rate, amortYears],
   );
+  const totalCost = useMemo(() => monthly * amortYears * 12, [monthly, amortYears]);
+  const totalInterest = useMemo(() => Math.max(totalCost - principal, 0), [totalCost, principal]);
   const shortDown = downPayment < minDown;
 
   return (
@@ -74,13 +76,15 @@ export function MortgageCalculator({ defaultPrice = 750_000 }: { defaultPrice?: 
         />
       </div>
 
-      <dl className="mt-8 grid gap-4 border-t border-border-subtle pt-6 sm:grid-cols-3">
+      <dl className="mt-8 grid gap-4 border-t border-border-subtle pt-6 sm:grid-cols-3 lg:grid-cols-5">
         <Stat label="Estimated monthly payment" value={formatCAD(monthly, { decimals: 0 })} primary />
         <Stat label="Mortgage principal" value={formatCAD(principal)} />
         <Stat
           label="CMHC insurance"
           value={insurance > 0 ? formatCAD(insurance) : "Not insured"}
         />
+        <Stat label="Total interest" value={formatCAD(totalInterest)} />
+        <Stat label="Total cost over term" value={formatCAD(totalCost)} />
       </dl>
 
       <p className="mt-6 text-caption text-muted">
@@ -153,7 +157,7 @@ function Stat({
       <dd
         className={
           primary
-            ? "mt-1 font-display text-display-md text-accent-deep"
+            ? "mt-1 font-display text-display-md text-accent"
             : "mt-1 font-display text-display-sm text-ink"
         }
       >

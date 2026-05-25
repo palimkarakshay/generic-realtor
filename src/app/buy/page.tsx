@@ -9,14 +9,14 @@ import { siteConfig } from "@/lib/site-config";
 import { pollinationsImage } from "@/lib/utils";
 
 const heroImage = pollinationsImage(
-  "Young couple touring a Kitchener Ontario brick home with a real estate agent, daylight, looking at the front porch, candid moment, real estate photograph",
-  { seed: 201, width: 1800, height: 600 },
+  "Cinematic editorial real estate photograph, 35mm film look, warm Kodak Portra color grading, young diverse couple walking up the front steps of a red brick century home in Kitchener Ontario at golden hour, candid moment looking at each other smiling, mature maple trees in the background, shallow depth of field, soft natural lighting, photoreal, no text, no watermark, no logo",
+  { seed: 2011, width: 1800, height: 720, model: "flux" },
 );
 
 export const metadata: Metadata = {
   title: "Buying in Kitchener-Waterloo",
   description:
-    "Honest help finding a place to buy in Kitchener, Waterloo, or Cambridge. Mortgage math, Ontario LTT, neighborhoods, and a first conversation with no pressure.",
+    "Search homes for sale in Kitchener, Waterloo, and Cambridge. Mortgage math, Ontario land transfer tax, neighborhood guides, and a conversation when you're ready.",
 };
 
 export default function BuyPage() {
@@ -30,13 +30,12 @@ export default function BuyPage() {
             Buying a place in Kitchener-Waterloo
           </h1>
           <p className="mt-6 max-w-prose text-body-lg text-ink-soft">
-            First place, forever place, or the somewhere-in-between place. The work I do on the
-            buyer side is mostly about slowing down: looking at more houses, asking more questions,
-            and being willing to walk away from the wrong one.
+            First-time, upsize, downsize, or investment — whatever brings you to the buyer side, the
+            process is the same: search, view, evaluate, negotiate, close.
           </p>
           <p className="mt-4 max-w-prose text-body text-ink-soft">
-            Below: what&apos;s currently on the market through me, the Ontario mortgage and
-            land-transfer-tax math, and the neighborhoods I can speak to.
+            Below: active for-sale listings, the Ontario mortgage and land-transfer-tax math, and
+            the neighborhoods covered.
           </p>
         </div>
       </section>
@@ -46,19 +45,14 @@ export default function BuyPage() {
           Current for-sale listings
         </h2>
         <p className="mt-2 max-w-prose text-body text-ink-soft">
-          If nothing here fits, that&apos;s expected — most of the work happens before a listing
-          exists. Tell me what you&apos;re looking for and I&apos;ll watch for it.
+          Don&apos;t see what you&apos;re looking for? Tell me what you need and I&apos;ll watch
+          the market for you.
         </p>
 
         <div className="mt-8">
           <ListingsGrid
             listings={activeSaleListings}
-            emptyMessage={
-              <>
-                No active for-sale listings right now. The buying conversation starts before
-                a listing exists anyway.
-              </>
-            }
+            emptyMessage={<>No active for-sale listings right now.</>}
           />
         </div>
       </section>
@@ -100,7 +94,7 @@ export default function BuyPage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
-        <h2 className="text-display-lg text-ink">Neighborhoods I know</h2>
+        <h2 className="text-display-lg text-ink">Neighborhoods covered</h2>
         <ul className="mt-6 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
           {siteConfig.neighborhoods.map((n) => (
             <li key={n.slug}>
@@ -118,11 +112,11 @@ export default function BuyPage() {
       <section className="mx-auto max-w-3xl px-5 py-16 sm:px-8" aria-labelledby="buy-cta">
         <div className="rounded-lg border border-border-subtle bg-canvas-elevated p-8 text-center">
           <h2 id="buy-cta" className="font-display text-display-md text-ink">
-            Ready for the slow version of this conversation?
+            Ready to start the conversation?
           </h2>
           <p className="mt-3 text-body text-ink-soft">
-            A first call is 30 minutes. We talk about what you want, what you can afford, and
-            whether buying right now is even the right move.
+            Let&apos;s talk about what you&apos;re looking for, what you can afford, and the right
+            time to make a move.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Link

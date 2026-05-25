@@ -1,0 +1,34 @@
+[
+  {
+    "id": "t-sarah-marcus",
+    "author": "Sarah & Marcus",
+    "relation": "Recent buyers, Westmount",
+    "quote": "Walked us through every step of buying our first home. We always knew what was happening and never felt rushed into a decision.",
+    "location": "Kitchener",
+    "draft": false
+  },
+  {
+    "id": "t-james",
+    "author": "James K.",
+    "relation": "Recent seller, downtown condo",
+    "quote": "Sold our condo in three weeks at over ask. The pricing strategy was honest and the marketing materials were genuinely good.",
+    "location": "Kitchener",
+    "draft": false
+  },
+  {
+    "id": "t-priya",
+    "author": "Priya R.",
+    "relation": "Returning client (twice)",
+    "quote": "Bought my first place through Riley in 2022 and listed it with Riley again to upsize in 2026. Always available, always responsive.",
+    "location": "Waterloo",
+    "draft": false
+  },
+  {
+    "id": "t-hannah",
+    "author": "Hannah W.",
+    "relation": "Mortgage broker · referral partner",
+    "quote": "Sends clients to me prepared. Pre-approval calls are efficient because the basics are already covered before we get on the phone.",
+    "location": "Cambridge",
+    "draft": false
+  }
+]

@@ -41,6 +41,14 @@
     ],
     "lat": 43.3553,
     "lng": -80.3145,
+    "openHouses": [
+      {
+        "date": "2026-05-23",
+        "startTime": "14:00",
+        "endTime": "16:00",
+        "notes": "Drop in any time during the window — no appointment needed."
+      }
+    ],
     "listedAt": "2026-04-22",
     "createdAt": "2026-04-22",
     "updatedAt": "2026-05-01"
@@ -89,6 +97,14 @@
     ],
     "lat": 43.4643,
     "lng": -80.5204,
+    "openHouses": [
+      {
+        "date": "2026-05-24",
+        "startTime": "10:00",
+        "endTime": "11:00",
+        "notes": "Combined showing — three groups back-to-back."
+      }
+    ],
     "listedAt": "2026-05-10",
     "createdAt": "2026-05-10"
   },
@@ -125,6 +141,18 @@
     ],
     "lat": 43.4847,
     "lng": -80.5701,
+    "openHouses": [
+      {
+        "date": "2026-05-24",
+        "startTime": "13:00",
+        "endTime": "15:00"
+      },
+      {
+        "date": "2026-05-30",
+        "startTime": "11:00",
+        "endTime": "13:00"
+      }
+    ],
     "listedAt": "2026-05-03",
     "createdAt": "2026-05-03"
   },
@@ -166,6 +194,14 @@
     ],
     "lat": 43.4516,
     "lng": -80.4925,
+    "openHouses": [
+      {
+        "date": "2026-05-23",
+        "startTime": "11:00",
+        "endTime": "13:00",
+        "notes": "Building requires ID at the front desk."
+      }
+    ],
     "listedAt": "2026-05-05",
     "createdAt": "2026-05-05"
   },
@@ -366,5 +402,86 @@
     "leasedAt": "2026-04-08",
     "createdAt": "2026-03-28",
     "updatedAt": "2026-04-08"
+  },
+  {
+    "listingId": "L-2025-019",
+    "slug": "82-king-st-uptown-detached-sold",
+    "listingType": "sale",
+    "title": "1924 detached in Uptown Waterloo — sold February 2026",
+    "address": "82 King Street North",
+    "city": "Waterloo",
+    "province": "ON",
+    "postalCode": "N2J 2X8",
+    "price": 1175000,
+    "soldPrice": 1150000,
+    "status": "sold",
+    "beds": 4,
+    "baths": 3,
+    "sqft": 2480,
+    "lotSizeSqft": 6200,
+    "yearBuilt": 1924,
+    "propertyType": "detached",
+    "description": "Three-storey Edwardian on a quiet Uptown street. Updated kitchen, restored stained glass, two-car detached garage. Closed at $1.15M after 18 days — modest discount off ask, but the comp set tightened in February.",
+    "features": [
+      "Original stained glass",
+      "Updated kitchen (2022)",
+      "Detached two-car garage",
+      "Walk to Uptown",
+      "Mature 60-foot lot"
+    ],
+    "photos": [
+      {
+        "src": "https://image.pollinations.ai/prompt/Exterior%20of%20a%201924%20three%20storey%20Edwardian%20detached%20home%20in%20Uptown%20Waterloo%20Ontario%2C%20painted%20wood%20siding%2C%20stained%20glass%20accent%20windows%2C%20covered%20front%20porch%2C%20mature%20maple%20trees%2C%20soft%20winter%20daylight%2C%20real%20estate%20listing%20photograph?width=1200&height=900&seed=101&model=flux&nologo=true",
+        "alt": "Uptown Waterloo Edwardian detached"
+      }
+    ],
+    "lat": 43.4709,
+    "lng": -80.5239,
+    "listedAt": "2026-01-22",
+    "soldAt": "2026-02-09",
+    "createdAt": "2026-01-22",
+    "updatedAt": "2026-02-09"
+  },
+  {
+    "listingId": "L-2025-020",
+    "slug": "14-doon-south-2br-leased",
+    "listingType": "rent",
+    "title": "2BR townhouse rental in Doon South — leased January 2026",
+    "address": "14 Doon South Drive, Unit B",
+    "city": "Kitchener",
+    "province": "ON",
+    "postalCode": "N2P 0E7",
+    "monthlyRent": 2650,
+    "status": "leased",
+    "leaseTerm": "12-months",
+    "furnished": "none",
+    "petsAllowed": "case-by-case",
+    "parkingIncluded": true,
+    "utilitiesIncluded": [
+      "none"
+    ],
+    "beds": 2,
+    "baths": 2,
+    "sqft": 1240,
+    "propertyType": "townhouse",
+    "description": "Newer-build end townhome rental near the 401. Leased in 9 days at full ask to a family relocating from Mississauga.",
+    "features": [
+      "Attached single garage",
+      "9-foot main-floor ceilings",
+      "End unit",
+      "Quick 401 access"
+    ],
+    "photos": [
+      {
+        "src": "https://image.pollinations.ai/prompt/Exterior%20of%20a%20newer%20build%20end%20unit%20townhouse%20rental%20in%20Doon%20South%20Kitchener%20Ontario%2C%20neutral%20grey%20siding%2C%20attached%20single%20garage%2C%20clean%20landscaping%2C%20winter%20morning%20light%2C%20real%20estate%20listing%20photograph?width=1200&height=900&seed=102&model=flux&nologo=true",
+        "alt": "Doon South end townhome"
+      }
+    ],
+    "lat": 43.3839,
+    "lng": -80.4399,
+    "listedAt": "2025-12-28",
+    "leasedAt": "2026-01-06",
+    "createdAt": "2025-12-28",
+    "updatedAt": "2026-01-06"
   }
 ]

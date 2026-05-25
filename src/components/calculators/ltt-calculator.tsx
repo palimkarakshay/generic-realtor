@@ -13,7 +13,7 @@ export function LTTCalculator({ defaultPrice = 750_000 }: { defaultPrice?: numbe
   const net = ltt - rebate;
 
   return (
-    <div className="rounded-lg border border-border-subtle bg-canvas-elevated p-6 sm:p-8">
+    <div className="rounded-xl bg-canvas-elevated p-6 shadow-sm ring-1 ring-border-subtle sm:p-8">
       <h3 className="font-display text-display-sm text-ink">Ontario Land Transfer Tax</h3>
       <p className="mt-2 text-body-sm text-muted">
         Ontario&apos;s provincial LTT on a residential purchase. Toronto&apos;s additional
@@ -30,7 +30,7 @@ export function LTTCalculator({ defaultPrice = 750_000 }: { defaultPrice?: numbe
               onChange={(e) => setPrice(Number(e.target.value))}
               min={0}
               step={5_000}
-              className="w-full bg-transparent text-body text-ink outline-none"
+              className="w-full bg-transparent text-body text-ink outline-none tabular-nums"
             />
             <span className="text-caption text-muted">CAD</span>
           </div>
@@ -52,17 +52,17 @@ export function LTTCalculator({ defaultPrice = 750_000 }: { defaultPrice?: numbe
       <dl className="mt-8 grid gap-4 border-t border-border-subtle pt-6 sm:grid-cols-3">
         <div>
           <dt className="text-caption text-muted">Ontario LTT</dt>
-          <dd className="mt-1 font-display text-display-sm text-ink">{formatCAD(ltt)}</dd>
+          <dd className="mt-1 font-display text-display-sm text-ink tabular-nums">{formatCAD(ltt)}</dd>
         </div>
         <div>
           <dt className="text-caption text-muted">First-time rebate</dt>
-          <dd className="mt-1 font-display text-display-sm text-success">
+          <dd className="mt-1 font-display text-display-sm text-success tabular-nums">
             -{formatCAD(rebate)}
           </dd>
         </div>
         <div>
           <dt className="text-caption text-muted">Net LTT owing</dt>
-          <dd className="mt-1 font-display text-display-md text-accent-deep">{formatCAD(net)}</dd>
+          <dd className="mt-1 font-display text-display-md text-accent-deep tabular-nums">{formatCAD(net)}</dd>
         </div>
       </dl>
     </div>

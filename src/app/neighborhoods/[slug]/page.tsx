@@ -8,35 +8,39 @@ import { ListingCard } from "@/components/listings/listing-card";
 import { PageHero } from "@/components/layout/page-hero";
 import { pollinationsImage } from "@/lib/utils";
 
+const CINEMATIC_PREFIX =
+  "Cinematic editorial photograph, 35mm film look, warm Kodak Portra color grading, soft golden hour light, hyperreal architectural detail, shallow depth of field, photoreal, no text, no watermark, no logo,";
+
 const neighborhoodHeroPrompts: Record<string, string> = {
   "downtown-kitchener":
-    "Downtown Kitchener Ontario King Street with the LRT and historic Walper Hotel facade, summer afternoon, photograph",
+    "King Street East Downtown Kitchener Ontario with the ION light rail gliding past, the historic Walper Hotel red brick facade catching late sun, scattered pedestrians, summer evening, long warm shadows",
   "uptown-waterloo":
-    "Uptown Waterloo Ontario King Street North brick storefronts and restaurants, golden hour, photograph",
+    "King Street North Uptown Waterloo Ontario at golden hour, leafy maples turning amber, locals on indie coffee shop patios, brick and limestone storefronts glowing warm, a young couple walking",
   "westmount-kitchener":
-    "Quiet residential tree-lined street in Westmount Kitchener Ontario with mid-century brick houses, mature maples, daylight, photograph",
+    "Quiet tree-lined residential street in Westmount Kitchener Ontario with mid-century brick bungalows, mature maples arching overhead, dappled afternoon sunlight on the asphalt, a kid on a bike in the distance",
   "doon-south":
-    "Modern suburban street in Doon South Kitchener Ontario with new build townhomes and well-kept lawns, midday light, photograph",
+    "Newer subdivision street in Doon South Kitchener Ontario with modern stone-and-brick townhomes and well-kept lawns, families pulling into driveways, soft late-afternoon light, suburban calm",
   "stanley-park":
-    "Quiet residential street in Stanley Park Kitchener Ontario with mature trees and modest post war homes, summer afternoon, photograph",
+    "Family-friendly Stanley Park Kitchener Ontario residential street with mature trees and tidy post-war detached homes, kids' bikes on the lawn, summer evening light",
   "laurelwood":
-    "Suburban Laurelwood neighborhood Waterloo Ontario with forested trail next to family homes, daylight, photograph",
+    "Laurelwood neighborhood Waterloo Ontario suburban street backing onto the Hillside Park forest trail, modern family homes with mature trees, soft afternoon light filtering through leaves",
   "preston":
-    "Old Preston Cambridge Ontario historic brick downtown street with small shops, autumn afternoon, photograph",
+    "Old Preston downtown Cambridge Ontario historic two-storey brick storefronts on King Street East, small independent shops, autumn afternoon, warm golden light on the brick",
   "galt":
-    "Historic Galt Cambridge Ontario with old stone bridges over the Grand River and brick downtown buildings, soft daylight, photograph",
+    "Historic Galt downtown Cambridge Ontario with the Main Street stone bridge over the Grand River and limestone Victorian buildings, river reflections, soft warm daylight, painterly",
   "st-jacobs":
-    "Rural St Jacobs Ontario Mennonite countryside with historic mill, horse and buggy on country road, golden hour, photograph",
+    "Rural St Jacobs Ontario countryside with the historic Mill and dam on the Conestoga River, Mennonite horse-and-buggy on a country road, autumn fields, golden hour glow",
 };
 
 function heroForNeighborhood(slug: string, name: string): string {
-  const prompt =
+  const subject =
     neighborhoodHeroPrompts[slug] ??
-    `${name} residential street in Kitchener Waterloo Ontario, mature trees, daylight, photograph`;
-  // Stable seed per slug
-  let seed = 300;
+    `${name} residential street in Kitchener Waterloo Ontario, mature trees, soft afternoon light`;
+  const prompt = `${CINEMATIC_PREFIX} ${subject}`;
+  // Stable seed per slug, shifted so we don't collide with old cached generations
+  let seed = 3300;
   for (let i = 0; i < slug.length; i++) seed = (seed * 31 + slug.charCodeAt(i)) & 0xffff;
-  return pollinationsImage(prompt, { seed, width: 1800, height: 600 });
+  return pollinationsImage(prompt, { seed, width: 2000, height: 800, model: "flux" });
 }
 
 export async function generateStaticParams() {

@@ -8,8 +8,8 @@ import { siteConfig } from "@/lib/site-config";
 import { pollinationsImage } from "@/lib/utils";
 
 const heroImage = pollinationsImage(
-  "Quiet Uptown Waterloo Ontario apartment building exterior with mature trees, brick facade, afternoon daylight, residential street, photograph",
-  { seed: 202, width: 1800, height: 600 },
+  "Cinematic editorial photograph, 50mm lens, low afternoon sun, a young woman with a backpack walking past a leafy King Street North apartment building in Uptown Waterloo Ontario, modern mid-rise brick facade with balconies, mature maples turning amber, warm golden hour light, shallow depth of field, photoreal, no text, no watermark, no logo",
+  { seed: 2022, width: 1800, height: 720, model: "flux" },
 );
 
 export const metadata: Metadata = {
@@ -29,9 +29,8 @@ export default function RentPage() {
             Renting in Kitchener-Waterloo
           </h1>
           <p className="mt-6 max-w-prose text-body-lg text-ink-soft">
-            A rental should disclose what it costs, what utilities you&apos;ll pay on top, and
-            what the landlord&apos;s pet policy is — before you fill out a form. The listings
-            below try to do that.
+            Rentals in Kitchener-Waterloo and Cambridge with the lease terms, utilities, and pet
+            policies up front — so you know what you&apos;re looking at before you fill out a form.
           </p>
         </div>
       </section>
@@ -45,8 +44,8 @@ export default function RentPage() {
             listings={activeRentListings}
             emptyMessage={
               <>
-                No active rentals right now. I can keep an ear out for what you&apos;re looking
-                for — KW rentals move fast and most don&apos;t even reach a public listing.
+                No active rentals right now. KW rentals move fast — send what you&apos;re looking
+                for and I&apos;ll keep an eye out.
               </>
             }
           />

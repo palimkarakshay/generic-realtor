@@ -3,24 +3,63 @@ import { type Listing } from "@/lib/schemas";
 import { formatCAD, formatNumber, daysSince } from "@/lib/utils";
 import { SmartImage } from "@/components/ui/smart-image";
 
-export function ListingCard({ listing }: { listing: Listing }) {
+export type ListingCardVariant = "default" | "feature" | "compact";
+
+const variantStyles: Record<
+  ListingCardVariant,
+  { image: string; body: string; price: string; address: string; meta: string }
+> = {
+  default: {
+    image: "aspect-[4/3]",
+    body: "p-5",
+    price: "font-display text-display-sm text-ink tabular-nums",
+    address: "mt-1 text-body-sm text-ink-soft",
+    meta: "mt-3 flex flex-wrap gap-x-4 gap-y-1 text-caption text-muted",
+  },
+  feature: {
+    image: "aspect-[16/10] md:aspect-[3/2]",
+    body: "p-6 sm:p-7",
+    price: "font-display text-display-md text-ink tabular-nums md:text-display-lg",
+    address: "mt-2 text-body text-ink-soft",
+    meta: "mt-4 flex flex-wrap gap-x-5 gap-y-1 text-body-sm text-muted",
+  },
+  compact: {
+    image: "aspect-[4/3]",
+    body: "p-4",
+    price: "font-display text-display-sm text-ink tabular-nums",
+    address: "mt-0.5 text-caption text-ink-soft",
+    meta: "mt-2 flex flex-wrap gap-x-3 gap-y-0.5 text-caption text-muted",
+  },
+};
+
+interface ListingCardProps {
+  listing: Listing;
+  variant?: ListingCardVariant;
+}
+
+export function ListingCard({ listing, variant = "default" }: ListingCardProps) {
   const photo = listing.photos[0];
+  const s = variantStyles[variant];
 
   // Days on Market — only show if we have a listedAt date.
   const dom = listing.listedAt ? daysSince(listing.listedAt) : null;
 
+  const todayISO = new Date().toISOString().slice(0, 10);
+  const hasUpcomingOpenHouse = (listing.openHouses ?? []).some((oh) => oh.date >= todayISO);
+
   return (
     <Link
       href={`/listings/${listing.slug}`}
-      className="group block overflow-hidden rounded-lg border border-border-subtle bg-canvas-elevated transition hover:border-accent hover:shadow-md"
+      data-variant={variant}
+      className="group block overflow-hidden rounded-xl bg-canvas-elevated shadow-sm ring-1 ring-border-subtle transition hover:shadow-xl hover:ring-accent"
     >
-      <div className="relative aspect-[4/3] bg-parchment">
+      <div className={`relative overflow-hidden bg-parchment ${s.image}`}>
         {photo ? (
           <SmartImage
             src={photo.src}
             alt={photo.alt}
             loading="lazy"
-            className="h-full w-full object-cover transition group-hover:scale-[1.02]"
+            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]"
           />
         ) : (
           <div className="flex h-full items-center justify-center text-muted">
@@ -31,43 +70,50 @@ export function ListingCard({ listing }: { listing: Listing }) {
         <div className="absolute left-3 top-3 flex gap-2">
           <span
             className={
-              "rounded-full px-2.5 py-1 text-caption font-medium uppercase " +
+              "rounded-full px-2.5 py-1 text-caption font-medium uppercase shadow-sm " +
               (listing.listingType === "sale"
-                ? "bg-ink text-canvas"
+                ? "bg-accent text-canvas"
                 : "bg-moss text-canvas")
             }
           >
             {listing.listingType === "sale" ? "For sale" : "For rent"}
           </span>
           {listing.status !== "active" ? (
-            <span className="rounded-full bg-accent-deep px-2.5 py-1 text-caption font-medium uppercase text-canvas">
+            <span className="rounded-full bg-ink px-2.5 py-1 text-caption font-medium uppercase text-canvas">
               {listing.status}
+            </span>
+          ) : null}
+          {hasUpcomingOpenHouse ? (
+            <span className="rounded-full bg-moss px-2.5 py-1 text-caption font-medium uppercase text-canvas">
+              Open house
             </span>
           ) : null}
         </div>
 
         {dom !== null && dom > 0 ? (
-          <span className="absolute right-3 top-3 rounded-full bg-canvas/90 px-2.5 py-1 text-caption text-ink-soft">
+          <span className="absolute right-3 top-3 rounded-full bg-canvas/95 px-2.5 py-1 text-caption text-ink-soft backdrop-blur-sm">
             {dom} day{dom === 1 ? "" : "s"} on market
           </span>
         ) : null}
       </div>
 
-      <div className="p-5">
-        <p className="font-display text-display-sm text-ink">
+      <div className={s.body}>
+        <p className={s.price}>
           {listing.listingType === "sale"
             ? formatCAD(listing.price)
             : `${formatCAD(listing.monthlyRent)}/mo`}
         </p>
 
-        <p className="mt-1 text-body-sm text-ink-soft">
+        <p className={s.address}>
           {listing.address}, {listing.city}
         </p>
 
-        <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-caption text-muted">
-          <span>{listing.beds} bd</span>
-          <span>{listing.baths} ba</span>
-          {listing.sqft ? <span>{formatNumber(listing.sqft)} sqft</span> : null}
+        <div className={s.meta}>
+          <span className="tabular-nums">{listing.beds} bd</span>
+          <span className="tabular-nums">{listing.baths} ba</span>
+          {listing.sqft ? (
+            <span className="tabular-nums">{formatNumber(listing.sqft)} sqft</span>
+          ) : null}
           {listing.listingType === "rent" && listing.parkingIncluded ? (
             <span>· parking</span>
           ) : null}

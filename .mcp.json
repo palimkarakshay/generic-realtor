@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "vercel": { "type": "http", "url": "https://mcp.vercel.com" },
+    "sentry": { "type": "http", "url": "https://mcp.sentry.dev" },
+    "cloudflare": { "type": "http", "url": "https://api.cloudflare.com/mcp/v1/sse" },
+    "context7": { "type": "http", "url": "https://mcp.context7.com/mcp" },
+    "shadcn": { "type": "stdio", "command": "npx", "args": ["-y", "shadcn@latest", "mcp"] },
+    "playwright": { "type": "stdio", "command": "npx", "args": ["-y", "@playwright/mcp@latest"] },
+    "resend": { "type": "stdio", "command": "npx", "args": ["-y", "resend-mcp"], "env": { "RESEND_API_KEY": "${RESEND_API_KEY}" } },
+    "github": { "type": "stdio", "command": "npx", "args": ["-y", "@github/github-mcp-server@latest"] }
+  }
+}
